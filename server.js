@@ -10,8 +10,6 @@ var io = require('socket.io').listen(server);
 //Clock Functions
 var stopwatch = new Stopwatch();
 
-stopwatch.start();
-
 stopwatch.on('tick:stopwatch', function(time) {
 	io.sockets.emit("clock:tick", time);
 });
@@ -65,20 +63,6 @@ io.on('connection', function(socket) {
 
 	socket.on("lowerthird:hide", function() {
 		io.sockets.emit("lowerthird:hide");
-	});
-
-	/*
-	 * 		Boxing
-	 */
-	socket.on("boxing", function(msg) {
-		io.sockets.emit("boxing", msg);
-	});
-
-	/*
-	 * 		Score
-	 */
-	 socket.on("score", function(msg) {
-		io.sockets.emit("score", msg);
 	});
 
 	 /*

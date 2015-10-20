@@ -12,7 +12,7 @@
   	<div class="ui grid">
 
     <div class="four wide column center aligned">
-      <h2 class="ui header">{{clock}}</h2>
+      <h2 class="ui header">{{football.clock}}</h2>
     </div>
 
     <div class="five wide column"> 
@@ -47,10 +47,10 @@
     <div class="eight wide column">
       <div class="ui selection dropdown">
           <input type="hidden" name="gender">
-          <div class="text">Team 1</div>
+          <div class="text">{{football.team1}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team1 = college.shortname">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team1 = college.name; football.team1short = college.shortname;">
                 {{college.name}}
             </div>
           </div>
@@ -69,10 +69,10 @@
     <div class="eight wide column">
       <div class="ui selection dropdown">
           <input type="hidden" name="gender">
-          <div class="text">Team 2</div>
+          <div class="text">{{football.team2}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team2 = college.shortname">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team2 = college.name; football.team2short = college.shortname;">
                 {{college.name}}
             </div>
           </div>

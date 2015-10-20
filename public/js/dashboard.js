@@ -113,17 +113,16 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
 
         if (stored === null) {
             $scope.football = { 
-                team1: 'TM1', team2: 'TM2', score1: 0, score2: 0, showScore: false, showTime: false,
+                clock: '00:00', team1: 'Team 1', team2: 'Team 2', team1short: 'tm1', team2short: 'tm2', score1: 0, score2: 0, showScore: false, showTime: false,
             };
         } else {
             $scope.football = stored;
         }
         
         //Clock Functions
-        $scope.clock    = "00:00";
 
         socket.on("clock:tick", function (msg) {
-            $scope.clock = msg;
+            $scope.football.clock = msg;
         });
 
         $scope.pauseClock = function() {
@@ -148,6 +147,7 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
 
         $scope.$watch('football', function() {
             socket.emit("football", $scope.football);
+            localStorageService.set('football', $scope.football);
         }, true);
 
         $scope.$on("$destroy", function() {
