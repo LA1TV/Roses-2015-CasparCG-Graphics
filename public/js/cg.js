@@ -45,15 +45,15 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
     }
 ]);
 
-app.controller('footballCtrl', ['$scope', 'socket',
+app.controller('scoreboardCtrl', ['$scope', 'socket',
     function($scope, socket){
 
-        socket.on("football", function (msg) {
-            $scope.football = msg;
+        socket.on("scoreboard", function (msg) {
+            $scope.scoreboard = msg;
         });
 
         socket.on("clock:tick", function (msg) {
-            $scope.clock = msg;
+            $scope.scoreboard.clock = msg;
         });
     }
 ]);

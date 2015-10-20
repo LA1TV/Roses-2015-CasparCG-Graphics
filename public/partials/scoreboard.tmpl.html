@@ -1,9 +1,9 @@
 <div class="ui form segment">
-  <h2>Football</h2>
+  <h2>Scoreboard</h2>
 
 	<div class="ui grid center aligned">
     	<div class="eight wide column">
-    		<div class="field"><checkbox ng-model="football.show" size="large" type="toggle">Show Score Bar</checkbox></div>
+    		<div class="field"><checkbox ng-model="scoreboard.show" size="large" type="toggle">Show Score Bar</checkbox></div>
     	</div>
     </div>
 
@@ -12,7 +12,7 @@
   	<div class="ui grid">
 
     <div class="four wide column center aligned">
-      <h2 class="ui header">{{football.clock}}</h2>
+      <h2 class="ui header">{{scoreboard.clock}}</h2>
     </div>
 
     <div class="five wide column"> 
@@ -47,20 +47,20 @@
     <div class="eight wide column">
       <div class="ui selection dropdown">
           <input type="hidden" name="gender">
-          <div class="text">{{football.team1}}</div>
+          <div class="text">{{scoreboard.team1}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team1 = college.name; football.team1short = college.shortname;">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team1 = college.name; scoreboard.team1short = college.shortname;">
                 {{college.name}}
             </div>
           </div>
       </div>
-      <h1>{{football.score1}}</h1>
+      <h1>{{scoreboard.score1}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="football.score1 = football.score1 + 1;">
+        <button class="ui green button" ng-click="scoreboard.score1 = scoreboard.score1 + 1;">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="football.score1 = football.score1 - 1;" ng-disabled="football.score1 == 0">
+        <button class="ui red button" ng-click="scoreboard.score1 = scoreboard.score1 - 1;" ng-disabled="scoreboard.score1 == 0">
           <i class="minus icon"></i>
         </button>
       </div>
@@ -69,20 +69,20 @@
     <div class="eight wide column">
       <div class="ui selection dropdown">
           <input type="hidden" name="gender">
-          <div class="text">{{football.team2}}</div>
+          <div class="text">{{scoreboard.team2}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team2 = college.name; football.team2short = college.shortname;">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team2 = college.name; scoreboard.team2short = college.shortname;">
                 {{college.name}}
             </div>
           </div>
       </div>
-      <h1>{{football.score2}}</h1>
+      <h1>{{scoreboard.score2}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="football.score2 = football.score2 + 1;">
+        <button class="ui green button" ng-click="scoreboard.score2 = scoreboard.score2 + 1;">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="football.score2 = football.score2 - 1;" ng-disabled="football.score2 == 0">
+        <button class="ui red button" ng-click="scoreboard.score2 = scoreboard.score2 - 1;" ng-disabled="scoreboard.score2 == 0">
           <i class="minus icon"></i>
         </button>
       </div>

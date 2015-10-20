@@ -178,50 +178,14 @@ h1, h2, h3, h4 {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-
 /**************************************************/
-/*              [Live Bug]                        */
-/**************************************************/
-.bug {
-    display:inline;
-    white-space: nowrap;
-    clear:none;
-}
-
-.bug h1 {
-    color: #fff;
-    text-shadow:1px -1px 0px #000;
-    font-size: 25px;
-    font-size: 1.3vw;
-    font-weight: normal;
-    display:inline;
-    padding: 5px;
-    margin-right: 0px;
-
-    background-color: #cd1d18;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.black {
-    background-color: #000 !important;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-/**************************************************/
-/*              [Logo]                            */
+/*              [Scoreboard Score]                  */
 /**************************************************/
 
-.logo {
-    opacity: 0.5;
-    top: 40px;
-}
-
-/**************************************************/
-/*              [Football Score]                  */
-/**************************************************/
-
-.football {
-  width: 433px;
+.scoreboard .row {
+  position: absolute;
+  left: 34px;
+  width: 478px;
   border-radius: 5px; 
   border: 4px solid rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -230,90 +194,95 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
-.football .clock, .football .team, .football .score {
+.scoreboard .clock, .scoreboard .team, .scoreboard .score {
   float: left; 
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-.football .clock {
+.scoreboard .clock {
   background-color: #fff;
-  width: 105px;
-  border-radius: 3px 0 0 3px;
+  padding-left: 25px;
+  width: 150px;
 }
 
-.football .score {
+.scoreboard .score {
   color: #fff;
   background-color: #000;
 }
 
-.football .score1, .football .score2 {
+.scoreboard .score1, .scoreboard .score2 {
   width: 40px;
 }
 
-.football .score1 {
+.scoreboard .score1 {
   text-align: right;
 }
 
-.football .score2 {
+.scoreboard .score2 {
   text-align: left;
 }
 
-.football .scoredivider {
+.scoreboard .scoredivider {
   width: 20px;
 }
 
-.football .team {
+.scoreboard .team {
   width: 110px;
   color: #fff;
   text-transform: uppercase;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-.football .team2 {
+.scoreboard .team2 {
   border-radius: 0 3px 3px 0;
 }
 
-.football .team.alc {
+.scoreboard .team.alc {
   color: #fff;
   background-color: #800000;
 }
 
-.football .team.con {
+.scoreboard .team.con {
   color: #fff;
   background-color: #C6007E;
 }
 
-.football .team.der {
+.scoreboard .team.der {
   color: #fff;
   background-color: #002366;
 }
 
-.football .team.gdr {
+.scoreboard .team.gdr {
   color: #fff;
   background-color: #008000;
 }
 
-.football .team.hal {
+.scoreboard .team.hal {
   color: #fff;
   background-color: #6495ED;
 }
 
-.football .team.jam {
+.scoreboard .team.jam {
   color: #fff;
   background-color: #000;
 }
 
-.football .team.lan {
+.scoreboard .team.lan {
   color: #000;
   background-color: #FFD700;
 }
 
-.football .team.van {
+.scoreboard .team.van {
   color: #fff;
   background-color: #592259;
 }
 
-.football .team.wen {
+.scoreboard .team.wen {
   color: #fff;
   background-color: #C0C0C0;
+}
+
+.scoreboard .logo {
+    top: -18px;
+    left: 0px;
 }

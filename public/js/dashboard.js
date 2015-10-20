@@ -9,13 +9,6 @@ app.controller('AppCtrl', ['$scope', '$location',
         };
 
         $scope.menu.push({
-            name: 'General',
-            url: '/general',
-            type: 'link',
-            icon: 'settings',
-        });
-
-        $scope.menu.push({
             name: 'Lower Thirds',
             url: '/lowerThirds',
             type: 'link',
@@ -23,8 +16,8 @@ app.controller('AppCtrl', ['$scope', '$location',
         });
 
         $scope.menu.push({
-            name: 'Football/Rugby',
-            url: '/football',
+            name: 'Scoreboard',
+            url: '/scoreboard',
             type: 'link',
             icon: 'soccer',
         });
@@ -40,34 +33,15 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
         localStorageServiceProvider.setPrefix('la1tv');
 
         $routeProvider
-            .when("/general", {
-                templateUrl: '/partials/general.tmpl.html',
-                controller: 'generalCGController'
-            })
             .when("/lowerThirds", {
                 templateUrl: '/partials/lowerThirds.tmpl.html',
                 controller: 'lowerThirdsCGController'
             })
-            .when("/football", {
-                templateUrl: '/partials/football.tmpl.html',
-                controller: 'footballCGController'
+            .when("/scoreboard", {
+                templateUrl: '/partials/scoreboard.tmpl.html',
+                controller: 'scoreboardCGController'
             })
-            .otherwise({redirectTo: '/general'});
-    }
-]);
-
-app.controller('generalCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-
-        $scope.general = localStorageService.get('general');
-
-        $scope.$watch('general', function() {
-            socket.emit("bug", $scope.general);
-        }, true);
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('general', $scope.general);
-        });
+            .otherwise({redirectTo: '/scoreboard'});
     }
 ]);
 
@@ -107,22 +81,22 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
     }
 ]);
 
-app.controller('footballCGController', ['$scope', 'localStorageService', 'socket',
+app.controller('scoreboardCGController', ['$scope', 'localStorageService', 'socket',
     function($scope, localStorageService, socket){
-        var stored = localStorageService.get('football');
+        var stored = localStorageService.get('scoreboard');
 
         if (stored === null) {
-            $scope.football = { 
+            $scope.scoreboard = { 
                 clock: '00:00', team1: 'Team 1', team2: 'Team 2', team1short: 'tm1', team2short: 'tm2', score1: 0, score2: 0, showScore: false, showTime: false,
             };
         } else {
-            $scope.football = stored;
+            $scope.scoreboard = stored;
         }
         
         //Clock Functions
-
+        
         socket.on("clock:tick", function (msg) {
-            $scope.football.clock = msg;
+            $scope.scoreboard.clock = msg;
         });
 
         $scope.pauseClock = function() {
@@ -145,13 +119,13 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
             socket.emit("clock:up");
         };
 
-        $scope.$watch('football', function() {
-            socket.emit("football", $scope.football);
-            localStorageService.set('football', $scope.football);
+        $scope.$watch('scoreboard', function() {
+            socket.emit("scoreboard", $scope.scoreboard);
+            localStorageService.set('scoreboard', $scope.scoreboard);
         }, true);
 
         $scope.$on("$destroy", function() {
-            localStorageService.set('football', $scope.football);
+            localStorageService.set('scoreboard', $scope.scoreboard);
         });
         
         //Team Select

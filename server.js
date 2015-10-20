@@ -68,8 +68,8 @@ io.on('connection', function(socket) {
 	 /*
 	 * 		Score
 	 */
-	 socket.on("football", function(msg) {
-		io.sockets.emit("football", msg);
+	 socket.on("scoreboard", function(msg) {
+		io.sockets.emit("scoreboard", msg);
 	});
 
 
