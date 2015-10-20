@@ -27,19 +27,6 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('boxingCtrl', ['$scope', 'socket',
-    function($scope, socket){
-
-        socket.on("boxing", function (msg) {
-            $scope.boxing = msg;
-        });
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg;
-        });
-    }
-]);
-
 app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
     function($scope, $timeout, socket){
         $scope.tickInterval = 1000; //ms
@@ -58,33 +45,6 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
     }
 ]);
 
-app.controller('scoringCtrl', ['$scope', '$timeout', '$http', 'socket',
-    function($scope, $timeout, $http, socket){
-        $scope.tickInterval = 5000;
-        $scope.yorkScore = "";
-        $scope.lancScore = "";
-
-        var fetchScore = function () {
-            $http.get('http://roseslive.co.uk/score.json')
-                .success(function(data) {
-                    $scope.yorkScore = data.york;
-                    $scope.lancScore = data.lancs;
-                }
-            );
-        }
-
-        socket.on("score", function (state) {
-            console.log(state);
-            $scope.showScore = state.showScore;
-        });
-
-        //Intial fetch
-        fetchScore();
-        // Start the timer
-        $timeout(fetchScore, $scope.tickInterval);
-    }   
-]);
-
 app.controller('footballCtrl', ['$scope', 'socket',
     function($scope, socket){
 
@@ -94,14 +54,6 @@ app.controller('footballCtrl', ['$scope', 'socket',
 
         socket.on("clock:tick", function (msg) {
             $scope.clock = msg;
-        });
-    }
-]);
-
-app.controller('dartsCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("dart", function (msg) {
-            $scope.darts = msg;
         });
     }
 ]);

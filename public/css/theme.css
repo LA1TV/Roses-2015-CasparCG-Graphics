@@ -178,43 +178,6 @@ h1, h2, h3, h4 {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-/**************************************************/
-/*              [Boxing Score]                    */
-/**************************************************/
-.boxing-score {
-    background-color: rgba(0,0,0,0.5);
-    width: 15%;
-}
-
-.score-inner {
-    color: #fff;
-    text-shadow:1px -1px 0px #000;
-    text-align: center;
-    padding: 15px 60px 15px 60px;
-}
-
-.timer {
-    top: -2px;
-    font-size: 30px !important;
-}
-
-.score-inner h1 {
-    font-size: 35px;
-}
-
-.red-moving {
-    height: 40px;
-    width: 500%;
-    
-    background: linear-gradient(to left, rgba(225,0,0,1) 0%, rgba(225,0,0,1) 71%, rgba(225,25,25,1) 85%, rgba(225,0,0,1) 98%, rgba(225,0,0,1) 100%) repeat;
-    
-    -webkit-background-size: 50% 100%;
-    -webkit-animation-name: moving-gradient;
-    -webkit-animation-duration: 20s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
 
 /**************************************************/
 /*              [Live Bug]                        */
@@ -254,153 +217,103 @@ h1, h2, h3, h4 {
 }
 
 /**************************************************/
-/*              [Total Score]                     */
-/**************************************************/
-
-.total-score {
-    width: 550px;
-    text-align: center;
-    border-radius: 10px; 
-    border: 10px solid rgba(0, 0, 0, 0.5);
-    background-clip: padding-box;
-}
-
-.total-score h1 {
-    color: #000;
-    font-size: 35px;
-    padding: 10px;
-    text-transform: uppercase;
-    background-color: #fff !important;
-}
-
-.total-score .lanc {
-    display: block;
-    width: 50%;
-    font-size: 40px;
-    color: #fff;
-    background-color: #cd1d18;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.total-score .york {
-    display: block;
-    width: 50%;
-    font-size: 40px;
-    color: #efbb39;
-    background-color: #000 !important;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-/**************************************************/
 /*              [Football Score]                  */
 /**************************************************/
 
 .football {
-  width: 440px;
+  width: 433px;
   border-radius: 5px; 
-  border: 7px solid rgba(0, 0, 0, 0.5);
+  border: 4px solid rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 30px;
   text-align: center;
 }
 
-.football .clock, .football .score.lanc, .football .score.york {
+.football .clock, .football .team, .football .score {
   float: left; 
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
 .football .clock {
-  padding-left: 15px;
-  padding-right: 15px;
   background-color: #fff;
   width: 105px;
+  border-radius: 3px 0 0 3px;
 }
 
-.football .score.lanc {
-  width: 160px;
+.football .score {
   color: #fff;
-  background-color: #cd1d18;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.football .score.york {
-  width: 160px;
-  color: #efbb39;
   background-color: #000;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-/**************************************************/
-/*              [Darts]                           */
-/**************************************************/
+.football .score1, .football .score2 {
+  width: 40px;
+}
 
-.darts {
-  width: 357px;
-  background-color: rgba(0, 0, 0, 0.5);
+.football .score1 {
+  text-align: right;
+}
+
+.football .score2 {
   text-align: left;
-  font-size: 25px;
-
-  border-radius: 5px; 
-  border: 8px solid rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
 }
 
-.darts .name, .darts .legs, .darts .score, .darts .leg, .darts .footer {
-  float: left;
-  line-height: 45px;
-  padding-left: 5px;
+.football .scoredivider {
+  width: 20px;
 }
 
-.darts .name {
-  width: 240px;
-}
-
-.darts .name.lanc {
+.football .team {
+  width: 110px;
   color: #fff;
-  background-color: #cd1d18;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.darts .name.york {
-  color: #efbb39;
-  background-color: #000;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.darts .legs {
-  width: 46px;
-  color: #fff;
-  background-color: #00d;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-  border-left: 2px solid #fff;
-}
-
-.darts .score {
-  width: 55px;
-  color: #fff;
-  background-color: #00d;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-  border-left: 2px solid #fff;
-}
-
-.darts .header .name {
-  background-color: #fff;
-  color: #000;
-  width: 234px
-}
-
-.darts .header .leg {
-  color: #000;
-  background-color: #fff;
-  width: 105px;
-  font-size: 20px; 
-}
-
-.darts .footer {
-  background-color: #fff;
-  color: #000;
   text-transform: uppercase;
-  width: 341px;
-  font-size: 20px; 
-  line-height: 30px;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+.football .team2 {
+  border-radius: 0 3px 3px 0;
+}
+
+.football .team.alc {
+  color: #fff;
+  background-color: #800000;
+}
+
+.football .team.con {
+  color: #fff;
+  background-color: #C6007E;
+}
+
+.football .team.der {
+  color: #fff;
+  background-color: #002366;
+}
+
+.football .team.gdr {
+  color: #fff;
+  background-color: #008000;
+}
+
+.football .team.hal {
+  color: #fff;
+  background-color: #6495ED;
+}
+
+.football .team.jam {
+  color: #fff;
+  background-color: #000;
+}
+
+.football .team.lan {
+  color: #000;
+  background-color: #FFD700;
+}
+
+.football .team.van {
+  color: #fff;
+  background-color: #592259;
+}
+
+.football .team.wen {
+  color: #fff;
+  background-color: #C0C0C0;
 }

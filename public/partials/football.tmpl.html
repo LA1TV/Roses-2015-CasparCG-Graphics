@@ -45,26 +45,44 @@
 
   <div class="ui grid center aligned">
     <div class="eight wide column">
-      <h3>Lancaster</h3>
-      <h1>{{football.lancScore}}</h1>
+      <div class="ui selection dropdown">
+          <input type="hidden" name="gender">
+          <div class="text">Team 1</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team1 = college.shortname">
+                {{college.name}}
+            </div>
+          </div>
+      </div>
+      <h1>{{football.score1}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="football.lancScore = football.lancScore + 1;">
+        <button class="ui green button" ng-click="football.score1 = football.score1 + 1;">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="football.lancScore = football.lancScore - 1;" ng-disabled="football.lancScore == 0">
+        <button class="ui red button" ng-click="football.score1 = football.score1 - 1;" ng-disabled="football.score1 == 0">
           <i class="minus icon"></i>
         </button>
       </div>
     </div>
 
     <div class="eight wide column">
-      <h3>York</h3>
-      <h1>{{football.yorkScore}}</h1>
+      <div class="ui selection dropdown">
+          <input type="hidden" name="gender">
+          <div class="text">Team 2</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="football.team2 = college.shortname">
+                {{college.name}}
+            </div>
+          </div>
+      </div>
+      <h1>{{football.score2}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="football.yorkScore = football.yorkScore + 1;">
+        <button class="ui green button" ng-click="football.score2 = football.score2 + 1;">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="football.yorkScore = football.yorkScore - 1;" ng-disabled="football.yorkScore == 0">
+        <button class="ui red button" ng-click="football.score2 = football.score2 - 1;" ng-disabled="football.score2 == 0">
           <i class="minus icon"></i>
         </button>
       </div>

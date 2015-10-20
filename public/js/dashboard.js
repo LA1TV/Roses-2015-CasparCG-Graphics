@@ -23,31 +23,10 @@ app.controller('AppCtrl', ['$scope', '$location',
         });
 
         $scope.menu.push({
-            name: 'Roses',
-            url: '/roses',
-            type: 'link',
-            icon: 'trophy',
-        });
-
-        $scope.menu.push({
-            name: 'Boxing',
-            url: '/boxing',
-            type: 'link',
-            icon: 'users',
-        });
-
-        $scope.menu.push({
             name: 'Football/Rugby',
             url: '/football',
             type: 'link',
             icon: 'soccer',
-        });
-
-        $scope.menu.push({
-            name: 'Darts',
-            url: '/darts',
-            type: 'link',
-            icon: 'bullseye',
         });
 
     }
@@ -69,21 +48,9 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
                 templateUrl: '/partials/lowerThirds.tmpl.html',
                 controller: 'lowerThirdsCGController'
             })
-            .when("/boxing", {
-                templateUrl: '/partials/boxing.tmpl.html',
-                controller: 'boxingCGController'
-            })
-            .when("/roses", {
-                templateUrl: '/partials/roses.tmpl.html',
-                controller: 'rosesCGController'
-            })
             .when("/football", {
                 templateUrl: '/partials/football.tmpl.html',
                 controller: 'footballCGController'
-            })
-            .when("/darts", {
-                templateUrl: '/partials/darts.tmpl.html',
-                controller: 'dartsCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -140,99 +107,18 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
     }
 ]);
 
-app.controller('boxingCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-        var stored = localStorageService.get('boxing');
-
-        //Clock Functions
-        $scope.clock    = "00:00";
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg;
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
-
-        if (stored === null) {
-            $scope.boxing = { 
-                lancScore: 0, yorkScore: 0, currRound: '', showScore: false, showTime: false,
-            };
-        } else {
-            $scope.boxing = stored;
-        }
-
-        $scope.updateScore = function() {
-            console.log("Score");
-        };
-
-        $scope.roundChanged = function() {
-            console.log("Round");
-        };
-
-        $scope.$watch('boxing', function() {
-            socket.emit("boxing", $scope.boxing);
-        }, true);
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('boxing', $scope.boxing);
-        });
-    }
-]);
-
-
-app.controller('rosesCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-        var stored = localStorageService.get('roses');
-
-        if (stored === null) {
-            $scope.roses = { 
-                showScore: false,
-            };
-        } else {
-            $scope.roses = stored;
-        }
-
-        $scope.$watch('roses', function() {
-            socket.emit("score", $scope.roses);
-        }, true);
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('roses', $scope.roses);
-        });
-    }
-]);
-
-
 app.controller('footballCGController', ['$scope', 'localStorageService', 'socket',
     function($scope, localStorageService, socket){
         var stored = localStorageService.get('football');
 
         if (stored === null) {
             $scope.football = { 
-                lancScore: 0, yorkScore: 0, showScore: false, showTime: false,
+                team1: 'TM1', team2: 'TM2', score1: 0, score2: 0, showScore: false, showTime: false,
             };
         } else {
             $scope.football = stored;
         }
-
+        
         //Clock Functions
         $scope.clock    = "00:00";
 
@@ -267,65 +153,40 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
         $scope.$on("$destroy", function() {
             localStorageService.set('football', $scope.football);
         });
-    }
-]);
-
-
-app.controller('dartsCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket) {
-
-        var stored = localStorageService.get('dart');
-
-        if (stored === null) {
-            $scope.dart = {};
-        } else {
-            $scope.dart = stored;
-        }
-
-        $scope.$watch('dart', function() {
-            socket.emit("dart", $scope.dart);
-        }, true);
-
-        $scope.reset1 = function() {
-            $scope.dart.score1 = 501;
-        };
-
-        $scope.reset2 = function() {
-            $scope.dart.score2 = 501;
-        };
-
-        $scope.take1 = function(val) {
-            if( val > 180) {
-                $scope.last1 = "";
-                return;
-            }
-
-            var tmp = $scope.dart.score1;
-            var newScore = (tmp - val);
-
-            if(newScore > 0) {
-                $scope.dart.score1 = newScore;
-                $scope.last1 = "";
-            }
-        };
-
-        $scope.take2 = function(val) {
-            if( val > 180) {
-                $scope.last2 = "";
-                return;
-            }
-
-            var tmp = $scope.dart.score2;
-            var newScore = (tmp - val);
-
-            if(newScore > 0) {
-                $scope.dart.score2 = newScore;
-                $scope.last2 = "";
-            }
-        };
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('dart', $scope.dart);
+        
+        //Team Select
+        $scope.colleges = [{
+          shortname: 'alc',
+          name: 'Alcuin'
+        }, {
+          shortname: 'con',
+          name: 'Constantine'
+        }, {
+          shortname: 'der',
+          name: 'Derwent'
+        }, {
+          shortname: 'gdr',
+          name: 'Goodricke'
+        }, {
+          shortname: 'jam',
+          name: 'James'
+        }, {
+          shortname: 'hal',
+          name: 'Halifax'
+        }, {
+          shortname: 'lan',
+          name: 'Langwith'
+        }, {
+          shortname: 'van',
+          name: 'Vanbrugh'
+        }, {
+          shortname: 'wen',
+          name: 'Wentworth'
+        }];
+    
+        $(function () {
+          $('.ui.dropdown').dropdown();
         });
+
     }
 ]);

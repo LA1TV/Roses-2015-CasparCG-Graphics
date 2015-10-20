@@ -39,85 +39,14 @@
             </div>
         </div>
 
-        <div ng-controller="boxingCtrl">
-            <div ng-show="boxing.showScore" class="boxing-score right bottom scale-fade">
-
-                <div class="bar">
-                    <div class="gradient-overlay"><span class="timer">{{clock}}</span></div>
-                    <div class="moving"></div>
-                </div>
-
-                <div class="score-inner">
-
-                    <div class="float-left">
-                        <h4>{{boxing.name1}}</h4>
-                        <h1>{{boxing.lancScore}}</h1>
-                        <h2>LANC</h2>
-                    </div>
-
-                    <div class="float-right">
-                        <h4>{{boxing.name2}}</h4>
-                        <h1>{{boxing.yorkScore}}</h1>
-                        <h2>YORK</h2>
-                    </div>
-
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="bar red">
-                    <div class="gradient-overlay"><span>{{boxing.currRound}} Round</span></div>
-                    <div class="red-moving"></div>
-                </div>
-            </div>
-        </div>
-
-        <div ng-controller="scoringCtrl">
-            <div ng-show="showScore" class="center bottom total-score scale-fade" >
-                <h1>Overall Score</h1>
-
-                <div class="float-left lanc">
-                LANCS
-                <p>{{lancScore}}</p>
-                </div>
-
-                <div class="float-right york">
-                YORK
-                <p>{{yorkScore}}</p>
-                </div>
-
-                <div class="clearfix"></div>
-            </div>
-        </div>
-
-
         <div ng-controller="footballCtrl" class="football left top scale-fade" ng-show="football.show">
             <div class="row">
                 <div class="clock">{{clock}}</div>
-                <div class="score lanc">LANCS {{football.lancScore}}</div>
-                <div class="score york">{{football.yorkScore}} YORK</div>                  
-            </div>
-        </div>
-
-        <div ng-controller="dartsCtrl" class="right bottom darts scale-fade" ng-show="darts.show">
-            <div class="row header">
-                <div class="name">&nbsp;</div>
-                <div class="leg">LEGS</div>
-            </div>
-
-            <div class="row">
-                <div class="name lanc">{{darts.player1}}</div>
-                <div class="legs">{{darts.leg1}}</div>
-                <div class="score">{{darts.score1}}</div>
-            </div>
-
-            <div class="row">
-                <div class="name york">{{darts.player2}}</div>
-                <div class="legs">{{darts.leg2}}</div>
-                <div class="score">{{darts.score2}}</div>
-            </div>
-
-            <div class="row">
-                 <div class="footer">first to 3 legs</div>
+                <div class="team team1 {{football.team1}}">{{football.team1}}</div>
+                <div class="score score1">{{football.score1}}</div>
+                <div class="score scoredivider">-</div>
+                <div class="score score2">{{football.score2}}</div>
+                <div class="team team2 {{football.team2}}">{{football.team2}}</div>                  
             </div>
         </div>
 
