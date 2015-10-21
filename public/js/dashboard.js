@@ -91,6 +91,7 @@ app.controller('scoreboardCGController', ['$scope', 'socket',
 
         $scope.pauseClock = function() {
             socket.emit("clock:pause");
+            $scope.scoreboard.clockpause = !$scope.scoreboard.clockpause;
         };
 
         $scope.resetClock = function() {

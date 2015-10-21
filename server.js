@@ -7,7 +7,15 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
 //Scoreboard array
-var scoreboard = { team1: 'Team 1', team2: 'Team 2', team1short: 'tm1', team2short: 'tm2', score1: 0, score2: 0, showScore: false, showTime: false, };
+var scoreboard = {
+    team1: 'Team 1', team2: 'Team 2', 
+    team1short: 'tm1', team2short: 'tm2', 
+    score1: 0, score2: 0, 
+    fouls1: 0, fouls2: 0, 
+    showScore: false, 
+    showFouls: false, 
+    clockPause: true,
+    };
 
 //Clock Functions
 var stopwatch = new Stopwatch();

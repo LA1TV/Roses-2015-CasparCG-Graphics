@@ -29,7 +29,8 @@
         </div>
 
         <div class="ui icon blue button" ng-click="pauseClock()">
-          <i class="pause icon"></i>
+          <i class="play icon" ng-show="!scoreboard.clockpause"></i>
+          <i class="pause icon" ng-show="scoreboard.clockpause"></i>
         </div>
 
         <div class="ui icon green button" ng-click="downClock()">
