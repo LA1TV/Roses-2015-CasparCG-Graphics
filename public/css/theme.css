@@ -7,7 +7,8 @@
 
 body {
     padding: 50px; /* Safe area */
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: bold;
     background:transparent;                          /* The HTML consumer actually makes your background transparent by default, unless a color or image is specified - but this might be usefull when debugging in browsers */
     overflow:hidden;                                 /* Hide any overflowing elements - to disable scollbars */
     -webkit-font-smoothing:antialiased !important;   
@@ -184,19 +185,23 @@ h1, h2, h3, h4 {
 
 .scoreboard {
   position: absolute;
-  left: 84px;
-  width: 478px;
+  left: 87px;
   border-radius: 5px; 
   border: 4px solid rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   background-color: rgba(0, 0, 0, 0.5);
-  font-size: 30px;
+  font-size: 28px;
   text-align: center;
 }
 
-.scoreboard .clock, .scoreboard .team, .scoreboard .score {
+.scoreboard .clock, .scoreboard .team, .scoreboard .score, .scoreboard .score *, .scoreboard .fouls * {
   float: left; 
+}
+
+.scoreboard .clock, .scoreboard .team, .scoreboard .score *, .scoreboard .fouls * {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .scoreboard .clock {
@@ -230,7 +235,6 @@ h1, h2, h3, h4 {
   width: 110px;
   color: #fff;
   text-transform: uppercase;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
 .scoreboard .team2 {
@@ -285,5 +289,23 @@ h1, h2, h3, h4 {
 .scoreboard .logo {
     position: absolute;
     top: -22px;
-    left: -38px;
+    left: -41px;
+}
+
+.scoreboard .fouls * {
+    background-color: #fff;
+    font-size: 80%;
+    padding: 3px 0;
+}
+
+.scoreboard .fouls1, .scoreboard .fouls2 {
+    width: 110px;
+}
+
+.scoreboard .foulslabel {
+    width:  100px;
+}
+
+.scoreboard .fouls1 {
+    margin-left: 150px;
 }

@@ -58,11 +58,11 @@
       </div>
       <h1>{{scoreboard.score1}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="scoreboard.score1 = scoreboard.score1 + 1;">
-          <i class="plus icon"></i>
-        </button>
         <button class="ui red button" ng-click="scoreboard.score1 = scoreboard.score1 - 1;" ng-disabled="scoreboard.score1 == 0">
           <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.score1 = scoreboard.score1 + 1;">
+          <i class="plus icon"></i>
         </button>
       </div>
     </div>
@@ -80,11 +80,43 @@
       </div>
       <h1>{{scoreboard.score2}}</h1>
       <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.score2 = scoreboard.score2 - 1;" ng-disabled="scoreboard.score2 == 0">
+          <i class="minus icon"></i>
+        </button>
         <button class="ui green button" ng-click="scoreboard.score2 = scoreboard.score2 + 1;">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="scoreboard.score2 = scoreboard.score2 - 1;" ng-disabled="scoreboard.score2 == 0">
+      </div>
+    </div>
+    
+    <div class="ui divider"></div>
+
+<div class="ui grid center aligned">
+    <div class="four wide column">
+      <h2>{{scoreboard.fouls1}}</h2>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.fouls1 = scoreboard.fouls1 - 1;" ng-disabled="scoreboard.fouls1 == 0">
           <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.fouls1 = scoreboard.fouls1 + 1;">
+          <i class="plus icon"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="four wide column">
+      <h2>Fouls</h2>
+      <div class="field"><checkbox ng-model="scoreboard.showfouls" size="large" type="toggle"></checkbox></div>
+    </div>
+    
+    <div class="four wide column">
+      <h2>{{scoreboard.fouls2}}</h2>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.fouls2 = scoreboard.fouls2 - 1;" ng-disabled="scoreboard.fouls2 == 0">
+          <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.fouls2 = scoreboard.fouls2 + 1;">
+          <i class="plus icon"></i>
         </button>
       </div>
     </div>
