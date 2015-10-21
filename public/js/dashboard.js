@@ -81,22 +81,12 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
     }
 ]);
 
-app.controller('scoreboardCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-        var stored = localStorageService.get('scoreboard');
-
-        if (stored === null) {
-            $scope.scoreboard = { 
-                clock: '00:00', team1: 'Team 1', team2: 'Team 2', team1short: 'tm1', team2short: 'tm2', score1: 0, score2: 0, showScore: false, showTime: false,
-            };
-        } else {
-            $scope.scoreboard = stored;
-        }
-        
+app.controller('scoreboardCGController', ['$scope', 'socket',
+    function($scope, socket){
         //Clock Functions
         
         socket.on("clock:tick", function (msg) {
-            $scope.scoreboard.clock = msg;
+            $scope.clock = msg;
         });
 
         $scope.pauseClock = function() {
@@ -119,14 +109,26 @@ app.controller('scoreboardCGController', ['$scope', 'localStorageService', 'sock
             socket.emit("clock:up");
         };
 
-        $scope.$watch('scoreboard', function() {
-            socket.emit("scoreboard", $scope.scoreboard);
-            localStorageService.set('scoreboard', $scope.scoreboard);
-        }, true);
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('scoreboard', $scope.scoreboard);
+        //Score Functions
+        
+        socket.on("scoreboard", function (msg) {
+            $scope.scoreboard = msg;
         });
+        
+        //Get data from server
+        
+        $scope.$watch('scoreboard', function() {
+            if ($scope.scoreboard) {
+                socket.emit("scoreboard", $scope.scoreboard);
+            } else {
+                getScoreData();
+            }
+        }, true);
+        
+        function getScoreData() {
+            socket.emit("scoreboard:get");
+            socket.emit("clock:get");
+        };
         
         //Team Select
         $scope.colleges = [{

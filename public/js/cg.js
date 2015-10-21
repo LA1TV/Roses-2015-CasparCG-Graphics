@@ -27,24 +27,6 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
-    function($scope, $timeout, socket){
-        $scope.tickInterval = 1000; //ms
-
-        socket.on("bug", function (state) {
-            $scope.state = state;
-        });
-
-        var tick = function () {
-            $scope.clock = Date.now() // get the current time
-            $timeout(tick, $scope.tickInterval); // reset the timer
-        }
-
-        // Start the timer
-        $timeout(tick, $scope.tickInterval);
-    }
-]);
-
 app.controller('scoreboardCtrl', ['$scope', 'socket',
     function($scope, socket){
 
@@ -53,7 +35,19 @@ app.controller('scoreboardCtrl', ['$scope', 'socket',
         });
 
         socket.on("clock:tick", function (msg) {
-            $scope.scoreboard.clock = msg;
+            $scope.clock = msg;
         });
+        
+        // Get data from server
+        $scope.$watch('scoreboard', function() {
+            if (!$scope.scoreboard) {
+                getScoreData();
+            }
+        }, true);
+        
+        function getScoreData() {
+            socket.emit("scoreboard:get");
+            socket.emit("clock:get");
+        };
     }
 ]);

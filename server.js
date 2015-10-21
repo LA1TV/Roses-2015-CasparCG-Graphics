@@ -6,6 +6,8 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+//Scoreboard array
+var scoreboard = { team1: 'Team 1', team2: 'Team 2', team1short: 'tm1', team2short: 'tm2', score1: 0, score2: 0, showScore: false, showTime: false, };
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -41,14 +43,11 @@ io.on('connection', function(socket) {
 	socket.on("clock:set", function(msg) {
 		stopwatch.setValue(msg);
 	});
-
-
-	/*
-	 * 		General Functions
-	 */
-	socket.on("bug", function(msg) {
-		io.sockets.emit("bug", msg);
+    
+    socket.on("clock:get", function() {
+        io.sockets.emit("clock:tick", stopwatch.getTime());
 	});
+
 
 	/*
 	 * 		Lower Thirds
@@ -68,16 +67,13 @@ io.on('connection', function(socket) {
 	 /*
 	 * 		Score
 	 */
-	 socket.on("scoreboard", function(msg) {
+	socket.on("scoreboard", function(msg) {
+        scoreboard = msg;
 		io.sockets.emit("scoreboard", msg);
 	});
-
-
-	/*
-	 * 		Darts
-	 */
-	 socket.on("dart", function(msg) {
-		io.sockets.emit("dart", msg);
+    
+    socket.on("scoreboard:get", function(msg) {
+		io.sockets.emit("scoreboard", scoreboard);
 	});
 });
 
