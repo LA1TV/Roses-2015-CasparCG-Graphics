@@ -182,9 +182,9 @@ h1, h2, h3, h4 {
 /*              [Scoreboard Score]                  */
 /**************************************************/
 
-.scoreboard .row {
+.scoreboard {
   position: absolute;
-  left: 34px;
+  left: 84px;
   width: 478px;
   border-radius: 5px; 
   border: 4px solid rgba(0, 0, 0, 0.5);
@@ -283,6 +283,7 @@ h1, h2, h3, h4 {
 }
 
 .scoreboard .logo {
-    top: -18px;
-    left: 0px;
+    position: absolute;
+    top: -22px;
+    left: -38px;
 }

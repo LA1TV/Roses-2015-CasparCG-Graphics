@@ -29,15 +29,13 @@
 
         <div ng-controller="scoreboardCtrl" class="scoreboard left top scale-fade" ng-show="scoreboard.show">
             <div class="row">
+                <div class="logo"><img src="/images/logo.png" /></div>
                 <div class="clock">{{clock}}</div>
                 <div class="team team1 {{scoreboard.team1short}}">{{scoreboard.team1short}}</div>
                 <div class="score score1">{{scoreboard.score1}}</div>
                 <div class="score scoredivider">-</div>
                 <div class="score score2">{{scoreboard.score2}}</div>
                 <div class="team team2 {{scoreboard.team2short}}">{{scoreboard.team2short}}</div>                  
-            </div>
-            <div class="logo left top">
-                    <img src="/images/logo.png" />
             </div>
         </div>
 
