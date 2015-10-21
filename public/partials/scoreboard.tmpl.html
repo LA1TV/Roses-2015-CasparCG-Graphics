@@ -47,11 +47,11 @@
   <div class="ui grid center aligned">
     <div class="eight wide column">
       <div class="ui selection dropdown">
-          <input type="hidden" name="gender">
+          <input type="hidden" name="team1">
           <div class="text">{{scoreboard.team1}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team1 = college.name; scoreboard.team1short = college.shortname;">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team1 = college.name; scoreboard.team1short = college.shortname;" ng-class="{'active selected' : college.name == scoreboard.team1}">
                 {{college.name}}
             </div>
           </div>
@@ -69,11 +69,11 @@
 
     <div class="eight wide column">
       <div class="ui selection dropdown">
-          <input type="hidden" name="gender">
+          <input type="hidden" name="team2">
           <div class="text">{{scoreboard.team2}}</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team2 = college.name; scoreboard.team2short = college.shortname;">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team2 = college.name; scoreboard.team2short = college.shortname;" ng-class="{'active selected' : college.name == scoreboard.team2}">
                 {{college.name}}
             </div>
           </div>
