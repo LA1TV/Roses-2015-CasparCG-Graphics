@@ -87,11 +87,14 @@ app.controller('scoreboardCGController', ['$scope', 'socket',
         
         socket.on("clock:tick", function (msg) {
             $scope.clock = msg;
+            if (msg == '00:00') {
+                $scope.scoreboard.clockPause = true;
+            }
         });
 
         $scope.pauseClock = function() {
             socket.emit("clock:pause");
-            $scope.scoreboard.clockpause = !$scope.scoreboard.clockpause;
+            $scope.scoreboard.clockPause = !$scope.scoreboard.clockPause;
         };
 
         $scope.resetClock = function() {
@@ -99,7 +102,12 @@ app.controller('scoreboardCGController', ['$scope', 'socket',
         };
 
         $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
+            if (!val.match(/^\d{2}:(?:[0-5]\d)$/)) {
+                alert('Invalid time entered.');
+                $scope.time = null;
+            } else {
+                socket.emit("clock:set", val);
+            }
         };
 
         $scope.downClock = function() {
