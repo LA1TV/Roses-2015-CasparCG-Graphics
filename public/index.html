@@ -38,11 +38,14 @@
                   <div class="score2">{{scoreboard.score2}}</div>
                 </div>
                 <div class="team team2 {{scoreboard.team2short}}">{{scoreboard.team2short}}</div>
-            </div>
-            <div class="row fouls" ng-show="scoreboard.showfouls">
-                  <div class="fouls1">{{scoreboard.fouls1}}</div>
-                  <div class="foulslabel">Fouls</div>
-                  <div class="fouls2">{{scoreboard.fouls2}}</div>
+            </div><br />
+            <div class="row border"></div>
+            <div class="row sub size-vert" ng-show="scoreboard.showfouls">
+                  <div class="fouls">
+                    <div class="fouls1">{{scoreboard.fouls1}}</div>
+                    <div class="foulslabel">Fouls</div>
+                    <div class="fouls2">{{scoreboard.fouls2}}</div>
+                  </div>
             </div>
         </div>
 

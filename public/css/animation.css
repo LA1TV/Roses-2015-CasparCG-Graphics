@@ -1260,3 +1260,17 @@
   -webkit-transform: perspective(300px) rotateY(0deg);
   opacity: 1;
 }
+
+/* ------------------------------------------- */
+/* Vertical Size
+/* ------------------------------------------- */
+.size-vert {
+  -webkit-transition: max-height 0.5s;
+  -moz-transition: max-height 0.5s;
+  transition: max-height 0.5s;
+  overflow: hidden;
+}
+
+.size-vert.ng-hide {
+  max-height: 0px;
+}
