@@ -1,9 +1,11 @@
 {
-	"name": "ystv-yorksport-graphics",
-	"version": "1.0.0",
-	"dependencies": {
-		"express": "*",
-		"socket.io": "*",
-		"underscore": "*"
-	}
+  "name": "ystv-yorksport-graphics",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular-minicolors": "*",
+    "express": "*",
+    "jquery-minicolors": "*",
+    "socket.io": "*",
+    "underscore": "*"
+  }
 }

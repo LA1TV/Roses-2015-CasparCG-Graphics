@@ -141,32 +141,14 @@ app.controller('scoreboardCGController', ['$scope', 'socket',
         
         //Team Select
         $scope.colleges = [{
-          shortname: 'alc',
-          name: 'Alcuin'
+          shortname: 'yrk',
+          name: 'York'
         }, {
-          shortname: 'con',
-          name: 'Constantine'
+          shortname: 'shf',
+          name: 'Sheffield'
         }, {
-          shortname: 'der',
-          name: 'Derwent'
-        }, {
-          shortname: 'gdr',
-          name: 'Goodricke'
-        }, {
-          shortname: 'jam',
-          name: 'James'
-        }, {
-          shortname: 'hal',
-          name: 'Halifax'
-        }, {
-          shortname: 'lan',
-          name: 'Langwith'
-        }, {
-          shortname: 'van',
-          name: 'Vanbrugh'
-        }, {
-          shortname: 'wen',
-          name: 'Wentworth'
+          shortname: 'nth',
+          name: 'Northumbria'
         }];
     
         $(function () {

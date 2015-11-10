@@ -27,6 +27,14 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     }
 ]);
 
+app.controller('lowerThirdsScoreCtrl', ['$scope', 'socket',
+    function($scope, socket){
+        socket.on("scoreboard", function (msg) {
+            $scope.scoreboard = msg;
+        });
+    }
+]);
+
 app.controller('scoreboardCtrl', ['$scope', 'socket',
     function($scope, socket){
 

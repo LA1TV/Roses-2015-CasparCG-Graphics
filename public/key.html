@@ -5,59 +5,63 @@
         <title>CG</title>
         <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css" />
         <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-        <link href="/css/theme.css" rel="stylesheet" type="text/css">
+        <link href="/css/key.css" rel="stylesheet" type="text/css">
         <link href="/css/animation.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
 
         <div ng-controller="lowerThirdsCtrl">
-            <div class="lowerthird left bottom scale-fade" ng-show="showLeft">
-                <h1>{{left.heading}}</h1>
+            <div class="lowerthird left bottom bouncy-slide-left" ng-show="showLeft">
+                <div class="gradient-overlay">
+                    <h1>{{left.heading}}</h1>
+                </div>
                 <h2 ng-show="left.subHeading">{{left.subHeading}}</h2>
             </div>
 
-            <div class="lowerthird right bottom scale-fade" ng-show="showRight">
-                <h1>{{right.heading}}</h1>
+            <div class="lowerthird right bottom bouncy-slide-right" ng-show="showRight">
+                <div class="gradient-overlay">
+                    <h1>{{right.heading}}</h1>
+                </div>
                 <h2 ng-show="right.subHeading">{{right.subHeading}}</h2>
             </div>
         </div>
         
-        <div ng-controller="lowerThirdsScoreCtrl" class="scorethird center bottom scale-fade" ng-show="scoreboard.showThirds">
+        <div ng-controller="lowerThirdsScoreCtrl" class="scorethird center bottom scale-fade">
             <div class="row main">
-                <div class="team team1 {{scoreboard.team1short}}">{{scoreboard.team1}}</div>
+                <div class="team team1"></div>
                 <div class="score">
-                  <div class="score1">{{scoreboard.score1}}</div>
-                  <div class="scoredivider">-</div>
-                  <div class="score2">{{scoreboard.score2}}</div>
+                  <div class="score1"></div>
+                  <div class="scoredivider"></div>
+                  <div class="score2"></div>
                 </div>
-                <div class="team team2 {{scoreboard.team2short}}">{{scoreboard.team2}}</div>
+                <div class="team team2"></div>
             </div>
             <div class="row sub scorers">
-                <div class="scorers1">{{team1.scorers}}</div>
-                <div class="half">Half-time</div>
-                <div class="scorers2">{{team2.scorers}}</div>
+                <div class="scorers1">Hobin  4', 12'</div>
+                <div class="half"></div>
+                <div class="scorers2">Nicholson 15'<br />Johnson 19' (OG)</div>
             </div>
         </div>
 
         <div ng-controller="scoreboardCtrl" class="scoreboard left top scale-fade" ng-show="scoreboard.show">
             <div class="row main">
-                <div class="logo">ystv</div>
-                <div class="clock size-hor" ng-show="scoreboard.showClock"><span class="time">{{clock}}</span></div>
-                <div class="team team1 {{scoreboard.team1short}}">{{scoreboard.team1short}}</div>
+                <div class="logo"></div>
+                <div class="clock size-hor" ng-show="scoreboard.showClock"></div>
+                <div class="team team1"></div>
                 <div class="score">
-                  <div class="score1">{{scoreboard.score1}}</div>
-                  <div class="scoredivider">-</div>
-                  <div class="score2">{{scoreboard.score2}}</div>
+                  <div class="score1"></div>
+                  <div class="scoredivider"></div>
+                  <div class="score2"></div>
                 </div>
-                <div class="team team2 {{scoreboard.team2short}}">{{scoreboard.team2short}}</div>
+                <div class="team team2"></div>
             </div><br />
             <div class="row border border-logo"></div><div class="row border border-clock size-hor" ng-show="scoreboard.showClock"></div>
             <div class="row sub size-vert" ng-show="scoreboard.showfouls">
                   <div class="fouls">
-                    <div class="fouls1">{{scoreboard.fouls1}}</div>
-                    <div class="foulslabel">Fouls</div>
-                    <div class="fouls2">{{scoreboard.fouls2}}</div>
+                    <div class="fouls1"></div>
+                    <div class="foulslabel"></div>
+                    <div class="fouls2"></div>
                   </div>
             </div>
         </div>

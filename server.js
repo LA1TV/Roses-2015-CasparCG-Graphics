@@ -15,6 +15,7 @@ var scoreboard = {
     showScore: false, 
     showFouls: false, 
     clockPause: true,
+    showClock: false,
     };
 
 //Clock Functions

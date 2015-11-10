@@ -1274,3 +1274,17 @@
 .size-vert.ng-hide {
   max-height: 0px;
 }
+
+/* ------------------------------------------- */
+/* Horizontal Size
+/* ------------------------------------------- */
+.size-hor {
+  -webkit-transition: max-width 0.5s;
+  -moz-transition: max-width 0.5s;
+  transition: max-width 0.5s;
+  overflow: hidden;
+}
+
+.size-hor.ng-hide {
+  max-width: 0px;
+}
