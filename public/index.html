@@ -23,7 +23,7 @@
             </div>
         </div>
         
-        <div ng-controller="lowerThirdsScoreCtrl" class="scorethird center bottom scale-fade" ng-show="scoreboard.showThirds">
+        <div ng-controller="statsCGController" class="scorethird center bottom scale-fade" ng-show="scoreboard.showThirds">
             <div class="row main">
                 <div class="team team1 {{scoreboard.team1short}}">{{scoreboard.team1}}</div>
                 <div class="score">
@@ -34,9 +34,9 @@
                 <div class="team team2 {{scoreboard.team2short}}">{{scoreboard.team2}}</div>
             </div>
             <div class="row sub scorers">
-                <div class="scorers1">{{team1.scorers}}</div>
-                <div class="half">Half-time</div>
-                <div class="scorers2">{{team2.scorers}}</div>
+                <div class="scorers1"><div ng-repeat="scorer in scorers">{{scorer.name}} {{scorer.time}}</div></div>
+                <div class="period">{{scoreboard.period}}</div>
+                <div class="scorers2">{{scoreboard.team2.scorers}}</div>
             </div>
         </div>
 

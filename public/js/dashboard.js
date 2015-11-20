@@ -21,6 +21,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             type: 'link',
             icon: 'soccer',
         });
+        
+        $scope.menu.push({
+            name: 'Stats',
+            url: '/stats',
+            type: 'link',
+            icon: 'soccer',
+        });
 
     }
 ]);
@@ -40,6 +47,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/scoreboard", {
                 templateUrl: '/partials/scoreboard.tmpl.html',
                 controller: 'scoreboardCGController'
+            })
+            .when("/stats", {
+                templateUrl: '/partials/stats.tmpl.html',
+                controller: 'statsCGController'
             })
             .otherwise({redirectTo: '/scoreboard'});
     }
@@ -77,6 +88,52 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
 
         $scope.$on("$destroy", function() {
             localStorageService.set('lower_thirds', $scope.queuedThirds);
+        });
+    }
+]);
+
+app.controller('statsCGController', ['$scope', 'socket',
+    function($scope, socket){
+        
+        $scope.add = function(item) {
+            $scope.scorers.push(item);
+            
+            $scope.scorersForm.$setPristine();
+            $scope.scorer = {};
+        };
+
+        $scope.remove = function(index){
+            $scope.scorers.splice(index, 1);
+        };
+        
+        socket.on("scorers", function (msg) {
+            $scope.scorers = msg;
+        });
+        
+        $scope.$watch('scorers', function() {
+            if ($scope.scorers) {
+                socket.emit("scorers", $scope.scorers);
+            } else {
+                socket.emit("scorers:get");
+            }
+        }, true);
+        
+        socket.on("scoreboard", function (msg) {
+            $scope.scoreboard = msg;
+        });
+        
+        $scope.$watch('scoreboard', function() {
+            if ($scope.scoreboard) {
+                socket.emit("scoreboard", $scope.scoreboard);
+            } else {
+                socket.emit("scoreboard:get");
+            }
+        }, true);
+        
+        $scope.periods = ['1st Half', 'Half-time', '2nd Half', 'Full-time', 'Extra-time'];
+    
+        $(function () {
+          $('.ui.dropdown').dropdown();
         });
     }
 ]);

@@ -17,6 +17,8 @@ var scoreboard = {
     clockPause: true,
     showClock: false,
     };
+    
+    var scorers = [];
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -71,6 +73,18 @@ io.on('connection', function(socket) {
 
 	socket.on("lowerthird:hide", function() {
 		io.sockets.emit("lowerthird:hide");
+	});
+    
+    /*
+	 * 		Stats
+	 */
+	socket.on("scorers", function(msg) {
+        scorers = msg;
+		io.sockets.emit("scorers", msg);
+	});
+    
+    socket.on("scorers:get", function(msg) {
+		io.sockets.emit("scorers", scorers);
 	});
 
 	 /*

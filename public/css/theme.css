@@ -215,12 +215,12 @@ h1, h2, h3, h4 {
     width: 30px;
 }
 
-.scorethird .scorers * {
+.scorethird .scorers > * {
     float: left;
     padding: 5px;
 }
 
-.scorethird .half {
+.scorethird .period {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
     float: left;
     border-radius: 0 0 5px 5px;
@@ -435,7 +435,7 @@ h1, h2, h3, h4 {
     float: left;
     background-color: #fff;
     font-size: 70%;
-    padding: 4px 0;
+    padding: 6px 0;
     height: 30px;
 }
 
