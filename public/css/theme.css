@@ -172,6 +172,17 @@ h1, h2, h3, h4 {
 /**************************************************/
 /*              [LowerThird Score]                  */
 /**************************************************/
+.scorethird .licence {
+    color: #fff;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+    background-color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    height: 180px;
+}
+
+.scorethird .licence .logo {float: left; margin: 0 15px;}
+.scorethird .licence .licenceim {margin-top: 20px; height: 55px}
 
 .scorethird {
     text-align: center;
@@ -429,6 +440,11 @@ h1, h2, h3, h4 {
 .team.yrk {
     color: #000;
     background-color: #FBB114;
+}
+
+.team.nth {
+    color: #000;
+    background-color: #fff;
 }
 
 .scoreboard .fouls * {

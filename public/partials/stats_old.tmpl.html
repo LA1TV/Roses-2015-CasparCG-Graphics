@@ -1,0 +1,65 @@
+<div class="ui form segment">
+  <h2>Stats</h2>
+
+	<div class="ui grid center aligned">
+    	<div class="eight wide column">
+    		<div class="field"><checkbox ng-model="scoreboard.showThirds" size="large" type="toggle">Show Stats</checkbox></div>
+    	</div>
+    </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui grid center aligned">
+    <div class="eight wide column">
+      <div class="ui selection dropdown">
+          <input type="hidden" name="period">
+          <div class="text">{{scoreboard.period}}</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value={{$index+1}} ng-repeat="period in periods" ng-click="scoreboard.period = period;" ng-class="{'active selected' : period == scoreboard.period}">
+                {{period}}
+            </div>
+          </div>
+      </div>
+    </div>
+    
+    <div class="ui divider"></div>
+
+<div class="ui grid center aligned">
+    <form name="scorersForm" method="post">
+    <div class="two fields">
+      <div class="field">
+        <label for="Name">Name</label>
+        <input id="Name" placeholder="Name" type="text" ng-trim="true" ng-model="scorer.name"/>
+      </div>
+
+      <div class="field">
+        <label for="Time">Time</label>
+        <input id="Time" placeholder="Time" type="text" ng-trim="true" ng-model="scorer.time">
+      </div>
+    </div>
+
+    <div class="right floated right aligned six wide column">
+      <div class="ui blue button" ng-click="add(scorer)" ng-disabled="scorersForm.$invalid" >Add</div>
+    </div>
+  </form>
+  </div>
+ </div>
+ 
+ <div class="ui segment" ng-repeat="scorer in scorers">
+  <div class="ui grid">
+    <div class="three wide column">
+      <h2 class="left aligned ui header">
+          <i class="list layout icon"></i>
+          <div class="content">
+              {{scorer.name}}
+          </div>
+        </h2>
+    </div>
+
+      <div class="ui icon red small button">
+        <i class="delete icon" ng-click='remove($index)'></i>
+      </div>
+    </div>
+  </div>
+</div>
