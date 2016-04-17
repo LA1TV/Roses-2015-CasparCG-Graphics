@@ -7,7 +7,8 @@
 
 body {
     padding: 50px; /* Safe area */
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: bold;
     background:transparent;                          /* The HTML consumer actually makes your background transparent by default, unless a color or image is specified - but this might be usefull when debugging in browsers */
     overflow:hidden;                                 /* Hide any overflowing elements - to disable scollbars */
     -webkit-font-smoothing:antialiased !important;   
@@ -87,21 +88,21 @@ h1, h2, h3, h4 {
 /**************************************************/
 .left{
     position: absolute;
-    left: 50px;
+    left: 96px;
 }
 
 .right {
     position: absolute;
-    right: 50px;
+    right: 96px;
     text-align: right;
 }
 
 .bottom {
-    bottom: 50px;
+    bottom: 54px;
 }
 
 .top {
-    top: 50px;
+    top: 54px;
 }
 
 .center {
@@ -143,264 +144,329 @@ h1, h2, h3, h4 {
 /**************************************************/
 
 .lowerthird {
-    min-width: 30%;
-    width: 40%;
+    min-width: 600px;
     border-radius: 5px;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.lowerthird.left{
-    border-left: thick solid #fff;
+.lowerthird * {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+    border-radius: 5px;
+    padding: 8px 15px;
 }
-
-.lowerthird.right{
-    border-right: thick solid #fff;
-}
-
+    
 .lowerthird h1 {
     color: #fff;
-    text-shadow:1px -1px 0px #000;
     font-size: 40px;
-    font-size: 2.5vw;
-    font-weight: normal;
-    padding: 5px;
-
-    background-color: #cd1d18;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+    background-color: #000;
 }
 
 .lowerthird h2 {
-    color: #fff;
-    font-size: 35px;
-    font-weight: normal;
-    padding: 5px;
-
-    background-color: #000;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-/**************************************************/
-/*              [Boxing Score]                    */
-/**************************************************/
-.boxing-score {
-    background-color: rgba(0,0,0,0.5);
-    width: 15%;
-}
-
-.score-inner {
-    color: #fff;
-    text-shadow:1px -1px 0px #000;
-    text-align: center;
-    padding: 15px 60px 15px 60px;
-}
-
-.timer {
-    top: -2px;
-    font-size: 30px !important;
-}
-
-.score-inner h1 {
-    font-size: 35px;
-}
-
-.red-moving {
-    height: 40px;
-    width: 500%;
-    
-    background: linear-gradient(to left, rgba(225,0,0,1) 0%, rgba(225,0,0,1) 71%, rgba(225,25,25,1) 85%, rgba(225,0,0,1) 98%, rgba(225,0,0,1) 100%) repeat;
-    
-    -webkit-background-size: 50% 100%;
-    -webkit-animation-name: moving-gradient;
-    -webkit-animation-duration: 20s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-
-/**************************************************/
-/*              [Live Bug]                        */
-/**************************************************/
-.bug {
-    display:inline;
-    white-space: nowrap;
-    clear:none;
-}
-
-.bug h1 {
-    color: #fff;
-    text-shadow:1px -1px 0px #000;
-    font-size: 25px;
-    font-size: 1.3vw;
-    font-weight: normal;
-    display:inline;
-    padding: 5px;
-    margin-right: 0px;
-
-    background-color: #cd1d18;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.black {
-    background-color: #000 !important;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-/**************************************************/
-/*              [Logo]                            */
-/**************************************************/
-
-.logo {
-    opacity: 0.5;
-    top: 40px;
-}
-
-/**************************************************/
-/*              [Total Score]                     */
-/**************************************************/
-
-.total-score {
-    width: 550px;
-    text-align: center;
-    border-radius: 10px; 
-    border: 10px solid rgba(0, 0, 0, 0.5);
-    background-clip: padding-box;
-}
-
-.total-score h1 {
     color: #000;
-    font-size: 35px;
-    padding: 10px;
-    text-transform: uppercase;
-    background-color: #fff !important;
+    font-size: 30px;
+    background-color: #fff;
 }
 
-.total-score .lanc {
-    display: block;
-    width: 50%;
-    font-size: 40px;
+/**************************************************/
+/*              [LowerThird Score]                  */
+/**************************************************/
+.scorethird .licence {
     color: #fff;
-    background-color: #cd1d18;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+    background-color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    height: 180px;
 }
 
-.total-score .york {
-    display: block;
-    width: 50%;
-    font-size: 40px;
-    color: #efbb39;
-    background-color: #000 !important;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+.scorethird .licence .logo {float: left; margin: 0 15px;}
+.scorethird .licence .licenceim {margin-top: 20px; height: 55px}
+
+.scorethird {
+    text-align: center;
+    font-size: 28px;
+    width: 1200px;
+    border-radius: 10px;
+    border: 8px solid rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.scorethird .team, .scorethird .score * {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+  float: left;
+  font-size: 48px;
+  padding: 10px 0;
+  height: 68px;
+}
+
+.scorethird .team {
+    color: #fff;
+    width: 507px;
+    padding: 10px 20px;
+}
+
+.scorethird .team1 {
+    text-align: right;
+    border-radius: 10px 0 0 10px;
+}
+
+.scorethird .team2 {
+    text-align: left;
+    border-radius: 0 10px 10px 0;
+}
+
+.scorethird .score1, .scorethird .score2 {
+    width: 70px
+}
+
+.scorethird .scoredivider {
+    width: 30px;
+}
+
+.scorethird .scorers > * {
+    float: left;
+    padding: 5px;
+}
+
+.scorethird .period {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+    float: left;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    width: 170px;
+    height: 38px;
+}
+
+.scorethird .scorers1, .scorethird .scorers2 {
+    color: #fff;
+    width: 507px;
+}
+
+.scorethird .scorers1 {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.scorethird .scorers2 {
+    text-align: left;
+    padding-left: 20px;
 }
 
 /**************************************************/
-/*              [Football Score]                  */
+/*              [Scoreboard Score]                */
 /**************************************************/
 
-.football {
-  width: 440px;
-  border-radius: 5px; 
-  border: 7px solid rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
-  background-color: rgba(0, 0, 0, 0.5);
-  font-size: 30px;
+/* UNCOMMENT IF NO TRANSPARENCY KEY */
+/*
+.scoreboard .row, .scoreboard .border {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+.scoreboard * {
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+.scoreboard .fouls1 {
+    border-top-left-radius: 3px !important;
+}
+*/
+
+
+.scoreboard {
+  font-size: 26px;
   text-align: center;
 }
 
-.football .clock, .football .score.lanc, .football .score.york {
+.scoreboard .main {
+  border-radius: 5px 5px 0 0;
+  border: 4px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 0px;
+  background-clip: padding-box;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.scoreboard .border {
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.scoreboard .border-logo {
+    width: 80px;
+    border-bottom-left-radius: 5px;
+}
+
+.scoreboard .border-clock {
+    width: 100px;
+    max-width: 100px;
+}
+
+.scoreboard .sub {
+  max-height: 34px;
+  border-radius: 0 0 5px 5px; 
+  border: 4px solid rgba(0, 0, 0, 0.5);
+  border-top: 0px;
+  background-clip: padding-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-transition: max-height 0.5s, border-bottom-left-radius 0.4s;
+  -moz-transition: max-height 0.5s, border-bottom-left-radius 0.4s;
+  transition: max-height 0.5s, border-bottom-left-radius 0.4s;
+  overflow: hidden;
+}
+
+.scoreboard .sub.ng-hide {
+  display: block !important;
+  border-bottom-left-radius: 0px;
+}
+
+.scoreboard .row {
   float: left; 
 }
 
-.football .clock {
-  padding-left: 15px;
-  padding-right: 15px;
+.scoreboard .logo, .scoreboard .clock, .scoreboard .team, .scoreboard .score *, .scoreboard .fouls * {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, 0.04));
+  height: 40px;
+  padding: 6px 0;
+}
+
+.scoreboard .logo {
+    width: 80px;
+    float: left;
+    font-family: 'Century Gothic';
+    color: #fff;
+    background-color: #000;
+    border-radius: 5px 0 0 5px;
+    padding: 5px 0;
+}
+
+.scoreboard .logo img {
+    height: 45px;
+}
+
+.scoreboard .clock {
+  float: left; 
   background-color: #fff;
-  width: 105px;
-}
-
-.football .score.lanc {
-  width: 160px;
-  color: #fff;
-  background-color: #cd1d18;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.football .score.york {
-  width: 160px;
-  color: #efbb39;
-  background-color: #000;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-/**************************************************/
-/*              [Darts]                           */
-/**************************************************/
-
-.darts {
-  width: 357px;
-  background-color: rgba(0, 0, 0, 0.5);
-  text-align: left;
-  font-size: 25px;
-
-  border-radius: 5px; 
-  border: 8px solid rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
+  width: 100px;
+  max-width: 100px;
 }
 
-.darts .name, .darts .legs, .darts .score, .darts .leg, .darts .footer {
-  float: left;
-  line-height: 45px;
-  padding-left: 5px;
+.scoreboard .clock .time {
+    margin-left: -50px;
+    margin-right: -50px;
+    text-align: center;
 }
 
-.darts .name {
-  width: 240px;
-}
-
-.darts .name.lanc {
+.score {
+  float: left; 
   color: #fff;
-  background-color: #cd1d18;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-}
-
-.darts .name.york {
-  color: #efbb39;
   background-color: #000;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }
 
-.darts .legs {
-  width: 46px;
+.scoreboard .score1, .scoreboard .score2 {
+  float: left; 
+  width: 40px;
+}
+
+.score1 {
+  text-align: right;
+}
+
+.score2 {
+  text-align: left;
+}
+
+.scoreboard .scoredivider {
+  float: left; 
+  width: 20px;
+}
+
+.scoreboard .team {
+  float: left; 
+  width: 85px;
   color: #fff;
-  background-color: #00d;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-  border-left: 2px solid #fff;
-}
-
-.darts .score {
-  width: 55px;
-  color: #fff;
-  background-color: #00d;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
-  border-left: 2px solid #fff;
-}
-
-.darts .header .name {
-  background-color: #fff;
-  color: #000;
-  width: 234px
-}
-
-.darts .header .leg {
-  color: #000;
-  background-color: #fff;
-  width: 105px;
-  font-size: 20px; 
-}
-
-.darts .footer {
-  background-color: #fff;
-  color: #000;
   text-transform: uppercase;
-  width: 341px;
-  font-size: 20px; 
-  line-height: 30px;
+}
+
+.scoreboard .team2 {
+  border-radius: 0 3px 3px 0;
+}
+
+.scoreboard .team.alc {
+  color: #fff;
+  background-color: #800000;
+}
+
+.scoreboard .team.con {
+  color: #fff;
+  background-color: #C6007E;
+}
+
+.scoreboard .team.der {
+  color: #fff;
+  background-color: #002366;
+}
+
+.scoreboard .team.gdr {
+  color: #fff;
+  background-color: #008000;
+}
+
+.scoreboard .team.hal {
+  color: #fff;
+  background-color: #6495ED;
+}
+
+.scoreboard .team.jam {
+  color: #fff;
+  background-color: #000;
+}
+
+.scoreboard .team.lan {
+  color: #000;
+  background-color: #FFD700;
+}
+
+.scoreboard .team.van {
+  color: #fff;
+  background-color: #592259;
+}
+
+.scoreboard .team.wen {
+  color: #fff;
+  background-color: #C0C0C0;
+}
+
+.team.yrk {
+    color: #000;
+    background-color: #FBB114;
+}
+
+.team.nth {
+    color: #000;
+    background-color: #fff;
+}
+
+.scoreboard .fouls * {
+    float: left;
+    background-color: #fff;
+    font-size: 70%;
+    padding: 6px 0;
+    height: 30px;
+}
+
+.scoreboard .fouls1, .scoreboard .fouls2 {
+    width: 85px;
+}
+
+.scoreboard .foulslabel {
+    width:  100px;
+}
+
+.scoreboard .fouls1 {
+    border-radius: 0 0 0 3px;
+}
+
+.scoreboard .fouls2 {
+    border-radius: 0 3px 3px 0;
 }

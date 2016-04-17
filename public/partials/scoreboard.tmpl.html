@@ -1,0 +1,124 @@
+<div class="ui form segment">
+  <h2>Scoreboard</h2>
+
+	<div class="ui grid center aligned">
+    	<div class="eight wide column">
+    		<div class="field"><checkbox ng-model="scoreboard.show" size="large" type="toggle">Show Score Bar</checkbox></div>
+    	</div>
+    </div>
+
+  	<div class="ui divider"></div>
+
+  	<div class="ui grid">
+
+    <div class="six wide column center aligned">
+      <div class="field"><checkbox ng-model="scoreboard.showClock" size="large" type="toggle"><h2 class="ui header">{{clock}}</h2></checkbox></div>
+    </div>
+
+    <div class="five wide column"> 
+      <div class="ui action input">
+        <input type="text" placeholder="mm:ss" ng-model="time" >
+        <div class="ui button" ng-click="setClock(time)">Set</div>
+      </div>
+    </div>
+
+    <div class="four wide column">
+      <div class="ui">
+        <!--<div class="ui icon red button" ng-click="upClock()">
+          <i class="up arrow icon"></i>
+        </div>-->
+
+        <div class="ui icon blue button" ng-click="pauseClock()">
+          <i class="icon" ng-class="{'play' : scoreboard.clockPause, 'pause' : !scoreboard.clockPause}"></i>
+        </div>
+
+        <!--<div class="ui icon green button" ng-click="downClock()" >
+          <i class="down arrow icon"></i>
+        </div>-->
+
+        <div class="ui button" ng-click="resetClock()" >Reset</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui grid center aligned">
+    <div class="eight wide column">
+      <div class="ui selection dropdown">
+          <input type="hidden" name="team1">
+          <div class="text">{{scoreboard.team1}}</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team1 = college.name; scoreboard.team1short = college.shortname;" ng-class="{'active selected' : college.name == scoreboard.team1}">
+                {{college.name}}
+            </div>
+          </div>
+      </div>
+
+      <h1>{{scoreboard.score1}}</h1>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.score1 = scoreboard.score1 - 1;" ng-disabled="scoreboard.score1 == 0">
+          <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.score1 = scoreboard.score1 + 1;">
+          <i class="plus icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="eight wide column">
+      <div class="ui selection dropdown">
+          <input type="hidden" name="team2">
+          <div class="text">{{scoreboard.team2}}</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value={{$index+1}} ng-repeat="college in colleges" ng-click="scoreboard.team2 = college.name; scoreboard.team2short = college.shortname;" ng-class="{'active selected' : college.name == scoreboard.team2}">
+                {{college.name}}
+            </div>
+          </div>
+      </div>
+      <h1>{{scoreboard.score2}}</h1>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.score2 = scoreboard.score2 - 1;" ng-disabled="scoreboard.score2 == 0">
+          <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.score2 = scoreboard.score2 + 1;">
+          <i class="plus icon"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="ui divider"></div>
+
+<div class="ui grid center aligned">
+    <div class="four wide column">
+      <h2>{{scoreboard.fouls1}}</h2>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.fouls1 = scoreboard.fouls1 - 1;" ng-disabled="scoreboard.fouls1 == 0">
+          <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.fouls1 = scoreboard.fouls1 + 1;">
+          <i class="plus icon"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="four wide column">
+      <h2>Fouls</h2>
+      <div class="field"><checkbox ng-model="scoreboard.showfouls" size="large" type="toggle"></checkbox></div>
+    </div>
+    
+    <div class="four wide column">
+      <h2>{{scoreboard.fouls2}}</h2>
+      <div class="ui icon buttons">
+        <button class="ui red button" ng-click="scoreboard.fouls2 = scoreboard.fouls2 - 1;" ng-disabled="scoreboard.fouls2 == 0">
+          <i class="minus icon"></i>
+        </button>
+        <button class="ui green button" ng-click="scoreboard.fouls2 = scoreboard.fouls2 + 1;">
+          <i class="plus icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+ </div>

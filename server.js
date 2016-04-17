@@ -6,11 +6,22 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+//Scoreboard array
+var scoreboard = {
+    team1: 'Team 1', team2: 'Team 2', 
+    team1short: 'tm1', team2short: 'tm2', 
+    score1: 0, score2: 0, 
+    fouls1: 0, fouls2: 0, 
+    showScore: false, 
+    showFouls: false, 
+    clockPause: true,
+    showClock: false,
+    };
+    
+    var scorers = [];
 
 //Clock Functions
 var stopwatch = new Stopwatch();
-
-stopwatch.start();
 
 stopwatch.on('tick:stopwatch', function(time) {
 	io.sockets.emit("clock:tick", time);
@@ -43,14 +54,11 @@ io.on('connection', function(socket) {
 	socket.on("clock:set", function(msg) {
 		stopwatch.setValue(msg);
 	});
-
-
-	/*
-	 * 		General Functions
-	 */
-	socket.on("bug", function(msg) {
-		io.sockets.emit("bug", msg);
+    
+    socket.on("clock:get", function() {
+        io.sockets.emit("clock:tick", stopwatch.getTime());
 	});
+
 
 	/*
 	 * 		Lower Thirds
@@ -66,34 +74,29 @@ io.on('connection', function(socket) {
 	socket.on("lowerthird:hide", function() {
 		io.sockets.emit("lowerthird:hide");
 	});
-
-	/*
-	 * 		Boxing
+    
+    /*
+	 * 		Stats
 	 */
-	socket.on("boxing", function(msg) {
-		io.sockets.emit("boxing", msg);
+	socket.on("scorers", function(msg) {
+        scorers = msg;
+		io.sockets.emit("scorers", msg);
 	});
-
-	/*
-	 * 		Score
-	 */
-	 socket.on("score", function(msg) {
-		io.sockets.emit("score", msg);
+    
+    socket.on("scorers:get", function(msg) {
+		io.sockets.emit("scorers", scorers);
 	});
 
 	 /*
 	 * 		Score
 	 */
-	 socket.on("football", function(msg) {
-		io.sockets.emit("football", msg);
+	socket.on("scoreboard", function(msg) {
+        scoreboard = msg;
+		io.sockets.emit("scoreboard", msg);
 	});
-
-
-	/*
-	 * 		Darts
-	 */
-	 socket.on("dart", function(msg) {
-		io.sockets.emit("dart", msg);
+    
+    socket.on("scoreboard:get", function(msg) {
+		io.sockets.emit("scoreboard", scoreboard);
 	});
 });
 

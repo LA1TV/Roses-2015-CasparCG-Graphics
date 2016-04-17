@@ -24680,39 +24680,6 @@ select.ui.dropdown {
   display: none;
 }
 
-/* Scrollbar in IE */
-
-@media all and (-ms-high-contrast: none) {
-  .ui.selection.dropdown .menu {
-    min-width: -webkit-calc(100% -  15px );
-    min-width: calc(100% -  15px );
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .ui.selection.dropdown .menu {
-    max-height: 7.49991429em;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .ui.selection.dropdown .menu {
-    max-height: 9.99988571em;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .ui.selection.dropdown .menu {
-    max-height: 14.99982857em;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-  .ui.selection.dropdown .menu {
-    max-height: 19.99977143em;
-  }
-}
-
 /* Menu Item */
 
 .ui.selection.dropdown .menu > .item {

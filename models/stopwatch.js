@@ -13,9 +13,9 @@ function Stopwatch() {
     this.hour = 3600000;
     this.minute = 60000;
     this.second = 1000;
-    this.time = 0;
+    this.time = 1200000;
     this.interval = undefined;
-    this.setCountMode = "up";
+    this.setCountMode = "down";
 
     events.EventEmitter.call(this);
 
@@ -76,12 +76,14 @@ Stopwatch.prototype.setValue = function(val) {
     var match = pattern.exec(val);
 
     this.time = (this.hour * parseInt(match[1])|0) + (this.minute * parseInt(match[2])|0) + (this.second * parseInt(match[3])|0);
+    this.emit('tick:stopwatch', this.formatTime(this.time));
 }
 
 Stopwatch.prototype.reset = function() {
     console.log('Resetting Stopwatch!');
-    this.time = 0;
+    this.time = 1200000;
     this.emit('reset:stopwatch', this.formatTime(this.time));
+    this.emit('tick:stopwatch', this.formatTime(this.time));
 };
 
 Stopwatch.prototype.onTick = function() {
