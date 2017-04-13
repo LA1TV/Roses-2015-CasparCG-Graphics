@@ -195,7 +195,12 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
           		oEmbedUrl = 'http://api.instagram.com/oembed?url='; 
           }
           else if (tweetUrl.includes("facebook.com")) { 
-          		oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url='; 
+          		if 	(tweetUrl.includes("video")) {
+          		oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
+          		}
+          		else { 
+          		oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
+          		}		
           }
           else { 
           		oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
@@ -206,8 +211,10 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
                 $scope.tweetHTML = $sce.trustAsHtml(data.html);
                 $scope.tweetAuthor = data.author_name;
                 $scope.tweetType = data.type;
-                setTimeout(function() {
-                    twttr.widgets.load();
+                setTimeout(function() {       
+                   if (tweetUrl.includes("instagram.com")) { instgrm.Embeds.process() }
+                   else if (tweetUrl.includes("facebook.com")) { }
+                   else { twttr.widgets.load(); }
                     if (showTweet) {
                         $scope.showTweet = showTweet;
                     }
