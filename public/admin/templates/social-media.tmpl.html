@@ -55,7 +55,13 @@
 				var url = $("#socialurl").val();
 				
 				if (url.includes("instagram.com")) { oEmbedUrl = 'http://api.instagram.com/oembed?url='; }
-				else if (url.includes("facebook.com")) { oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url='; }
+				else if (url.includes("facebook.com")) 
+					 if 	(url.includes("video")) {
+          					oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
+          				}
+          			 else { 
+          					oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
+          			 }	
           		else { oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           		}
 				

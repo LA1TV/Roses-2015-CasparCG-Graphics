@@ -214,18 +214,18 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
                 setTimeout(function() {       
                    if (tweetUrl.includes("instagram.com")) { instgrm.Embeds.process(); }
                    else if (tweetUrl.includes("facebook.com")) { window.fbAsyncInit = function() {
-    FB.init({
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  }; 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk')); }
+								FB.init({
+								  xfbml      : true,
+								  version    : 'v2.8'
+								});
+							  }; 
+							  (function(d, s, id){
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) {return;}
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/en_US/sdk.js";
+								fjs.parentNode.insertBefore(js, fjs);
+							  }(document, 'script', 'facebook-jssdk')); }
                    else { twttr.widgets.load(); }
                     if (showTweet) {
                         $scope.showTweet = showTweet;
