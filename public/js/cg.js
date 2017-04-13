@@ -171,6 +171,9 @@ app.controller('dartsCtrl', ['$scope', 'socket',
     }
 ]);
 
+// Social Media Controller, as developed by Dan Leedham with help from the amazing Tom J
+// Initialise with the usual plus http for grabbing data from social media sites
+// SCE allows us to use Trust HTML for the data we get back from social media sites
 app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
     function($scope, $http, socket, $sce){
         var showTweet = false;
@@ -184,6 +187,9 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
             fetchTweetHTML(msg.tweet);
         });
 
+// Now let's go get the html code from our provider
+// tweetUrl in the function is the text entered by the user in the backend
+// tweetUrl requires a full post/video url to work. References to 'tweet' usually mean post
 		var fetchTweetHTML = function (tweetUrl) {
           var config = {headers:  {
               'Accept': 'application/jsonp',
@@ -191,10 +197,13 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
             }
           };
           
+// Checks the user provided url, determines which oEmbed engine to use
+// For more oEmbed sites, add another else if        
           if (tweetUrl.includes("instagram.com")) { 
           		oEmbedUrl = 'http://api.instagram.com/oembed?url='; 
           }
-          else if (tweetUrl.includes("facebook.com")) { 
+          else if (tweetUrl.includes("facebook.com")) {
+          		// Facebook has two endpoints, one for post and one for video, hence the nested if    
           		if 	(tweetUrl.includes("video")) {
           		oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
           		}
@@ -206,12 +215,15 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
           		oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           }
 
+// $http.jsonp goes gets the data from oEmbed
           $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK', config)
             .success(function(data) {
-                $scope.tweetHTML = $sce.trustAsHtml(data.html);
-                $scope.tweetAuthor = data.author_name;
-                $scope.tweetType = data.type;
-                setTimeout(function() {       
+                $scope.tweetHTML = $sce.trustAsHtml(data.html);		// trustAsHtml stops the app adding '' around the html code
+                $scope.tweetAuthor = data.author_name;				// Not used yet, but could be handy
+                $scope.tweetType = data.type;						// Not used yet, but could be handy for the client side
+                setTimeout(function() { 
+                // Once a post is called, it needs to be styled correctly by initialising some cleverness
+                // Each service requires its own function determined by the content of the url    
                    if (tweetUrl.includes("instagram.com")) { instgrm.Embeds.process(); }
                    else if (tweetUrl.includes("facebook.com")) { window.fbAsyncInit = function() {
 								FB.init({
