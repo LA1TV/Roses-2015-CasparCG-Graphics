@@ -191,9 +191,14 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
             }
           };
           
-          if (tweetUrl.includes("instagram.com")) { oEmbedUrl = 'http://api.instagram.com/oembed?url='; }
-          else if (tweetUrl.includes("facebook.com")) { oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url='; }
-          else { oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
+          if (tweetUrl.includes("instagram.com")) { 
+          		oEmbedUrl = 'http://api.instagram.com/oembed?url='; 
+          }
+          else if (tweetUrl.includes("facebook.com")) { 
+          		oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url='; 
+          }
+          else { 
+          		oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           }
 
           $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK', config)
