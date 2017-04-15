@@ -199,20 +199,20 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
           
 // Checks the user provided url, determines which oEmbed engine to use
 // For more oEmbed sites, add another else if        
-          if (tweetUrl.includes("instagram.com")) { 
-          		oEmbedUrl = 'http://api.instagram.com/oembed?url='; 
+         if (tweetUrl.indexOf('instagram.com') >= 0) {
+                  oEmbedUrl = 'http://api.instagram.com/oembed?url=';
           }
-          else if (tweetUrl.includes("facebook.com")) {
-          		// Facebook has two endpoints, one for post and one for video, hence the nested if    
-          		if 	(tweetUrl.includes("video")) {
-          		oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
-          		}
-          		else { 
-          		oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
-          		}		
+          else if (tweetUrl.indexOf('facebook.com') >= 0) {
+                  // Facebook has two endpoints, one for post and one for video, hence the nested if
+                  if     (tweetUrl.indexOf('video') >= 0) {
+                  oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url=';
+                  }
+                  else {
+                  oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
+                  }
           }
-          else { 
-          		oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
+          else {
+                  oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           }
 
 // $http.jsonp goes gets the data from oEmbed
