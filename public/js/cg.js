@@ -224,8 +224,8 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
                 setTimeout(function() { 
                 // Once a post is called, it needs to be styled correctly by initialising some cleverness
                 // Each service requires its own function determined by the content of the url    
-                   if (tweetUrl.includes("instagram.com")) { instgrm.Embeds.process(); }
-                   else if (tweetUrl.includes("facebook.com")) { window.fbAsyncInit = function() {
+                   if (tweetUrl.indexOf("instagram.com") >= 0) { instgrm.Embeds.process(); }
+                   else if (tweetUrl.indexOf("facebook.com") >= 0) { window.fbAsyncInit = function() {
 								FB.init({
 								  xfbml      : true,
 								  version    : 'v2.8'
