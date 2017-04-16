@@ -69,13 +69,16 @@
           				showCaption = '&hidecaption=true'; 
           			} 
 				 }
-				else if (url.includes("facebook.com")) 
+				else if (url.includes("facebook.com")) {
 					 if 	(url.includes("video")) {
           					oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
           				}
           			 else { 
           					oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
           			 }	
+          			 
+          			 showCaption = '';
+          			 }
           		else { oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           			
           			if (caption == 'show') { 
@@ -83,7 +86,6 @@
           			} else { 
           				showCaption = '&hide_media=true'; 
           			} 
-          		
           		}	
 				if (url == "") {
 				  $(".controls").addClass("error");
