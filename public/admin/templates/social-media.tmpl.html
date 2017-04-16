@@ -16,17 +16,23 @@
 		
 			<div class="fields">
 
-                <div class="ten wide field">
-					<input id=socialurl type="text" placeholder="Post URL (Twit, Insta, FB Etc)" ng-model="socialmedia.tweet">
+                <div class="eight wide field">
+					<input id=socialUrl type="text" placeholder="Post URL (Twit, Insta, FB Etc)" ng-model="socialmedia.tweet">
 				</div>
 		
 
-				<div class="four wide field">
+				<div class="four field">
 						 <dropdown title="Tweet Location"  ng-model="socialmedia.pos">
 							<dropdown-group>bottom left</dropdown-group>
 							<dropdown-group>bottom right</dropdown-group>
 							<dropdown-group>bottom center</dropdown-group>
 							<dropdown-group>top center</dropdown-group>
+						  </dropdown>
+				</div>
+				<div class="two field">
+						 <dropdown title="Caption"  ng-model="socialmedia.caption" id=socialCaption>
+							<dropdown-group>show</dropdown-group>
+							<dropdown-group>hide</dropdown-group>
 						  </dropdown>
 				</div>
 			
@@ -52,9 +58,17 @@
 		
 			$(document).ready(function() {
 			  $("#resolve-tweet").click(function() {
-				var url = $("#socialurl").val();
+				var url = $("#socialUrl").val();
+				var caption = $("#socialCaption").val();		
 				
-				if (url.includes("instagram.com")) { oEmbedUrl = 'http://api.instagram.com/oembed?url='; }
+				if (url.includes("instagram.com")) { oEmbedUrl = 'http://api.instagram.com/oembed?url=';
+					
+					if (caption == 'show') { 
+          				showCaption = ''; 
+          			} else { 
+          				showCaption = '&hidecaption=true'; 
+          			} 
+				 }
 				else if (url.includes("facebook.com")) 
 					 if 	(url.includes("video")) {
           					oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
@@ -63,14 +77,20 @@
           					oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
           			 }	
           		else { oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
-          		}
-				
+          			
+          			if (caption == 'show') { 
+          				showCaption = ''; 
+          			} else { 
+          				showCaption = '&hide_media=true'; 
+          			} 
+          		
+          		}	
 				if (url == "") {
 				  $(".controls").addClass("error");
 				} else {
 				  $("#tweet_div").show();
 				  $.ajax({
-					url: oEmbedUrl + url,
+					url: oEmbedUrl + url + showCaption,
 					dataType: "jsonp",
 					success: function(data) {
 					  $('#tweet_details').html(data.html);

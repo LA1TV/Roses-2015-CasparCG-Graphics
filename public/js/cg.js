@@ -181,6 +181,7 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
             tweetUrl = msg.tweet;
             $scope.socialmedia = msg;
             showTweet = msg.show;
+            showCaption = msg.caption;
             if (!showTweet) {
                 $scope.showTweet = false;
             }
