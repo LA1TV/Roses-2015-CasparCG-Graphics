@@ -17,6 +17,17 @@ var swimming = {order: ''};
 var grid = {};
 var archery = {};
 var badminton = {match: "Badminton", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
+var eSports = {
+	team1: "York", team2: "Lancaster",
+	upNext: {
+		title: "",
+		game: ""
+	},
+	lastGame: {
+		title: "",
+		winner: ""
+	}
+}
 
 //Clock Functions
 var stopwatch = new Stopwatch();
