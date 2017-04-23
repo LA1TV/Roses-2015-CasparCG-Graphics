@@ -258,4 +258,20 @@
         <script type="text/javascript" src="/js/cg.js"></script>
 
     </body>
+
+    <div ng-controller="esportsCtrl" class="esports left top slide-left" ng-show="esports.scores.show">
+        <div class="row">
+            <div class="score title">{{esports.scoreDisplay.title}}</div>
+        </div>
+        <div class="row">
+            <div class="score lanc">LANCS {{esports.scoreDisplay.lanc}}</div>
+            <div class="score york">{{esports.scoreDisplay.york}} YORK</div>
+        </div>
+    </div>
+
+    <div ng-controller="esportsCtrl" class="esports center bottom scale-fade" ng-show="esports.showCountdown">
+        <div class="row">
+            <div class="clock">{{clock}}</div>
+        </div>
+    </div>
 </html>

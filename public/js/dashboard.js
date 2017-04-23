@@ -92,6 +92,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             type: 'link',
             icon: 'green neuter',
         });
+
+        $scope.menu.push({
+            name: 'esports',
+            url: '/esports',
+            type: 'link',
+            icon: 'green neuter',
+        });
     }
 ]);
 
@@ -150,6 +157,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/badminton", {
               templateUrl: '/admin/templates/badminton.tmpl.html',
               controller: 'badmintonCGController'
+            })
+            .when("/esports", {
+              templateUrl: '/admin/templates/esports.tmpl.html',
+              controller: 'esportsCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -236,11 +247,11 @@ app.controller('generalCGController', ['$scope', 'socket',
                 getBugData();
             }
         }, true);
-        
+
         socket.on("bug", function (msg) {
             $scope.bug = msg;
         });
-        
+
         function getBugData() {
             socket.emit("bug:get");
         }
@@ -803,6 +814,69 @@ app.controller('badmintonCGController', ['$scope', 'socket',
 
         function getBadmintonData() {
             socket.emit("badminton:get");
+        }
+    }
+]);
+
+app.controller('esportsCGController', ['$scope', '$timeout', 'socket',
+    function($scope, $timeout, socket){
+        socket.on("clock:tick", function (msg) {
+            $scope.clock = msg.slice(0, msg.indexOf("."));
+        });
+
+        $scope.pauseClock = function() {
+            socket.emit("clock:pause");
+        };
+
+        $scope.resetClock = function() {
+            socket.emit("clock:reset");
+        };
+
+        $scope.setClock = function(val) {
+            socket.emit("clock:set", val);
+        };
+
+        $scope.downClock = function() {
+            socket.emit("clock:down");
+        };
+
+        $scope.upClock = function() {
+            socket.emit("clock:up");
+        };
+
+        socket.on("esports", function (msg) {
+            $scope.esports = msg;
+        });
+
+        $scope.displayScore = function(title, lanc, york){
+          var delay = false;
+          if ($scope.esports.scores.show) {
+            delay = true;
+          }
+          $scope.esports.scores.show = false;
+          $scope.esports.scoreDisplay.title = title;
+          $scope.esports.scoreDisplay.lanc = lanc;
+          $scope.esports.scoreDisplay.york = york;
+          if (delay){
+            $timeout(function () {
+              $scope.esports.scores.show = true;
+            }, 500);
+          }else{
+            $scope.esports.scores.show = true;
+          }
+        }
+
+        $scope.$watch('esports', function() {
+            if ($scope.esports) {
+                socket.emit("esports", $scope.esports);
+            } else {
+                getEsportsData();
+            }
+        }, true);
+
+        function getEsportsData() {
+            socket.emit("esports:get");
+            socket.emit("clock:get");
         }
     }
 ]);

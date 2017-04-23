@@ -1,0 +1,235 @@
+<div class="ui form segment">
+    <h2>eSports</h2>
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid center aligned">
+        <div class="sixteen wide column center aligned">
+            <h2 class="ui header">Holding Card Countdown</h2>
+        </div>
+
+        <div class="four wide column center aligned">
+            <h2 class="ui header">{{clock}}</h2>
+        </div>
+
+        <div class="five wide column">
+            <div class="ui action input">
+                <input type="text" placeholder="mm:ss" ng-model="time" size="10">
+                <div class="ui button" ng-click="setClock(time)">Set</div>
+            </div>
+        </div>
+
+        <div class="seven wide column">
+            <div class="ui">
+                <div class="ui icon red button" ng-click="upClock()">
+                    <i class="up arrow icon"></i>
+                </div>
+
+                <div class="ui icon blue button" ng-click="pauseClock()">
+                    <i class="pause icon"></i>
+                </div>
+
+                <div class="ui icon green button" ng-click="downClock()">
+                    <i class="down arrow icon"></i>
+                </div>
+
+                <div class="ui button" ng-click="resetClock()">Reset</div>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+            <div class="field">
+                <checkbox ng-model="esports.showCountdown" size="large" type="toggle">Show Countdown</checkbox>
+            </div>
+        </div>
+    </div>
+
+    <!--
+      OVERALL SCORE
+    -->
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid center aligned">
+      <h2>Overall</h2>
+    </div>
+
+    <div class="ui grid center aligned">
+        <div class="eight wide column">
+            <h3>Lancaster</h3>
+            <h1>{{esports.scores.overall.lanc}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.overall.lanc = esports.scores.overall.lanc + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.overall.lanc = esports.scores.overall.lanc - 1;" ng-disabled="esports.scores.overall.lanc == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <h3>York</h3>
+            <h1>{{esports.scores.overall.york}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.overall.york = esports.scores.overall.york + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.overall.york = esports.scores.overall.york - 1;" ng-disabled="esports.scores.overall.york == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+          <button class="ui orange button" ng-click="displayScore('Overall Score', esports.scores.overall.lanc, esports.scores.overall.york);">
+              Show Score
+          </button>
+          <button class="ui orange button" ng-click="esports.scores.show = false;">
+              Hide Score
+          </button>
+        </div>
+    </div>
+
+    <!--
+      DoTA SCORE
+    -->
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid center aligned">
+      <h2>DOTA</h2>
+    </div>
+
+    <div class="ui grid center aligned">
+        <div class="eight wide column">
+            <h3>Lancaster</h3>
+            <h1>{{esports.scores.dota.lanc}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.dota.lanc = esports.scores.dota.lanc + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.dota.lanc = esports.scores.dota.lanc - 1;" ng-disabled="esports.scores.dota.lanc == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <h3>York</h3>
+            <h1>{{esports.scores.dota.york}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.dota.york = esports.scores.dota.york + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.dota.york = esports.scores.dota.york - 1;" ng-disabled="esports.scores.dota.york == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+          <button class="ui orange button" ng-click="displayScore('DOTA', esports.scores.dota.lanc, esports.scores.dota.york);">
+              Show Score
+          </button>
+          <button class="ui orange button" ng-click="esports.scores.show = false;">
+              Hide Score
+          </button>
+        </div>
+    </div>
+
+    <!--
+      DoTA SCORE
+    -->
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid center aligned">
+      <h2>LoL</h2>
+    </div>
+
+    <div class="ui grid center aligned">
+        <div class="eight wide column">
+            <h3>Lancaster</h3>
+            <h1>{{esports.scores.lol.lanc}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.lol.lanc = esports.scores.lol.lanc + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.lol.lanc = esports.scores.lol.lanc - 1;" ng-disabled="esports.scores.lol.lanc == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <h3>York</h3>
+            <h1>{{esports.scores.lol.york}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.lol.york = esports.scores.lol.york + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.lol.york = esports.scores.lol.york - 1;" ng-disabled="esports.scores.lol.york == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+          <button class="ui orange button" ng-click="displayScore('LoL', esports.scores.lol.lanc, esports.scores.lol.york);">
+              Show Score
+          </button>
+          <button class="ui orange button" ng-click="esports.scores.show = false;">
+              Hide Score
+          </button>
+        </div>
+    </div>
+
+    <!--
+      CS:GO SCORE
+    -->
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid center aligned">
+      <h2>CS:GO</h2>
+    </div>
+
+    <div class="ui grid center aligned">
+        <div class="eight wide column">
+            <h3>Lancaster</h3>
+            <h1>{{esports.scores.csgo.lanc}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.csgo.lanc = esports.scores.csgo.lanc + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.csgo.lanc = esports.scores.csgo.lanc - 1;" ng-disabled="esports.scores.csgo.lanc == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <h3>York</h3>
+            <h1>{{esports.scores.csgo.york}}</h1>
+            <div class="ui icon buttons">
+                <button class="ui green button" ng-click="esports.scores.csgo.york = esports.scores.csgo.york + 1;">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button" ng-click="esports.scores.csgo.york = esports.scores.csgo.york - 1;" ng-disabled="esports.scores.csgo.york == 0">
+                    <i class="minus icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+          <button class="ui orange button" ng-click="displayScore('CS:GO', esports.scores.csgo.lanc, esports.scores.csgo.york);">
+              Show Score
+          </button>
+          <button class="ui orange button" ng-click="esports.scores.show = false;">
+              Hide Score
+          </button>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <script>
+        $('.menu .item').tab();
+    </script>
+</div>
