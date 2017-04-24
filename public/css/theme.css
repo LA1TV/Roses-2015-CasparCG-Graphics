@@ -445,6 +445,19 @@ h1, h2, h3, h4 {
   display: none;
 }
 
+.instagram-media .instagram-media-rendered {
+    max-height: 620px; 
+}
+
+.twitter-tweet .twitter-tweet-rendered {
+    max-height: 620px; 
+}
+
+.fb-post .fb_iframe_widget .fb_iframe_widget_fluid {	
+    max-height: 620px; 
+    background-color: #FFF;
+}
+
 /**************************************************/
 /*              [Archery]                         */
 /**************************************************/

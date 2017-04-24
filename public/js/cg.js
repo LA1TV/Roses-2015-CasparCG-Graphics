@@ -203,7 +203,6 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
         var showTweet = false;
         socket.on("socialmedia", function (msg) {
             tweetUrl = msg.tweet;
-            caption = msg.caption;
             $scope.socialmedia = msg;
             showTweet = msg.show;
             if (!showTweet) {
@@ -215,7 +214,7 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
 // Now let's go get the html code from our provider
 // tweetUrl in the function is the text entered by the user in the backend
 // tweetUrl requires a full post/video url to work. References to 'tweet' usually mean post
-		var fetchTweetHTML = function (tweetUrl, caption) {
+		var fetchTweetHTML = function (tweetUrl) {
           var config = {headers:  {
               'Accept': 'application/jsonp',
               'Content-Type': 'application/jsonp',
@@ -238,10 +237,9 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
                   oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           }
          
-                  showCaption = '&hidecaption=true&hide_media=true&hidethread=true';
 
 // $http.jsonp goes gets the data from oEmbed
-          $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK'+showCaption, config)
+          $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK', config)
             .success(function(data) {
                 $scope.tweetHTML = $sce.trustAsHtml(data.html);		// trustAsHtml stops the app adding '' around the html code
                 $scope.tweetAuthor = data.author_name;				// Not used yet, but could be handy
