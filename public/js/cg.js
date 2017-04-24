@@ -203,9 +203,9 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
         var showTweet = false;
         socket.on("socialmedia", function (msg) {
             tweetUrl = msg.tweet;
+            caption = msg.caption;
             $scope.socialmedia = msg;
             showTweet = msg.show;
-            showCaption = msg.caption;
             if (!showTweet) {
                 $scope.showTweet = false;
             }
@@ -215,7 +215,7 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
 // Now let's go get the html code from our provider
 // tweetUrl in the function is the text entered by the user in the backend
 // tweetUrl requires a full post/video url to work. References to 'tweet' usually mean post
-		var fetchTweetHTML = function (tweetUrl) {
+		var fetchTweetHTML = function (tweetUrl, caption) {
           var config = {headers:  {
               'Accept': 'application/jsonp',
               'Content-Type': 'application/jsonp',
@@ -226,8 +226,7 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
 // For more oEmbed sites, add another else if        
          if (tweetUrl.indexOf('instagram.com') >= 0) {
                   oEmbedUrl = 'http://api.instagram.com/oembed?url=';
-          }
-          else if (tweetUrl.indexOf('facebook.com') >= 0) {
+          } else if (tweetUrl.indexOf('facebook.com') >= 0) {
                   // Facebook has two endpoints, one for post and one for video, hence the nested if
                   if     (tweetUrl.indexOf('video') >= 0) {
                   oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url=';
@@ -235,13 +234,14 @@ app.controller('socialmediaCtrl', ['$scope', '$http', 'socket', '$sce',
                   else {
                   oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
                   }
-          }
-          else {
+          } else {
                   oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
           }
+         
+                  showCaption = '&hidecaption=true&hide_media=true&hidethread=true';
 
 // $http.jsonp goes gets the data from oEmbed
-          $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK', config)
+          $http.jsonp(oEmbedUrl+tweetUrl+'&callback=JSON_CALLBACK'+showCaption, config)
             .success(function(data) {
                 $scope.tweetHTML = $sce.trustAsHtml(data.html);		// trustAsHtml stops the app adding '' around the html code
                 $scope.tweetAuthor = data.author_name;				// Not used yet, but could be handy

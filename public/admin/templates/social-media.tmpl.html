@@ -15,13 +15,15 @@
         <div class="sixteen wide column">
 		
 			<div class="fields">
-
+				
                 <div class="eight wide field">
+                <label>Post URL (supported: Twitter, Instagram, Facebook)</label>
 					<input id=socialUrl type="text" placeholder="Post URL (Twit, Insta, FB Etc)" ng-model="socialmedia.tweet">
 				</div>
 		
 
 				<div class="four field">
+						<label>Tweet Location</label>
 						 <dropdown title="Tweet Location"  ng-model="socialmedia.pos">
 							<dropdown-group>bottom left</dropdown-group>
 							<dropdown-group>bottom right</dropdown-group>
@@ -29,7 +31,8 @@
 							<dropdown-group>top center</dropdown-group>
 						  </dropdown>
 				</div>
-				<div class="two field">
+				<div class="four field">
+						<label>Show or Hide Card/Caption</label>
 						 <dropdown title="Caption"  ng-model="socialmedia.caption" id=socialCaption>
 							<dropdown-group>show</dropdown-group>
 							<dropdown-group>hide</dropdown-group>
@@ -37,6 +40,7 @@
 				</div>
 			
 				<div class="two wide field">
+						<label>&nbsp;</label>
 						<button id=resolve-tweet class="ui blue button">Preview </button>
 				</div>
 			</div>
