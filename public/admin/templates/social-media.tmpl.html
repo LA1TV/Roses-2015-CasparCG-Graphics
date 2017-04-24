@@ -1,0 +1,89 @@
+<div class="ui form segment">
+  <h2>Social Media</h2>
+
+   <div class="ui grid">
+
+        <div class="sixteen wide column">
+		
+			<div class="fields">
+
+                <div class="seven wide field">
+                	<label>Post URL </label>
+					<input id=socialUrl type="text" placeholder="Post URL (Twit, Insta, FB Etc)" ng-model="socialmedia.tweet">
+				</div>
+		
+
+				<div class="four field">
+						<label>Tweet Location </label>
+						 <dropdown title="Tweet Location"  ng-model="socialmedia.pos">
+							<dropdown-group>bottom left</dropdown-group>
+							<dropdown-group>bottom right</dropdown-group>
+							<dropdown-group>bottom center</dropdown-group>
+							<dropdown-group>top center</dropdown-group>
+						  </dropdown>
+				</div>
+			
+				<div class="two wide field">
+						<label>Preview below</label>
+						<button id=resolve-tweet class="ui blue button">Preview </button>
+				</div>
+				
+				<div class="three wide field">
+						<label>Make live</label>
+						<checkbox ng-model="socialmedia.show" size="large" type="toggle">Show Post</checkbox>
+ 				</div>
+			</div>
+		</div>
+</div>	
+<br>
+ <div class="ui divider"></div>
+
+    <br>
+    <div class="ui grid">
+    <div class="four wide column center"> </div>  
+	<div class="eight wide column center">
+        <div id=tweet_details></div>
+	</div>
+	<div class="four wide column center"> </div>  	
+	</div>
+			
+		<script>
+		
+			$(document).ready(function() {
+			  $("#resolve-tweet").click(function() {
+				var url = $("#socialUrl").val();
+				var caption = $("#socialCaption").val();		
+				
+				if (url.includes("instagram.com")) { 
+					oEmbedUrl = 'http://api.instagram.com/oembed?url=';
+				
+				} else if (url.includes("facebook.com")) {
+					 		if 	(url.includes("video")) {
+          							oEmbedUrl = 'https://www.facebook.com/plugins/video/oembed.json/?url='; 
+          					} else { 
+          							oEmbedUrl = 'https://www.facebook.com/plugins/post/oembed.json/?url=';
+          			 		}	
+          			 
+          			 
+          		} else { 
+          			oEmbedUrl = 'https://api.twitter.com/1/statuses/oembed.json?url=';
+          		}
+          			
+				if (url == "") {
+				  $(".controls").addClass("error");
+				} else {
+				  $("#tweet_div").show();
+				  $.ajax({
+					url: oEmbedUrl + url,
+					dataType: "jsonp",
+					success: function(data) {
+					  $('#tweet_details').html(data.html);
+					}
+				  });
+				}
+			  })
+			})
+	  </script>
+
+
+   

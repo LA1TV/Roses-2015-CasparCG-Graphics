@@ -9,11 +9,14 @@ var io = require('socket.io').listen(server);
 var bug = {};
 var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
 var score = {};
-var football = {lancScore: 0, yorkScore: 0};
-var basketball = {lancScore: 0, yorkScore: 0};
-var dart = {};
+var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var rugby = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var basketball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
+var socialmedia = {tweet: "", pos: "bottom center", tweethtml: ""};
 var swimming = {order: ''};
 var grid = {};
+var archery = {};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -123,6 +126,17 @@ io.on('connection', function(socket) {
 		io.sockets.emit("football", football);
 	});
 
+	/*
+	* 		Rugby
+	*/
+ socket.on("rugby", function(msg) {
+			 rugby = msg;
+	 io.sockets.emit("rugby", msg);
+ });
+
+	 socket.on("rugby:get", function(msg) {
+	 io.sockets.emit("rugby", rugby);
+ });
 
 	/*
 	 * 		Darts
@@ -135,6 +149,19 @@ io.on('connection', function(socket) {
     socket.on("dart:get", function(msg) {
         io.sockets.emit("dart", dart);
     });
+
+    /*
+	 * 		Social Media
+	 */
+	socket.on("socialmedia", function(msg) {
+        socialmedia = msg;
+		io.sockets.emit("socialmedia", msg);
+	});
+
+    socket.on("socialmedia:get", function(msg) {
+        io.sockets.emit("socialmedia", socialmedia);
+    });
+
 
     /*
 	 * 		Swimming
@@ -173,11 +200,22 @@ io.on('connection', function(socket) {
   socket.on("basketball:get", function(msg) {
  		io.sockets.emit("basketball", basketball);
  	});
+
+	socket.on("archery", function(msg) {
+        archery = msg;
+		io.sockets.emit("archery", msg);
+	});
+
+		socket.on("archery:get", function(msg) {
+				io.sockets.emit("archery", archery);
+		});
+
+
 });
 
 //Serve the puplic dir
 app.use(express.static(__dirname + "/public"));
 
 server.listen(3000);
-console.log("Now listening on port 3000. Go to localhost:3000/admin to control")
+console.log("Now listening on port 3000. Go to http://127.0.0.1:3000/admin to control")
 console.log("run 'play 1-1 [html] http://127.0.0.1:3000' in CasparCG to start the graphics")
