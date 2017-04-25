@@ -39,11 +39,14 @@ var esports = {
 	},
 	upNext: {
 		title: "",
-		game: ""
+		game: 1,
+		show: false
 	},
 	lastGame: {
 		title: "",
-		winner: ""
+		game: 1,
+		winner: "",
+		show: false
 	},
 	scoreDisplay: {
 		title: "Overall Score",

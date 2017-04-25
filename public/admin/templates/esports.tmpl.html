@@ -43,6 +43,70 @@
         </div>
     </div>
 
+    <div class="ui grid center aligned">
+        <div class="sixteen wide column center aligned">
+          <h2 class="ui header">Holding Card</h2>
+        </div>
+        <div class="eight wide column">
+          <div class="inline field">
+            <label>Up Next Title</label>
+            <dropdown title="Up Next Game Title" ng-model="esports.upNext.title">
+              <dropdown-group>DOTA</dropdown-group>
+              <dropdown-group>LoL</dropdown-group>
+              <dropdown-group>CS:GO</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="inline field">
+            <label>Up Next Game</label>
+            <dropdown title="Up Next Game Number" ng-model="esports.upNext.game">
+              <dropdown-group>1</dropdown-group>
+              <dropdown-group>2</dropdown-group>
+              <dropdown-group>3</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="field">
+              <checkbox ng-model="esports.upNext.show" size="large" type="toggle">Show Up Next</checkbox>
+          </div>
+        </div>
+        <div class="eight wide column">
+          <div class="inline field">
+            <label>Last Game Title</label>
+            <dropdown title="Last Game Title" ng-model="esports.lastGame.title">
+              <dropdown-group>DOTA</dropdown-group>
+              <dropdown-group>LoL</dropdown-group>
+              <dropdown-group>CS:GO</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="inline field">
+            <label>Last Game Number</label>
+            <dropdown title="Last Game Number" ng-model="esports.lastGame.game">
+              <dropdown-group>1</dropdown-group>
+              <dropdown-group>2</dropdown-group>
+              <dropdown-group>3</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="inline field">
+            <label>Last Game Winner</label>
+            <dropdown title="Last Game Winner" ng-model="esports.lastGame.winner">
+              <dropdown-group>Lancaster</dropdown-group>
+              <dropdown-group>York</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="field">
+              <checkbox ng-model="esports.lastGame.show" size="large" type="toggle">Show Last Game</checkbox>
+          </div>
+        </div>
+        <div class="sixteen wide column">
+          <button class="ui orange button" ng-click="displayBugs();">
+              Show Both
+          </button>
+          <button class="ui orange button" ng-click="hideBugs();">
+              Hide Both
+          </button>
+        </div>
+    </div>
+
+
     <!--
       OVERALL SCORE
     -->

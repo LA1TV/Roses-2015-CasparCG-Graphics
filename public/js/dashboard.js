@@ -822,6 +822,10 @@ app.controller('esportsCGController', ['$scope', '$timeout', 'socket',
     function($scope, $timeout, socket){
         socket.on("clock:tick", function (msg) {
             $scope.clock = msg.slice(0, msg.indexOf("."));
+
+            if($scope.clock == "00:00"){
+              $scope.esports.showCountdown = false;
+            }
         });
 
         $scope.pauseClock = function() {
@@ -864,6 +868,16 @@ app.controller('esportsCGController', ['$scope', '$timeout', 'socket',
           }else{
             $scope.esports.scores.show = true;
           }
+        }
+
+        $scope.displayBugs = function(){
+          $scope.esports.upNext.show = true;
+          $scope.esports.lastGame.show = true;
+        }
+
+        $scope.hideBugs = function(){
+          $scope.esports.upNext.show = false;
+          $scope.esports.lastGame.show = false;
         }
 
         $scope.$watch('esports', function() {
