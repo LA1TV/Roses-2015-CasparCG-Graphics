@@ -842,24 +842,18 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
-.esports .upnext {
+.esports .upnext, .esports .lastgame {
   width: 100%;
-  height: 25px;
+  height: 60px;
   background: transparent;
 }
 
-.esports .lastgame {
-  width: 100%;
-  height: 20px;
-  background: transparent;
+.esports .upnext .text, .esports .lastgame .text {
+  font-size: 35px;
+  font-size: 2.2vw;
 }
 
-.esports .upnext .title, .esports .lastgame .title {
-  font-size: 20px;
-  font-size: 2.5vw;
-}
-
-.esports .upnext .text, .esports .upnext .text {
+.esports .upnext .title, .esports .upnext .title {
   font-size: 30px;
   font-size: 1.8vw;
 }
@@ -870,13 +864,12 @@ h1, h2, h3, h4 {
 }
 
 .esports .clock {
-  background-color: #eee;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background: transparent;
   width: 100%;
-  height: 50px;
+  height: 120px;
   font-size: 30px;
   font-size: 4vw;
-  padding: 10px;
+  padding: 20px;
 }
 
 .esports .score.lanc {
@@ -900,5 +893,5 @@ h1, h2, h3, h4 {
 .esports .score.title {
   width: 100%;
   color: #000;
-  background-color: #fff;
+  background: #fff;
 }
