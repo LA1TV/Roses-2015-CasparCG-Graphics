@@ -97,7 +97,7 @@ app.controller('AppCtrl', ['$scope', '$location',
             name: 'esports',
             url: '/esports',
             type: 'link',
-            icon: 'green neuter',
+            icon: 'black gamepad',
         });
     }
 ]);
