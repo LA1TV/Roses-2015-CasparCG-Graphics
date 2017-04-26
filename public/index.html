@@ -307,6 +307,43 @@
             </div>
         </div>
 
+        <div ng-controller="esportsCtrl" class="esports left top slide-left" ng-show="esports.scores.show">
+            <div class="row">
+                <div class="score title">{{esports.scoreDisplay.title}}</div>
+            </div>
+            <div class="row">
+                <div class="score lanc">LANCS {{esports.scoreDisplay.lanc}}</div>
+                <div class="score york">{{esports.scoreDisplay.york}} YORK</div>
+            </div>
+        </div>
+
+        <div ng-controller="esportsCtrl" class="esports esportsLowerThirds left bottom slide-left" ng-show="esports.upNext.show">
+            <div class="row upnext">
+                <div class="score title">Up Next</div>
+            </div>
+            <div class="row upnext">
+                <div class="score text">{{esports.upNext.title}}: Game {{esports.upNext.game}}</div>
+            </div>
+        </div>
+
+        <div ng-controller="esportsCtrl" class="esports esportsLowerThirds right bottom slide-right" ng-show="esports.lastGame.show">
+            <div class="row lastgame">
+                <div class="score title">Last Game</div>
+            </div>
+            <div class="row lastgame">
+                <div class="score text">{{esports.lastGame.title}}: Game {{esports.lastGame.game}}</div>
+            </div>
+            <div class="row lastgame">
+                <div class="score text">Winner: {{esports.lastGame.winner}}</div>
+            </div>
+        </div>
+
+        <div ng-controller="esportsCtrl" class="esports center bottom scale-fade" ng-show="esports.showCountdown">
+            <div class="row">
+                <div class="clock">{{clock}}</div>
+            </div>
+        </div>
+
         <script type="text/javascript" src="/js/socket.io.js"></script>
         <script type="text/javascript" src="/js/libs/angular.min.js"></script>
         <script type="text/javascript" src="/js/libs/angular-animate.min.js"></script>
