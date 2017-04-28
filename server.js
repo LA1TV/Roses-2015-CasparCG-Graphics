@@ -6,7 +6,7 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var bug = {};
+var bug = {livetext: "Live", locationtext: ''};
 var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
 var score = {};
 var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
@@ -17,6 +17,7 @@ var socialmedia = {tweet: "", pos: "bottom center", tweethtml: ""};
 var swimming = {order: ''};
 var grid = {};
 var archery = {};
+var badminton = {match: "Badminton", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -85,9 +86,25 @@ io.on('connection', function(socket) {
 	socket.on("lowerthird:right", function(msg) {
 		io.sockets.emit("lowerthird:right", msg);
 	});
+	
+	socket.on("lowerthird:full", function(msg) {
+		io.sockets.emit("lowerthird:full", msg);
+	});
 
-	socket.on("lowerthird:hide", function() {
-		io.sockets.emit("lowerthird:hide");
+	socket.on("lowerthird:hidefull", function() {
+		io.sockets.emit("lowerthird:hidefull");
+	});
+	
+	socket.on("lowerthird:hideleft", function() {
+		io.sockets.emit("lowerthird:hideleft");
+	});
+	
+	socket.on("lowerthird:hideright", function() {
+		io.sockets.emit("lowerthird:hideright");
+	});
+
+	socket.on("lowerthird:hideall", function() {
+		io.sockets.emit("lowerthird:hideall");
 	});
 
 	/*
@@ -209,6 +226,18 @@ io.on('connection', function(socket) {
 		socket.on("archery:get", function(msg) {
 				io.sockets.emit("archery", archery);
 		});
+
+		/*
+		* Badminton
+		*/
+		socket.on("badminton", function(msg) {
+	        badminton = msg;
+			io.sockets.emit("badminton", msg);
+		});
+
+    socket.on("badminton:get", function(msg) {
+        io.sockets.emit("badminton", badminton);
+    });
 
 
 });

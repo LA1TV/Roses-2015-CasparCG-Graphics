@@ -92,6 +92,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             type: 'link',
             icon: 'bullseye',
         });
+
+        $scope.menu.push({
+            name: 'Badminton',
+            url: '/badminton',
+            type: 'link',
+            icon: 'green neuter',
+        });
     }
 ]);
 
@@ -150,6 +157,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/archery", {
                 templateUrl: '/admin/templates/archery.tmpl.html',
                 controller: 'archeryCGController'
+            })
+            .when("/badminton", {
+              templateUrl: '/admin/templates/badminton.tmpl.html',
+              controller: 'badmintonCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -236,7 +247,11 @@ app.controller('generalCGController', ['$scope', 'socket',
                 getBugData();
             }
         }, true);
-
+        
+        socket.on("bug", function (msg) {
+            $scope.bug = msg;
+        });
+        
         function getBugData() {
             socket.emit("bug:get");
         }
@@ -269,8 +284,20 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
             socket.emit("lowerthird:" + side, item);
         };
 
-        $scope.hide = function() {
-            socket.emit("lowerthird:hide");
+        $scope.hideall = function() {
+            socket.emit("lowerthird:hideall");
+        };
+        
+        $scope.hidefull = function() {
+            socket.emit("lowerthird:hidefull");
+        };
+
+		$scope.hideleft = function() {
+            socket.emit("lowerthird:hideleft");
+        };
+
+		$scope.hideright = function() {
+            socket.emit("lowerthird:hideright");
         };
 
         $scope.$on("$destroy", function() {
@@ -784,6 +811,42 @@ app.controller('basketballCGController', ['$scope', 'localStorageService', 'sock
         function getBasketballData() {
             socket.emit("football:get");
             socket.emit("clock:get");
+        }
+    }
+]);
+
+app.controller('badmintonCGController', ['$scope', 'socket',
+    function($scope, socket) {
+        socket.on("badminton", function (msg) {
+            $scope.badminton = msg;
+        });
+
+        $scope.resetGame1 = function() {
+          $scope.badminton.game1 = 0;
+        };
+
+        $scope.resetGame2 = function() {
+          $scope.badminton.game2 = 0;
+        };
+
+        $scope.resetPoint1 = function() {
+          $scope.badminton.point1 = 0;
+        };
+
+        $scope.resetPoint2 = function() {
+          $scope.badminton.point2 = 0;
+        };
+
+        $scope.$watch('badminton', function() {
+            if ($scope.badminton) {
+                socket.emit("badminton", $scope.badminton);
+            } else {
+                getBadmintonData();
+            }
+        }, true);
+
+        function getBadmintonData() {
+            socket.emit("badminton:get");
         }
     }
 ]);

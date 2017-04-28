@@ -4,8 +4,21 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     function($scope, socket){
         $scope.showLeft = false;
 
-        socket.on("lowerthird:hide", function (msg) {
+        socket.on("lowerthird:hideall", function (msg) {
             $scope.showLeft = false;
+            $scope.showRight = false;
+            $scope.showFull = false;
+        });
+        
+        socket.on("lowerthird:hidefull", function (msg) {
+            $scope.showFull = false;
+        });
+        
+        socket.on("lowerthird:hideleft", function (msg) {
+            $scope.showLeft = false;
+        });
+        
+        socket.on("lowerthird:hideright", function (msg) {
             $scope.showRight = false;
         });
 
@@ -23,6 +36,14 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
             }
             $scope.right = msg;
             $scope.showRight = true;
+        });
+        
+        socket.on("lowerthird:full", function (msg) {
+            if($scope.showFull) {
+                $scope.showFull = false;
+            }
+            $scope.full = msg;
+            $scope.showFull = true;
         });
     }
 ]);
@@ -66,17 +87,21 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
         socket.on("bug", function (state) {
             $scope.state = state;
         });
-
+        
         $scope.$watch('bug', function() {
-            if (!$scope.state) {
+            if (!$scope.bug) {
                 getBugData();
             }
         }, true);
-
+		
+		socket.on("bug", function (msg) {
+            $scope.bug = msg;
+        });
+        
         function getBugData() {
             socket.emit("bug:get");
-        }
-
+        };
+        
         var tick = function () {
             $scope.clock = Date.now(); // get the current time
             $timeout(tick, $scope.tickInterval); // reset the timer
@@ -347,6 +372,24 @@ app.controller('basketballCtrl', ['$scope', 'socket',
         function getBasketballData() {
             socket.emit("basketball:get");
             socket.emit("clock:get");
+        }
+    }
+]);
+
+app.controller('badmintonCtrl', ['$scope', 'socket',
+    function($scope, socket){
+        socket.on("badminton", function (msg) {
+            $scope.badminton = msg;
+        });
+
+        $scope.$watch('badminton', function() {
+            if (!$scope.badminton) {
+                getBadmintonData();
+            }
+        }, true);
+
+        function getBadmintonData() {
+            socket.emit("badminton:get");
         }
     }
 ]);

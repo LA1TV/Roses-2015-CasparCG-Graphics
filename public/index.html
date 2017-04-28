@@ -12,8 +12,14 @@
     <body>
         <div ng-controller="bugCtrl">
             <div class="wrapper slide-left">
-                 <div class="bug left top scale-fade" ng-show="state.showClock">
-                        <h1 class="black">{{clock | date: "HH:mm"}}</h1><h1 ng-show="state.showLive">Live</h1><h1 ng-show="state.bugText">{{bugText}}</h1>
+                 <div class="bug top scale-fade-in" ng-show="state.showClock">
+                        <h1 class="black">{{clock | date: "HH:mm"}}</h1>
+                 </div>
+                 <div class="bug top scale-fade-in" ng-show="state.showLive">
+                 <h1 ng-show="state.showLive">{{bug.livetext}}</h1>
+                 </div>
+                 <div class="bug top scale-fade-in" ng-show="state.showLocation">
+                 <h1 class="white" ng-show="state.showLocation">{{bug.locationtext}}</h1></div>
                 </div>
 
                 <div class="logo right top toggle" ng-show="state.showLogo">
@@ -23,6 +29,13 @@
         </div>
 
         <div ng-controller="lowerThirdsCtrl">
+        	<div class="lowerthird bottom fullwidth scale-fade" ng-show="showFull">
+                <div class="gradient-overlay">
+                    <h1>{{full.heading}}</h1>
+                </div>
+                <h2 ng-show="full.subHeading">{{full.subHeading}}</h2>
+            </div>
+        
             <div class="lowerthird left bottom slide-left" ng-show="showLeft">
                 <div class="gradient-overlay">
                     <h1>{{left.heading}}</h1>
@@ -41,7 +54,7 @@
         <div ng-controller="boxingCtrl">
             <div ng-show="boxing.showScore" class="boxing-score right bottom scale-fade">
 
-                <div class="bar">
+                <div class="bar" ng-show="boxing.showTime">
                     <div class="gradient-overlay"><span class="timer">{{clock}}</span></div>
                     <div class="moving"></div>
                 </div>
@@ -63,7 +76,7 @@
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="bar red">
+                <div class="bar">
                     <div class="gradient-overlay"><span>{{boxing.currRound}} Round</span></div>
                     <div class="red-moving"></div>
                 </div>
@@ -138,7 +151,7 @@
 
         <div ng-controller="archeryCtrl" class="left bottom darts scale-fade" ng-show="archery.show" style="width: 50%">
             <div class="row header">
-                <div class="name" style="width: 40%">&nbsp;</div>
+                <div class="name" style="width: 40%">Archery</div>
                 <div class="leg" style="width: 45%">HITS</div>
                 <div class="leg" style="width: 15%">TOTAL</div>
             </div>
@@ -224,6 +237,30 @@
                     <div class="row {{swimming.lane7team}}" ng-show="swimming.lane7name"><span class="lane">7</span>{{swimming.lane7name}}</div>
                     <div class="row {{swimming.lane8team}}" ng-show="swimming.lane8name"><span class="lane">8</span>{{swimming.lane8name}}</div>
                 </div>
+            </div>
+        </div>
+
+        <div ng-controller="badmintonCtrl" class="right bottom badminton scale-fade" ng-show="badminton.show">
+            <div class="row header">
+                <div class="name">{{badminton.match}}&nbsp;</div>
+                <div class="game">GAME</div>
+                <div class="match">POINTS</div>
+            </div>
+
+            <div class="row">
+                <div class="name lanc">{{badminton.player1}}</div>
+                <div class="games">{{badminton.game1}}</div>
+                <div class="matches">{{badminton.point1}}</div>
+            </div>
+
+            <div class="row">
+                <div class="name york">{{badminton.player2}}</div>
+                <div class="games">{{badminton.game2}}</div>
+                <div class="matches">{{badminton.point2}}</div>
+            </div>
+
+            <div class="row">
+                 <div class="footer">best of 3 games wins match</div>
             </div>
         </div>
 
