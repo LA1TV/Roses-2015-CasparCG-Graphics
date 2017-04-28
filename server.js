@@ -17,6 +17,44 @@ var swimming = {order: ''};
 var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
 var archery = {};
 var badminton = {match: "Badminton", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
+var esports = {
+	scores: {
+		dota: {
+			york: 0,
+			lanc: 0
+		},
+		lol: {
+			york: 0,
+			lanc: 0
+		},
+		csgo: {
+			york: 0,
+			lanc: 0
+		},
+		overall: {
+			york: 0,
+			lanc: 0
+		},
+		show: false
+	},
+	upNext: {
+		title: "",
+		game: 1,
+		show: false
+	},
+	lastGame: {
+		title: "",
+		game: 1,
+		winner: "",
+		show: false
+	},
+	scoreDisplay: {
+		title: "Overall Score",
+		york: 0,
+		lanc: 0
+	},
+	showCountdown: false
+}
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -231,6 +269,17 @@ io.on('connection', function(socket) {
         io.sockets.emit("badminton", badminton);
     });
 
+		/*
+		* eSports
+		*/
+		socket.on("esports", function(msg) {
+	    esports = msg;
+			io.sockets.emit("esports", msg);
+		});
+
+    socket.on("esports:get", function(msg) {
+        io.sockets.emit("esports", esports);
+    });
 
 });
 
