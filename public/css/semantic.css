@@ -17697,8 +17697,8 @@ ol.ui.horizontal.list li:before,
     width: auto;
     margin-left: 0em;
     margin-right: 0em;
-    padding-left: 23%;
-    padding-right: 23%;
+    padding-left: 0%;
+    padding-right: 0%;
   }
 }
 
