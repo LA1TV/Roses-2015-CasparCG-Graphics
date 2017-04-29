@@ -6,7 +6,7 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var bug = {};
+var bug = {livetext: "Live", locationtext: ''};
 var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
 var score = {};
 var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
@@ -16,6 +16,45 @@ var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2
 var swimming = {order: ''};
 var grid = {};
 var archery = {};
+var badminton = {match: "Badminton", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
+var esports = {
+	scores: {
+		dota: {
+			york: 0,
+			lanc: 0
+		},
+		lol: {
+			york: 0,
+			lanc: 0
+		},
+		csgo: {
+			york: 0,
+			lanc: 0
+		},
+		overall: {
+			york: 0,
+			lanc: 0
+		},
+		show: false
+	},
+	upNext: {
+		title: "",
+		game: 1,
+		show: false
+	},
+	lastGame: {
+		title: "",
+		game: 1,
+		winner: "",
+		show: false
+	},
+	scoreDisplay: {
+		title: "Overall Score",
+		york: 0,
+		lanc: 0
+	},
+	showCountdown: false
+}
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -196,6 +235,29 @@ io.on('connection', function(socket) {
 				io.sockets.emit("archery", archery);
 		});
 
+		/*
+		* Badminton
+		*/
+		socket.on("badminton", function(msg) {
+	        badminton = msg;
+			io.sockets.emit("badminton", msg);
+		});
+
+    socket.on("badminton:get", function(msg) {
+        io.sockets.emit("badminton", badminton);
+    });
+
+		/*
+		* eSports
+		*/
+		socket.on("esports", function(msg) {
+	    esports = msg;
+			io.sockets.emit("esports", msg);
+		});
+
+    socket.on("esports:get", function(msg) {
+        io.sockets.emit("esports", esports);
+    });
 
 });
 

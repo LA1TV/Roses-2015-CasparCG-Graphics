@@ -68,14 +68,18 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
         });
 
         $scope.$watch('bug', function() {
-            if (!$scope.state) {
+            if (!$scope.bug) {
                 getBugData();
             }
         }, true);
 
+		socket.on("bug", function (msg) {
+            $scope.bug = msg;
+        });
+
         function getBugData() {
             socket.emit("bug:get");
-        }
+        };
 
         var tick = function () {
             $scope.clock = Date.now(); // get the current time
@@ -277,6 +281,30 @@ app.controller('badmintonCtrl', ['$scope', 'socket',
 
         function getBadmintonData() {
             socket.emit("badminton:get");
+        }
+    }
+]);
+
+app.controller('esportsCtrl', ['$scope', 'socket',
+    function($scope, socket){
+
+        socket.on("esports", function (msg) {
+            $scope.esports = msg;
+        });
+
+        socket.on("clock:tick", function (msg) {
+            $scope.clock = msg.slice(0, msg.indexOf("."));
+        });
+
+        $scope.$watch('esports', function() {
+            if (!$scope.esports) {
+                getEsportsData();
+            }
+        }, true);
+
+        function getEsportsData() {
+            socket.emit("esports:get");
+            socket.emit("clock:get");
         }
     }
 ]);

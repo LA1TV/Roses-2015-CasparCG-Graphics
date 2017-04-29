@@ -92,6 +92,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             type: 'link',
             icon: 'green neuter',
         });
+
+        $scope.menu.push({
+            name: 'esports',
+            url: '/esports',
+            type: 'link',
+            icon: 'black gamepad',
+        });
     }
 ]);
 
@@ -150,6 +157,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/badminton", {
               templateUrl: '/admin/templates/badminton.tmpl.html',
               controller: 'badmintonCGController'
+            })
+            .when("/esports", {
+              templateUrl: '/admin/templates/esports.tmpl.html',
+              controller: 'esportsCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -236,6 +247,10 @@ app.controller('generalCGController', ['$scope', 'socket',
                 getBugData();
             }
         }, true);
+
+        socket.on("bug", function (msg) {
+            $scope.bug = msg;
+        });
 
         function getBugData() {
             socket.emit("bug:get");
@@ -773,6 +788,22 @@ app.controller('badmintonCGController', ['$scope', 'socket',
             $scope.badminton = msg;
         });
 
+        $scope.resetGame1 = function() {
+          $scope.badminton.game1 = 0;
+        };
+
+        $scope.resetGame2 = function() {
+          $scope.badminton.game2 = 0;
+        };
+
+        $scope.resetPoint1 = function() {
+          $scope.badminton.point1 = 0;
+        };
+
+        $scope.resetPoint2 = function() {
+          $scope.badminton.point2 = 0;
+        };
+
         $scope.$watch('badminton', function() {
             if ($scope.badminton) {
                 socket.emit("badminton", $scope.badminton);
@@ -784,43 +815,82 @@ app.controller('badmintonCGController', ['$scope', 'socket',
         function getBadmintonData() {
             socket.emit("badminton:get");
         }
+    }
+]);
 
-        $scope.reset1 = function() {
-            $scope.badminton.score1 = 0;
+app.controller('esportsCGController', ['$scope', '$timeout', 'socket',
+    function($scope, $timeout, socket){
+        socket.on("clock:tick", function (msg) {
+            $scope.clock = msg.slice(0, msg.indexOf("."));
+
+            if($scope.clock == "00:00"){
+              $scope.esports.showCountdown = false;
+            }
+        });
+
+        $scope.pauseClock = function() {
+            socket.emit("clock:pause");
         };
 
-        $scope.reset2 = function() {
-            $scope.badminton.score2 = 0;
+        $scope.resetClock = function() {
+            socket.emit("clock:reset");
         };
 
-        $scope.take1 = function(val) {
-            if( val > 180) {
-                $scope.last1 = "";
-                return;
-            }
-
-            var tmp = $scope.badminton.score1;
-            var newScore = (tmp - val);
-
-            if(newScore >= 0) {
-                $scope.badminton.score1 = newScore;
-                $scope.last1 = "";
-            }
+        $scope.setClock = function(val) {
+            socket.emit("clock:set", val);
         };
 
-        $scope.take2 = function(val) {
-            if( val > 180) {
-                $scope.last2 = "";
-                return;
-            }
-
-            var tmp = $scope.badminton.score2;
-            var newScore = (tmp - val);
-
-            if(newScore >= 0) {
-                $scope.badminton.score2 = newScore;
-                $scope.last2 = "";
-            }
+        $scope.downClock = function() {
+            socket.emit("clock:down");
         };
+
+        $scope.upClock = function() {
+            socket.emit("clock:up");
+        };
+
+        socket.on("esports", function (msg) {
+            $scope.esports = msg;
+        });
+
+        $scope.displayScore = function(title, lanc, york){
+          var delay = false;
+          if ($scope.esports.scores.show) {
+            delay = true;
+          }
+          $scope.esports.scores.show = false;
+          $scope.esports.scoreDisplay.title = title;
+          $scope.esports.scoreDisplay.lanc = lanc;
+          $scope.esports.scoreDisplay.york = york;
+          if (delay){
+            $timeout(function () {
+              $scope.esports.scores.show = true;
+            }, 500);
+          }else{
+            $scope.esports.scores.show = true;
+          }
+        }
+
+        $scope.displayBugs = function(){
+          $scope.esports.upNext.show = true;
+          $scope.esports.lastGame.show = true;
+        }
+
+        $scope.hideBugs = function(){
+          $scope.esports.upNext.show = false;
+          $scope.esports.lastGame.show = false;
+        }
+
+        $scope.$watch('esports', function() {
+            if ($scope.esports) {
+                socket.emit("esports", $scope.esports);
+            } else {
+                getEsportsData();
+            }
+        }, true);
+
+        function getEsportsData() {
+            socket.emit("esports:get");
+            socket.emit("clock:get");
+        }
     }
 ]);
