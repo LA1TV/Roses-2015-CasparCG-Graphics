@@ -191,6 +191,47 @@ app.controller('footballCtrl', ['$scope', 'socket',
     }
 ]);
 
+app.controller('netballCtrl', ['$scope', 'socket',
+    function($scope, socket){
+
+        socket.on("netball", function (msg) {
+            $scope.netball = msg;
+            
+            if ($scope.netball.firstpasslanc == true) {
+            	$scope.netball.lancoffset = 1; 
+            }
+            
+            if ($scope.netball.firstpasslanc == true & $scope.netball.firstpassyork == true) {
+            	$scope.netball.lancoffset = 0; 
+            }
+         
+            $scope.TotalScore = $scope.netball.yorkScore + $scope.netball.lancScore + $scope.netball.lancoffset;
+			if (($scope.TotalScore % 2) == 1) {
+						$scope.showcurrentlancs = true;
+						$scope.showcurrentyork = false;
+				} else {
+						$scope.showcurrentlancs = false;
+						$scope.showcurrentyork = true;
+					}
+			});
+
+        socket.on("clock:tick", function (msg) {
+            $scope.clock = msg.slice(0, msg.indexOf("."));
+        });
+
+        $scope.$watch('netball', function() {
+            if (!$scope.netball) {
+                getNetballData();
+            }
+        }, true);
+
+        function getNetballData() {
+            socket.emit("netball:get");
+            socket.emit("clock:get");
+        }
+    }
+]);
+
 app.controller('rugbyCtrl', ['$scope', 'socket',
     function($scope, socket){
 
