@@ -1,5 +1,29 @@
 var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
 
+app.controller('themeCtrl', ['$scope', 'socket',
+function($scope, socket){
+
+    socket.on("theme", function (state) {
+        $scope.state = state;
+    });
+
+    $scope.$watch('theme', function() {
+        if (!$scope.theme) {
+            getThemeData();
+        }
+    }, true);
+
+    socket.on("theme", function (msg) {
+        $scope.theme = msg;
+    });
+
+    function getThemeData() {
+        socket.emit("theme:get");
+    };
+}
+]);
+
+
 app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     function($scope, socket){
         $scope.showLeft = false;
@@ -9,15 +33,15 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
             $scope.showRight = false;
             $scope.showFull = false;
         });
-        
+
         socket.on("lowerthird:hidefull", function (msg) {
             $scope.showFull = false;
         });
-        
+
         socket.on("lowerthird:hideleft", function (msg) {
             $scope.showLeft = false;
         });
-        
+
         socket.on("lowerthird:hideright", function (msg) {
             $scope.showRight = false;
         });
@@ -37,7 +61,7 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket',
             $scope.right = msg;
             $scope.showRight = true;
         });
-        
+
         socket.on("lowerthird:full", function (msg) {
             if($scope.showFull) {
                 $scope.showFull = false;
@@ -87,21 +111,21 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
         socket.on("bug", function (state) {
             $scope.state = state;
         });
-        
+
         $scope.$watch('bug', function() {
             if (!$scope.bug) {
                 getBugData();
             }
         }, true);
-		
+
 		socket.on("bug", function (msg) {
             $scope.bug = msg;
         });
-        
+
         function getBugData() {
             socket.emit("bug:get");
         };
-        
+
         var tick = function () {
             $scope.clock = Date.now(); // get the current time
             $timeout(tick, $scope.tickInterval); // reset the timer

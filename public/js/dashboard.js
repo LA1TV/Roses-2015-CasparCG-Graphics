@@ -1,7 +1,12 @@
 var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic', 'socket-io']);
 
-app.controller('AppCtrl', ['$scope', '$location',
-    function($scope, $location){
+app.controller('AppCtrl', ['$scope', '$location', 'socket',
+    function($scope, $location, socket){
+
+        socket.on("theme", function (msg) {
+            $scope.theme = msg;
+        });
+
         $scope.menu = [];
 
         $scope.isActive = function (viewLocation) {
@@ -100,7 +105,7 @@ app.controller('AppCtrl', ['$scope', '$location',
  */
 app.config(['$routeProvider', 'localStorageServiceProvider',
     function($routeProvider, localStorageServiceProvider) {
-        localStorageServiceProvider.setPrefix('la1tv');
+        localStorageServiceProvider.setPrefix('cg');
 
         $routeProvider
             .when("/general", {
@@ -225,6 +230,24 @@ app.controller('archeryCGController', ['$scope', 'socket',
 
 app.controller('generalCGController', ['$scope', 'socket',
     function($scope, socket){
+
+        socket.on("theme", function (msg) {
+            $scope.theme = msg;
+        });
+
+        $scope.$watch('theme', function() {
+            if ($scope.theme) {
+                socket.emit("theme", $scope.theme);
+            } else {
+                getThemeData();
+            }
+        }, true);
+
+        function getThemeData() {
+            socket.emit("theme:get");
+        }
+
+
         socket.on("bug", function (msg) {
             $scope.general = msg;
         });
@@ -236,11 +259,11 @@ app.controller('generalCGController', ['$scope', 'socket',
                 getBugData();
             }
         }, true);
-        
+
         socket.on("bug", function (msg) {
             $scope.bug = msg;
         });
-        
+
         function getBugData() {
             socket.emit("bug:get");
         }
@@ -276,7 +299,7 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
         $scope.hideall = function() {
             socket.emit("lowerthird:hideall");
         };
-        
+
         $scope.hidefull = function() {
             socket.emit("lowerthird:hidefull");
         };

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="cgApp">
-    <head>
+    <head ng-controller="themeCtrl">
         <meta charset="UTF-8">
         <title>CG</title>
         <link rel="stylesheet" href="/css/reset.css" />
         <link href="/css/fonts/montserrat.css" rel="stylesheet" type="text/css">
-        <link href="/css/theme.css" rel="stylesheet" type="text/css">
+        <link href="/themes/{{theme.selected}}/theme.css" rel="stylesheet" type="text/css">
         <link href="/css/animation.css" rel="stylesheet" type="text/css">
     </head>
 
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="logo right top toggle" ng-show="state.showLogo">
-                    <img src="/images/roses2017logo.png" />
+                    <img ng-controller="themeCtrl" src="/themes/{{theme.selected}}/bug.png" />
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <h2 ng-show="full.subHeading">{{full.subHeading}}</h2>
             </div>
-        
+
             <div class="lowerthird left bottom slide-left" ng-show="showLeft">
                 <div class="gradient-overlay">
                     <h1>{{left.heading}}</h1>
@@ -131,10 +131,10 @@
 	              	<div class="clearfix"></div>
 	              	<div class="footballbottom">
 	              		<h1 ng-show="football.showbottom">{{football.starttime}}</h1>
-	              	</div>	
+	              	</div>
             	</div>
         </div>
-        
+
         <div ng-controller="footballCtrl" ng-show="football.showpre">
         		<img ng-src="images/YorkSport250.png" ng-show="football.showpre" class="bottom leftLogo scale-fade"/>
 				<img ng-src="images/LancasterSport250.png" ng-show="football.showpre" class="bottom rightLogo scale-fade"/>
@@ -156,8 +156,8 @@
                 	<div class="clearfix"></div>
             	</div>
         </div>
-                
-        
+
+
         <div ng-controller="rugbyCtrl" class="football left top scale-fade" ng-show="rugby.show">
             <div class="row">
                 <div class="clock">{{clock}}</div>
@@ -167,7 +167,7 @@
             	<div ng-show="rugby.showextratime" class="extratime scale-fade">ET</div>
         </div>
 
-        
+
         <div ng-controller="basketballCtrl" class="basketball left top scale-fade" ng-show="basketball.show">
             <div class="row">
                 <div class="clock">{{clock}}</div>
