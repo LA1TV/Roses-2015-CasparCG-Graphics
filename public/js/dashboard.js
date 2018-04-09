@@ -98,6 +98,9 @@ app.controller('AppCtrl', ['$scope', '$location',
             url: '/netball',
             type: 'link',
             icon: 'soccer',
+        });
+            
+          $scope.menu.push({   
             name: 'Tennis',
             url: '/tennis',
             type: 'link',
