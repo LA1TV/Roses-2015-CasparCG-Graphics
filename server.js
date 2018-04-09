@@ -12,10 +12,12 @@ var score = {};
 var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var rugby = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var basketball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
+var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501, bottomtext: "First to 3 legs wins set" };
 var swimming = {order: ''};
-var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
+var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34", position: "center center", split:"halves"};
 var archery = {};
+var badminton = {match: "Badminton", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
+var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 5, showScore: false, showSets: false}
 var tennisScore   = [{sets1: [], sets2: [],
                       set1: 0, set2: 0,
@@ -70,12 +72,19 @@ io.on('connection', function(socket) {
     socket.on("clock:get", function() {
         io.sockets.emit("clock:tick", stopwatch.getTime());
     });
-
-		socket.on("grid", function(payload) {
+	
+	/*
+	 * 		Grid Functions
+	 */
+	socket.on("grid", function(payload) {
         grid = payload;
         io.sockets.emit("grid", payload);
         console.log("Updating: grid");
     });
+	
+	socket.on("grid:get", function(msg) {
+		io.sockets.emit("grid", grid);
+	});
 
 	/*
 	 * 		General Functions
@@ -211,8 +220,20 @@ io.on('connection', function(socket) {
     socket.on("swimming:get", function(msg) {
         io.sockets.emit("swimming", swimming);
     });
+    
+	/*
+	 * 		Nettball
+	 */
+	socket.on("netball", function(msg) {
+        netball = msg;
+		io.sockets.emit("netball", msg);
+	});
 
-		/*
+    socket.on("netball:get", function(msg) {
+		io.sockets.emit("netball", netball);
+	});
+
+	/*
  	 * 		Basketball
  	 */
  	socket.on("basketball", function(msg) {
@@ -223,6 +244,10 @@ io.on('connection', function(socket) {
   socket.on("basketball:get", function(msg) {
  		io.sockets.emit("basketball", basketball);
  	});
+ 	
+ 	/*
+ 	 * 		Archery
+ 	 */
 
 	socket.on("archery", function(msg) {
         archery = msg;

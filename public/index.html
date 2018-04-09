@@ -62,13 +62,13 @@
                 <div class="score-inner">
 
                     <div class="float-left">
-                        <h4>{{boxing.name1}}</h4>
+                        <h4 ng-show="boxing.showNames" class="scale-fade">{{boxing.name1}}</h4>
                         <h1>{{boxing.lancScore}}</h1>
                         <h2>LANC</h2>
                     </div>
 
                     <div class="float-right">
-                        <h4>{{boxing.name2}}</h4>
+                        <h4 ng-show="boxing.showNames" class="scale-fade">{{boxing.name2}}</h4>
                         <h1>{{boxing.yorkScore}}</h1>
                         <h2>YORK</h2>
                     </div>
@@ -175,13 +175,21 @@
                 <div class="score york">{{basketball.yorkScore}} YORK</div>
             </div>
         </div>
+        
+        <div ng-controller="netballCtrl" class="netball left top scale-fade" ng-show="netball.show">
+            <div class="row">    	
+                <div class="score lanc"><span ng-show="netball.showcurrent"><span ng-show="showcurrentlancs">&diams;</span></span>LANCS {{netball.lancScore}}</div>
+                <div class="score york">{{netball.yorkScore}} YORK<span ng-show="netball.showcurrent"><span ng-show="showcurrentyork">&diams;</span></span></div>
+                <div class="clock">{{clock}}</div>
+                <div class="netballquarter fade" ng-show="netball.showquarter"><h1>{{netball.currQuarter}}</h1></div>
+            </div>
+        </div>
 
         <div ng-controller="dartsCtrl" class="right bottom darts scale-fade" ng-show="darts.show">
             <div class="row header">
                 <div class="name">{{darts.match}}&nbsp;</div>
                 <div class="set">SETS</div>
                 <div class="leg">LEGS</div>
-                <div class="name2">&nbsp;</div>
             </div>
 
             <div class="row">
@@ -199,7 +207,7 @@
             </div>
 
             <div class="row">
-                 <div class="footer">best of 3 legs wins set</div>
+                 <div class="footer">{{darts.bottomtext}}</div>
             </div>
         </div>
 
@@ -235,14 +243,15 @@
 
         <div ng-controller="gridCtrl">
           <div class="center-page scale-fade" ng-show="show">
-            <div class="grid center" style="margin-top: 20px; position: absolute;" >
+            <div class="grid {{grid.position}}" >
+
               <div class="gradient-overlay">
                 <h1 style="background-color: {{grid.headingcolor}} !important;">{{ grid.header }}</h1>
               </div>
 
               <div class="row animate-repeat" ng-repeat="row in grid.rows">
-                <div style="background-color: {{grid.leftcolor}} !important;" class="gridleft float-left">{{ row.left }}</div>
-                <div style="background-color: {{grid.rightcolor}} !important;" class="gridright float-right">{{ row.right }}</div>
+                <div style="background-color: {{grid.leftcolor}} !important;" class="gridleft {{grid.split}}gridleft">{{ row.left }}</div>
+                <div style="background-color: {{grid.rightcolor}} !important;" class="gridright {{grid.split}}gridright">{{ row.right }}</div>
               </div>
             </div>
           </div>
