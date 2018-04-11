@@ -299,6 +299,49 @@ h1, h2, h3, h4 {
 
 }
 
+.progress-bar {
+	width: 60px;
+	height: 410px;
+	bottom: 50px;
+	position: absolute;
+	border-top: 3px black solid;
+	font-weight: bold;
+}
+
+.lanc-progress, .york-progress {
+	position: absolute; 
+	bottom: 0px;
+	width: 29px;
+	text-align: center;
+	background-position: bottom; 
+	background-repeat: repeat-y;
+}
+
+.lanc-progress {
+	/* background-color: rgba(255, 0, 0, 0.6); */
+	left: 25px;
+	background-image: url("/images/rose_red.png");
+}
+
+.york-progress {
+	/* background-color: rgba(255, 255, 0, 0.6); */
+	background-image: url("/images/rose_white.png");
+}
+
+.scoreText {
+	position: absolute;
+	top: -20px;
+	z-index: 3;
+	text-align: center;
+	font-size: 	12px;
+}
+
+.toWin {
+	position: absolute;
+	top: -12px;
+	left: 65px;
+	font-size: 18px;
+}
 /**************************************************/
 /*              [Football Score]                  */
 /**************************************************/
@@ -634,7 +677,7 @@ h1, h2, h3, h4 {
   padding-left: 10px;
 }
 
-.tennisScore .name {
+.tennisScore .name, .tennisScore .info {
   width: 65%;
 }
 
@@ -642,17 +685,20 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
-.tennis .name.lanc {
+.tennis .lanc {
   background-color: #cd1d18;
 }
 
-.tennis .name.york {
+.tennis .york {
   background-color: #efbb39;
 }
 
-.tennis .info, .tennisSets .header {
-  width: 100%;
+.tennis .info, .tennis .header {
   background-color: #1f1a34;
+}
+
+.tennisSets .info, .tennisSets .header {
+  width: 100%;
 }
 
 .tennisScore .points, .tennisScore .games, .tennisScore .sets, .tennisSets .sets {
@@ -670,27 +716,86 @@ h1, h2, h3, h4 {
 
 .tennisSets .sets {
   width: 43px;
-  width: 3vw;
 }
 
 .tennisScore .server {
   width: 0; 
   height: 0; 
-  border-top: 14px solid transparent;
-  border-bottom: 14px solid transparent; 
-  border-right: 14px solid #fff; 
-  border-top: 1vw solid transparent;
-  border-bottom: 1vw solid transparent; 
-  border-right: 1vw solid #fff; 
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent; 
+  border-right: 12px solid #fff;
   float: right;
   margin-top: 6px;
-  margin-top: 0.45vw;
   margin-right: 4px;
-  margin-right: 0.3vw;
 }
 
 .tennisSets .info {
   font-size: 16px;
+  
+.tennis .info {
+  font-size: 15px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.tennisStats {
+	width: 70%;
+    text-align: center;
+	position: absolute;
+}
+
+.tennisStats .header {
+	width: 100%;
+	color: #fff;
+	line-height: 50px;
+    background-color: #BC204B;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+	font-size: 35px;
+}
+
+.tennisStats .info {
+	float: none;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.tennisStats .statsleft, .tennisStats .stats, .tennisStats .statsright {
+	line-height: 50px;
+	font-size: 25px;
+}
+
+.tennisStats .stats {
+	width: 100%;
+	background-color: #1f1a34;
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+	padding: 0 15px;
+}
+
+.tennisStats .stats .set:not(:first-child) {
+	margin-left: 12px;
+}
+
+.tennisStats .statsleft, .tennisStats .statsright {
+	width: 20%;
+}
+
+.tennisStats .statsleft {
+	float: left;
+	border-right: 3px solid #fff;
+}
+
+.tennisStats .statsright {
+	float: right;
+	border-left: 3px solid #fff;
+}
+
+.tennisStats .row {
+	color: #fff;
+	width: 100%;
+}
+
+.tennisStats .row:last-child {
+	margin-bottom: 5px;
 }
 
 
@@ -931,4 +1036,76 @@ h1, h2, h3, h4 {
   width: 38%;
   color: #000;
   background-color: #efbb39;
+}
+
+/**************************************************/
+/*              [Netball Score]                  */
+/**************************************************/
+
+.netball {
+  width: 40%;
+  border-radius: 3px;
+  background-clip: padding-box;
+  font-size: 30px;
+  font-size: 1.8vw;
+}
+
+.netballquarter {
+    display:inline;
+    white-space: nowrap;
+    clear:none;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+}
+
+.netballquarter h1 {
+    color: #fff;
+    font-size: 30px;
+    font-size: 1.55vw;
+    line-height: 1.8vw;
+    font-weight: normal;
+    float: left;
+    padding: 3px 10px;
+    margin-right: 0px;
+    background-color: #BC204B;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+.netballquarter h1:empty {
+    display: none;
+}
+
+.netball .clock, .netball .score.lanc, .netball .score.york {
+  padding: 3px;
+  float: left;
+}
+
+.netball .clock {
+  background-color: #eee;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  width: 18%;
+  text-align: center;
+}
+
+.netball .score.lanc {
+  width: 32%;
+  text-align: right;
+  padding-right:20px;
+  color: #fff;
+  background-color: #cd1d18;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+.netball .score.lanc p {
+    float: right;
+    text-align: center;
+}
+
+.netball .score.york {
+  width: 32%;
+  text-align: left;
+  padding-left: 30px;
+  color: #000;
+  background-color: #efbb39;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
 }

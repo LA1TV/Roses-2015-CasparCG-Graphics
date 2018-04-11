@@ -6,9 +6,9 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var bug = {livetext: "Live", locationtext: ''};
+var bug = {livetext: "Live", locationtext: '', showLive: false, showLocation: false};
 var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
-var score = {yorkScore: 0, lancScore: 0};
+var score = {yorkScore: 0, lancScore: 0, totalPoints: 354};
 var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var rugby = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var basketball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
@@ -16,8 +16,8 @@ var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2
 var swimming = {order: ''};
 var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
 var archery = {};
-var tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 5, showScore: false, showSets: false}
-var tennisScore   = [{sets1: [], sets2: [],
+var tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+var tennisScore   = [{sets1: [0], sets2: [0],
                       set1: 0, set2: 0,
                       game1: 0, game2: 0,
                       point1: 0, point2: 0,
@@ -29,8 +29,13 @@ var tennisScore   = [{sets1: [], sets2: [],
                       ace1: 0, ace2: 0,
                       singleFault1: 0, singleFault2: 0,
                       doubleFault1: 0, doubleFault2: 0,
+					  breakPoint1: 0, breakPoint2: 0,
+					  breaksWon1: 0, breaksWon2: 0,
+					  serviceGame1: 0, serviceGame2: 0,
+					  servicesWon1: 0, servicesWon2: 0,
                       pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
 var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
+var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -145,7 +150,9 @@ io.on('connection', function(socket) {
 	socket.on("yorkScore", function(msg){
 		io.sockets.emit("yorkScore", msg);
 	});
-
+	socket.on("totalPoints", function(msg){
+		io.sockets.emit("totalPoints", msg);
+	});
     socket.on("score:get", function(msg) {
 		io.sockets.emit("score", score);
 	});
@@ -254,8 +261,10 @@ io.on('connection', function(socket) {
     });
     
     socket.on("tennisScore", function(msg) {
-        tennisScore.push(msg);
-        io.sockets.emit("tennisScore", msg);
+		if (!_.isEqual(msg,tennisScore.slice(-1)[0])) {
+            tennisScore.push(msg);
+		    io.sockets.emit("tennisScore", msg);
+		}
     });
 
     socket.on("tennis:get", function(msg) {
@@ -271,8 +280,8 @@ io.on('connection', function(socket) {
     });
     
     socket.on("tennis:reset", function(msg) {
-        tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 5, showScore: false, showSets: false}
-        tennisScore   = [{sets1: [], sets2: [],
+        tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+        tennisScore   = [{sets1: [0], sets2: [0],
                           set1: 0, set2: 0,
                           game1: 0, game2: 0,
                           point1: 0, point2: 0,
@@ -284,11 +293,27 @@ io.on('connection', function(socket) {
                           ace1: 0, ace2: 0,
                           singleFault1: 0, singleFault2: 0,
                           doubleFault1: 0, doubleFault2: 0,
+						  breakPoint1: 0, breakPoint2: 0,
+					      breaksWon1: 0, breaksWon2: 0,
+						  serviceGame1: 0, serviceGame2: 0,
+					      servicesWon1: 0, servicesWon2: 0,
                           pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
         
         io.sockets.emit("tennisOptions", tennisOptions);
         io.sockets.emit("tennisScore", tennisScore[0]);
     });
+    
+    /*
+	 * 		Nettball
+	 */
+	socket.on("netball", function(msg) {
+        netball = msg;
+		io.sockets.emit("netball", msg);
+	});
+
+    socket.on("netball:get", function(msg) {
+		io.sockets.emit("netball", netball);
+	});
 
 });
 
