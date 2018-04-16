@@ -835,6 +835,7 @@ h1, h2, h3, h4 {
     width: 650px;
     text-align: center;
     background-clip: padding-box;
+    overflow: hidden;
   }
   .grid h1 {
     color:  #ffffff;
@@ -878,7 +879,7 @@ h1, h2, h3, h4 {
   }
 
   .grid.ng-hide-remove .row {
-    transform: translateY(-40px);
+    transform: translateY(-5.5vw);
     opacity: 0;
   }
 
