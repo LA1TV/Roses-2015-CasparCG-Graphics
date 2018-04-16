@@ -830,7 +830,8 @@ h1, h2, h3, h4 {
  *===================================
  */
   .grid {
-    margin-top: 20px; position: absolute;
+    margin-top: 20px;
+    position: absolute;
     width: 650px;
     text-align: center;
     background-clip: padding-box;
