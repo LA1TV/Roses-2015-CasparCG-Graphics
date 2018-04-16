@@ -867,6 +867,7 @@ h1, h2, h3, h4 {
   }
 
   .grid .row {
+    display: flex;
     color: #fff;
     border-top: 3px solid #fff;
     position: relative;
