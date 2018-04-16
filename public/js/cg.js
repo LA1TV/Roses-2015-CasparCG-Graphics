@@ -244,12 +244,14 @@ app.controller('dartsCtrl', ['$scope', 'socket',
 
 app.controller('gridCtrl', ['$scope', 'socket',
     function($scope, socket){
+        var timer;
         socket.on("grid", function (payload) {
             if (payload === "hide") {
                 //We first remove every element with a delay
-                setTimeout(function(){$scope.grid = {};}, 1000);
+                timer = setTimeout(function(){$scope.grid = {};}, 1000);
                 $scope.show = false;
             } else {
+                clearTimeout(timer);
                 $scope.show = true;
                 $scope.grid = payload;
             }
