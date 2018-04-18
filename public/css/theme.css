@@ -860,12 +860,14 @@ h1, h2, h3, h4 {
   .grid .gridleft {
     padding-left: 10px;
     text-align: left;
-    width: 80%;
+    float: left;
+    width: 50%;
   }
-
+    
   .grid .gridright {
-    width: 20%;
     border-left: 3px solid #fff;
+    float: right; 
+    width: 50%;
   }
 
   .sporttimesgridright {
@@ -909,6 +911,7 @@ h1, h2, h3, h4 {
   .grid.ng-hide-remove .row {
     transform: translateY(-5.5vw);
     opacity: 0;
+    transition-duration: 0;
   }
 
   .grid .row:last-child {
