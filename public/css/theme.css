@@ -868,6 +868,34 @@ h1, h2, h3, h4 {
     border-left: 3px solid #fff;
   }
 
+  .sporttimesgridright {
+    width: 20% !important;
+    text-align: center;
+  }
+
+  .sporttimesgridleft {
+    width: 80% !important;
+  }
+  
+  .halvesgridleft {
+    width: 50%;
+    text-align: left;
+    padding-left: 10px;
+  }
+  .halvesgridright {
+    width: 50%;
+    text-align: left;
+    padding-left: 10px;
+  }
+
+  .onebargridleft {
+    width: 100% !important;
+  }
+
+  .onebargridright {
+    display: none;
+  }
+
   .grid .row {
     display: flex;
     color: #fff;
