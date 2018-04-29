@@ -119,6 +119,15 @@ app.controller('AppCtrl', ['$scope', '$location',
             icon: 'soccer',
             live: false,
         });
+
+        $scope.menu.push({
+            name: 'Waterpolo',
+            url: '/waterpolo',
+            type: 'link',
+            icon: 'blue tint',
+            live: false,
+            play: true
+        });
     }
 ]);
 
@@ -186,6 +195,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
               templateUrl: '/admin/templates/netball.tmpl.html',
               controller: 'netballCGController'
             })
+            .when("/waterpolo", {
+              templateUrl: '/admin/templates/waterpolo.tmpl.html',
+              controller: 'waterpoloCGController'
+            })
             .otherwise({redirectTo: '/general'});
     }
 ]);
@@ -219,9 +232,12 @@ app.controller('archeryCGController', ['$scope', 'socket',
       };
 
       $scope.archeryHit1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
         if($scope.archery.shots1.length < 6) {
           $scope.archery.shots1 += "H";
-          var tmp = Number($scope.archery.score1);
+          var tmp = Number($scope.archery.score1) || 0;
           var newScore = (tmp + 1);
           $scope.archery.score1 = newScore;
           debugger
@@ -229,21 +245,30 @@ app.controller('archeryCGController', ['$scope', 'socket',
       }
 
       $scope.archeryHit2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
         if($scope.archery.shots2.length < 6) {
           $scope.archery.shots2 += "H";
-          var tmp = Number($scope.archery.score2);
+          var tmp = Number($scope.archery.score2) || 0;
           var newScore = (tmp + 1);
           $scope.archery.score2 = newScore;
         }
       }
 
       $scope.archeryMiss1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
         if($scope.archery.shots1.length < 6) {
           $scope.archery.shots1 += "M";
         }
       }
 
       $scope.archeryMiss2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
         if($scope.archery.shots2.length < 6) {
           $scope.archery.shots2 += "M";
         }
@@ -251,14 +276,16 @@ app.controller('archeryCGController', ['$scope', 'socket',
 
       $scope.archeryReset2 = function() {
           $scope.archery.score2 = 0;
+          $scope.archery.shots1 = [];
+          $scope.archery.shots2 = [];
       };
 
       $scope.archeryHitsReset1 = function() {
-          $scope.archery.shots1 = [];
+          $scope.archery.shots1 = "";
       };
 
       $scope.archeryHitsReset2 = function() {
-          $scope.archery.shots2 = [];
+          $scope.archery.shots2 = "";
       };
   }
 ]);
@@ -324,10 +351,12 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
         }
 
         $scope.add = function(item) {
-            $scope.queuedThirds.push(item);
+            if (item.heading) {
+                $scope.queuedThirds.push(item);
 
-            $scope.lowerThirdsForm.$setPristine();
-            $scope.lowerThird = {};
+                $scope.lowerThirdsForm.$setPristine();
+                $scope.lowerThird = {};
+            }
         };
 
         $scope.remove = function(index){
@@ -338,6 +367,14 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
             socket.emit("lowerthird:" + side, item);
             showLiveLowerThird($scope)
         };
+
+        $scope.edit = function(index) {
+            if (!$scope.queuedThirds[index].edit) {
+                $scope.queuedThirds[index].edit = true;
+            } else if ($scope.queuedThirds[index].heading) {
+                $scope.queuedThirds[index].edit = !$scope.queuedThirds[index].edit
+            }
+        }
 
         $scope.hideall = function() {
             socket.emit("lowerthird:hideall");
@@ -406,6 +443,14 @@ app.controller('gridCGController', ['$scope', '$log', 'localStorageService', 'so
         $scope.$on("$destroy", function() {
             localStorageService.set('grid', $scope.grid);
         });
+
+        $scope.showColorOptions = function() {
+          $scope.grid.colorShow = true
+        }
+
+        $scope.hideColorOptions = function() {
+          $scope.grid.colorShow = false
+        }
 }]);
 
 app.controller('boxingCGController', ['$scope', 'socket',
@@ -960,7 +1005,11 @@ app.controller('tennisCGController', ['$scope', 'socket',
             $scope.tennisOptions = msg;
             $scope.menu.forEach(item => {
                 if (item.name === 'Tennis') {
-                    item.live = $scope.tennisOptions.showScore
+                    if ($scope.tennisOptions.showScore === true || $scope.tennisOptions.showSets === true || $scope.tennisOptions.showStats === true) {
+                        item.live = true
+                    } else {
+                        item.live = false
+                    }
                 }
             })
         });
@@ -975,7 +1024,7 @@ app.controller('tennisCGController', ['$scope', 'socket',
 					$scope.tennisOptions.player1 = "Lancaster";
 					$scope.tennisOptions.player2 = "York";
 				}
-				
+
                 socket.emit("tennisOptions", $scope.tennisOptions);
             } else {
                 getTennisData();
@@ -1083,7 +1132,7 @@ app.controller('tennisCGController', ['$scope', 'socket',
         function winGame(player) {
             // given the scoring player, get their opponent
             var opponent = (player == 1 ? 2 : 1);
-			
+
             if ($scope.tennisScore.tiebreak == false) {
                 if (player == $scope.tennisScore.server) {
 					          // player was serving, and not in a tiebreak, count this as service game win
@@ -1096,7 +1145,7 @@ app.controller('tennisCGController', ['$scope', 'socket',
                 // increment service games for server
                 $scope.tennisScore['serviceGame' + $scope.tennisScore.server] ++;
             }
-            
+
             // update the sets array
             $scope.tennisScore['sets' + player].splice(-1,1,($scope.tennisScore['game' + player] + 1));
 
@@ -1120,7 +1169,7 @@ app.controller('tennisCGController', ['$scope', 'socket',
 
             $scope.tennisScore['set' + player] ++;
             resetGames();
-            
+
             if ($scope.tennisScore['set' + player] > ($scope.tennisOptions.maxSets - 1)/2) {
                 // player already won (max - 1) sets, so wins match
                 $scope.tennisOptions.disableInput = true;
@@ -1212,12 +1261,12 @@ app.controller('tennisCGController', ['$scope', 'socket',
                 } else {
                     $scope.tennisScore.gamePoint = "Set Point";
                 }
-				
+
                 // check if this is also break point and increment
                 if ($scope.tennisScore.server != opponent) {
                     $scope.tennisScore['breakPoint' + opponent] ++;
                 }
-              
+
             } else if ($scope.tennisScore.server != player && $scope.tennisScore['point' + player] >= 3 && ($scope.tennisScore['point' + player] - $scope.tennisScore['point' + opponent]) >= 1) {
                 // normal game, not a set/match point, so player needs be against the serve, have at least 40, with a 1 point advantage
 
@@ -1251,14 +1300,14 @@ app.controller('tennisCGController', ['$scope', 'socket',
             socket.emit("tennis:reset");
             $("input[type='checkbox']").attr("checked", false);
         }
-		
+
     }
 ]);
 
 app.controller('netballCGController', ['$scope', 'localStorageService', 'socket',
     function($scope, localStorageService, socket){
         var storedLancs = localStorageService.get('lancs_netball');
-        var storedYork = localStorageService.get('york_nettball');
+        var storedYork = localStorageService.get('york_netball');
 
         if(storedLancs === null) {
             $scope.lancsPlayers = [];
@@ -1346,4 +1395,95 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
             socket.emit("clock:get");
         }
     }
+]);
+
+app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket',
+  function($scope, localStorageService, socket){
+    var storedLancs = localStorageService.get('lancs_waterpolo');
+    var storedYork = localStorageService.get('york_waterpolo');
+    var clockIcon = 'pause icon'
+
+    if(storedLancs === null) {
+        $scope.lancsPlayers = [];
+    } else {
+        $scope.lancsPlayers = storedLancs;
+    }
+
+    if(storedYork === null) {
+        $scope.yorksPlayers = [];
+    } else {
+        $scope.yorksPlayers = storedYork;
+    }
+
+    socket.on("clock:tick", function (msg) {
+        $scope.clock = msg.slice(0, msg.indexOf("."));
+    });
+
+    $scope.waterpoloClock = function() {
+      $scope.downClock()
+      $scope.pauseClock()
+    }
+
+    $scope.pauseClock = function() {
+        socket.emit("clock:pause");
+    };
+
+    $scope.resetClock = function() {
+        socket.emit("clock:reset");
+    };
+
+    $scope.setClock = function(val) {
+        socket.emit("clock:set", val);
+    };
+
+    $scope.downClock = function() {
+        socket.emit("clock:down");
+    };
+
+    $scope.addLancsPlayer = function() {
+        $scope.lancsPlayers.push($scope.lancs);
+        $scope.lancs = {};
+    };
+
+    $scope.addYorksPlayer = function() {
+        $scope.yorksPlayers.push($scope.york);
+        $scope.york = {};
+    };
+
+    $scope.delete = function(team, index) {
+        console.log('delete');
+        if(team === 'york') {
+            $scope.yorksPlayers.splice(index, 1);
+        } else if (team === 'lancs') {
+            $scope.lancsPlayers.splice(index, 1);
+        }
+    };
+
+    socket.on("waterpolo", function (msg) {
+        $scope.waterpolo = msg;
+        $scope.menu.forEach(item => {
+            if (item.name === 'Waterpolo') {
+                item.live = $scope.waterpolo.show
+            }
+        })
+    });
+
+    $scope.$watch('waterpolo', function() {
+        if ($scope.waterpolo) {
+            socket.emit("waterpolo", $scope.waterpolo);
+        } else {
+            getWaterpoloData();
+        }
+    }, true);
+
+    $scope.$on("$destroy", function() {
+        localStorageService.set('york_waterpolo', $scope.yorksPlayers);
+        localStorageService.set('lancs_waterpolo', $scope.lancsPlayers);
+    });
+
+    function getWaterpoloData() {
+        socket.emit("waterpolo:get");
+        socket.emit("clock:get");
+    }
+  }
 ]);
