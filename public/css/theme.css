@@ -725,10 +725,10 @@ h1, h2, h3, h4 {
 }
 
 .tennisScore .server {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent; 
+  border-bottom: 12px solid transparent;
   border-right: 12px solid #fff;
   float: right;
   margin-top: 6px;
@@ -1252,7 +1252,7 @@ h1, h2, h3, h4 {
 .waterpolo .score.york {
   width: 32%;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 20px;
   color: #000;
   background-color: #efbb39;
 }

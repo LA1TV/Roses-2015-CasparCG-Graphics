@@ -1397,8 +1397,8 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
     }
 ]);
 
-app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket',
-  function($scope, localStorageService, socket){
+app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket', '$rootScope', '$document',
+  function($scope, localStorageService, socket, $rootScope, $document){
     var storedLancs = localStorageService.get('lancs_waterpolo');
     var storedYork = localStorageService.get('york_waterpolo');
     var clockIcon = 'pause icon'
@@ -1425,7 +1425,12 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     }
 
     $scope.pauseClock = function() {
-        socket.emit("clock:pause");
+      if($scope.clockState) {
+        $scope.clockState = false
+      } else {
+        $scope.clockState = true
+      }
+      socket.emit("clock:pause");
     };
 
     $scope.resetClock = function() {
@@ -1438,6 +1443,36 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
 
     $scope.downClock = function() {
         socket.emit("clock:down");
+    };
+
+    socket.on("shotclock:tick", function (msg) {
+        $scope.shotclock = msg.slice(0, msg.indexOf("."));
+    });
+
+    $scope.waterpoloShotClock = function() {
+      $scope.downShotClock()
+      $scope.pauseShotClock()
+    }
+
+    $scope.pauseShotClock = function() {
+      if($scope.shotClockState) {
+        $scope.shotClockState = false
+      } else {
+        $scope.shotClockState = true
+      }
+        socket.emit("shotclock:pause");
+    };
+
+    $scope.resetShotClock = function() {
+        socket.emit("shotclock:reset");
+    };
+
+    $scope.setShotClock = function(val) {
+        socket.emit("shotclock:set", val);
+    };
+
+    $scope.downShotClock = function() {
+        socket.emit("shotclock:down");
     };
 
     $scope.addLancsPlayer = function() {
@@ -1482,8 +1517,23 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     });
 
     function getWaterpoloData() {
-        socket.emit("waterpolo:get");
-        socket.emit("clock:get");
+      socket.emit("waterpolo:get");
+      socket.emit("clock:get");
+      socket.emit("shotclock:get");
     }
+
+    $document.bind('keypress', function (e) {
+        $rootScope.$emit('keypress', e, String.fromCharCode(e.which));
+    });
+
+    $rootScope.$on('keypress', function (event, object, key) {
+      if(object.which === 32 && $scope.waterpolo.enableKeyboard) {
+        $scope.waterpoloShotClock()
+        $scope.waterpoloClock()
+      }
+      if(object.which === 13 && $scope.waterpolo.enableKeyboard) {
+        $scope.setShotClock("00:30")
+      }
+    })
   }
 ]);

@@ -2,40 +2,96 @@
     <h2>Waterpolo</h2>
 
     <div class="ui grid center aligned">
-        <div class="ten wide column">
-            <div class="inline field">
-                <checkbox ng-model="waterpolo.show" size="large" type="toggle">Show Score Bar</checkbox>
-           		<checkbox ng-model="waterpolo.showquarter" size="large" type="toggle">Show Quarter</checkbox>
+      <div class="four wide column">
+        <dropdown title="Current Quarter" ng-model="waterpolo.currentQuarter" on-change="quarterChanged()">
+          <dropdown-group>1st</dropdown-group>
+          <dropdown-group>2nd</dropdown-group>
+          <dropdown-group>3rd</dropdown-group>
+          <dropdown-group>4th</dropdown-group>
+        </dropdown>
+      </div>
+      <div class="twelve wide column">
+        <div class="inline field">
+          <checkbox ng-model="waterpolo.show" size="large" type="toggle">Show Score Bar</checkbox>
+       		<checkbox ng-model="waterpolo.showquarter" size="large" type="toggle">Show Quarter</checkbox>
+          <checkbox ng-model="waterpolo.showshotcountdown" size="large" type="toggle">Show Shot Countdown</checkbox>
+          <checkbox ng-model="waterpolo.enableKeyboard" size="large" type="toggle">Enable Keyboard Controls</checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div class="ui grid">
+        <div class="four wide column center aligned">
+          <h3 class="ui header">Game clock:</h3>
+        </div>
+
+        <div class="four wide column">
+            <div class="ui action input" style="max-width: 70%">
+                <input type="text" placeholder="mm:ss" ng-model="time" size="10">
+                <div class="ui button" ng-click="setClock(time)">Set</div>
             </div>
+        </div>
+
+        <div class="eight wide column">
+          <div class="ui">
+            <div class="content" ng-if="clockState">
+              <div class="ui icon blue button" ng-click="waterpoloClock()">
+                <i class="pause icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetClock()">Reset</div>
+              <div class="ui label">
+                <h3 class="ui text">{{clock}}</h3>
+              </div>
+            </div>
+            <div class="content" ng-if="!clockState">
+              <div class="ui icon green button" ng-click="waterpoloClock()">
+                <i class="play icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetClock()">Reset</div>
+              <div class="ui label">
+                <h3 class="ui text">{{clock}}</h3>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 
     <div class="ui divider"></div>
 
     <div class="ui grid">
-        <div class="five wide column center aligned">
-          <h2 class="ui header">{{clock}}</h2>
-          <dropdown title="Current Quarter" ng-model="waterpolo.currentQuarter" on-change="quarterChanged()">
-            <dropdown-group>1st</dropdown-group>
-            <dropdown-group>2nd</dropdown-group>
-            <dropdown-group>3rd</dropdown-group>
-            <dropdown-group>4th</dropdown-group>
-          </dropdown>
+        <div class="four wide column center aligned">
+          <h3 class="ui header">Shot clock:</h3>
         </div>
 
-        <div class="five wide column">
-            <div class="ui action input">
-                <input type="text" placeholder="mm:ss" ng-model="time" size="10">
-                <div class="ui button" ng-click="setClock(time)">Set</div>
+        <div class="four wide column">
+            <div class="ui action input" style="max-width: 70%">
+                <input type="text" placeholder="mm:ss" ng-model="shotTime" size="10">
+                <div class="ui button" ng-click="setShotClock(shotTime)">Set</div>
             </div>
         </div>
 
-        <div class="five wide column">
+        <div class="eight wide column">
           <div class="ui">
-            <div class="ui icon blue button" ng-click="waterpoloClock()">
-              <i class="pause icon"></i>
+            <div class="content" ng-if="shotClockState">
+              <div class="ui icon blue button" ng-click="waterpoloShotClock()">
+                <i class="pause icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetShotClock()">Reset</div>
+              <div class="ui label">
+                <h3 class="ui text">{{shotclock}}</h3>
+              </div>
             </div>
-            <div class="ui button" ng-click="resetClock()">Reset</div>
+            <div class="content" ng-if="!shotClockState">
+              <div class="ui icon green button" ng-click="waterpoloShotClock()">
+                <i class="play icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetShotClock()">Reset</div>
+              <div class="ui label">
+                <h3 class="ui text">{{shotclock}}</h3>
+              </div>
+            </div>
           </div>
         </div>
     </div>

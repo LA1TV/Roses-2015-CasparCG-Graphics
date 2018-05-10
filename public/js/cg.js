@@ -406,6 +406,10 @@ app.controller('waterpoloCtrl', ['$scope', 'socket',
             $scope.clock = msg.slice(0, msg.indexOf("."));
         });
 
+        socket.on("shotclock:tick", function (msg) {
+            $scope.shotclock = msg.slice(0, msg.indexOf("."));
+        });
+
         $scope.$watch('waterpolo', function() {
             if (!$scope.waterpolo) {
                 getWaterpoloData();
@@ -415,6 +419,7 @@ app.controller('waterpoloCtrl', ['$scope', 'socket',
         function getWaterpoloData() {
             socket.emit("waterpolo:get");
             socket.emit("clock:get");
+            socket.emit("shotclock:get");
         }
     }
 ]);
