@@ -128,6 +128,14 @@ app.controller('AppCtrl', ['$scope', '$location',
             live: false,
             play: true
         });
+
+        $scope.menu.push({
+            name: 'Volleyball',
+            url: '/volleyball',
+            type: 'link',
+            icon: 'soccer',
+            live: false,
+        });
     }
 ]);
 
@@ -198,6 +206,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/waterpolo", {
               templateUrl: '/admin/templates/waterpolo.tmpl.html',
               controller: 'waterpoloCGController'
+            })
+            .when("/volleyball", {
+                templateUrl: '/admin/templates/volleyball.tmpl.html',
+                controller: 'volleyballCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -1486,4 +1498,62 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
         socket.emit("clock:get");
     }
   }
+]);
+
+app.controller('volleyballCGController', ['$scope', 'socket',
+    function($scope, socket){
+        socket.on("clock:tick", function (msg) {
+            $scope.clock = msg.slice(0, msg.indexOf("."));
+        });
+
+        $scope.pauseClock = function() {
+            socket.emit("clock:pause");
+        };
+
+        $scope.resetClock = function() {
+            socket.emit("clock:reset");
+        };
+
+        $scope.setClock = function(val) {
+            socket.emit("clock:set", val);
+        };
+
+        $scope.downClock = function() {
+            socket.emit("clock:down");
+        };
+
+        $scope.upClock = function() {
+            socket.emit("clock:up");
+        };
+
+        $scope.updateScore = function() {
+            console.log("Score");
+        };
+
+        $scope.roundChanged = function() {
+            console.log("Round");
+        };
+
+        socket.on("volleyball", function (msg) {
+            $scope.volleyball = msg;
+            $scope.menu.forEach(item => {
+                if (item.name === 'Volleyball') {
+                    item.live = $scope.volleyball.showScore
+                }
+            })
+        });
+
+        $scope.$watch('volleyball', function() {
+            if ($scope.volleyball) {
+                socket.emit("volleyball", $scope.volleyball);
+            } else {
+                getVolleyballData();
+            }
+        }, true);
+
+        function getVolleyballData() {
+            socket.emit("volleyball:get");
+            socket.emit("clock:get");
+        }
+    }
 ]);

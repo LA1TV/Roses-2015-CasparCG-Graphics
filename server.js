@@ -37,6 +37,7 @@ var tennisScore   = [{sets1: [0], sets2: [0],
 var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
 var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
 var waterpolo = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var volleyball = {lancScore: 0, yorkScore: 0};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -327,6 +328,18 @@ socket.on("waterpolo", function(msg) {
 	socket.on("waterpolo:get", function(msg) {
 	io.sockets.emit("waterpolo", waterpolo);
 });
+
+	/*
+	 * 		Volleyball
+	 */
+	socket.on("volleyball", function(msg) {
+        volleyball = msg;
+		io.sockets.emit("volleyball", msg);
+	});
+
+    socket.on("volleyball:get", function(msg) {
+		io.sockets.emit("volleyball", volleyball);
+	});
 
 });
 

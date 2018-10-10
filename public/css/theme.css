@@ -201,17 +201,17 @@ h1, h2, h3, h4 {
     display:inline;
     white-space: nowrap;
     clear:none;
-    background-color: #1f1a34;
+    background-color: #333333;
 }
 
 .bug h1 {
-    color: #fff;
-    font-size: 18px;
-    line-height: 20px;
+    color: #F2F2F2;
+    font-size: 36px;
+    line-height: 40px;
     float: left;
     padding: 3px 10px;
     margin-right: 0px;
-    background-color: #BC204B;
+    background-color: #FCAF17;
 }
 
 .bug h1:empty {
@@ -219,26 +219,26 @@ h1, h2, h3, h4 {
 }
 
 .black {
-    background-color: #1f1a34 !important;
+    background-color: #333333 !important;
 }
 
 .white {	
 	background-color: #f2f2f2 !important;
-	color: #1f1a34 !important;
+	color: #333333 !important;
 }
 /**************************************************/
 /*              [Logo]                            */
 /**************************************************/
 
 .logo {
-    opacity: 0.5;
+    opacity: 1.0;
     top: 40px;
 }
 
 .logo.toggle.ng-leave,
 .logo.toggle.ng-hide-add,
 .logo.toggle.ng-hide-remove.ng-hide-remove-active {
-    opacity: 0.5;
+    opacity: 1.0;
 }
 
 
@@ -1255,4 +1255,67 @@ h1, h2, h3, h4 {
   padding-left: 30px;
   color: #000;
   background-color: #efbb39;
+}
+
+/**************************************************/
+/*              [Volleyball Score]                    */
+/**************************************************/
+.volleyball-score {
+  background-color: #FCAF17;
+  width: 15%;
+}
+
+.score-inner {
+  color: #fff;
+  text-align: center;
+  padding: 15px 30px 15px 30px;
+}
+
+.timer {
+  top: -2px;
+  font-size: 28px !important;
+}
+
+.score-inner h1 {
+  font-size: 35px;
+}
+
+.red-moving, .moving {
+  height: 40px;
+  width: 500%;
+}
+
+.bar {
+overflow-x: hidden;
+overflow-y:hidden;
+width: 100%;
+border-radius: 2px;
+}
+
+.bar .gradient-overlay {
+  position: absolute;
+  width: inherit;
+  height: 40px;
+background-color: #333333;
+}
+
+.gradient-overlay > span {
+  position:relative;
+  padding-top: 8px;
+  padding-left: 8px;
+  text-align: center;
+  text-transform:uppercase;
+  z-index:1;
+  display:block;
+  color:#fff;
+  font-size:22px;
+  text-shadow:1px -1px 0px #000;
+}
+
+.lancLight {
+background-color: #f4a6a4;
+}
+
+.yorkLight {
+background-color: #f7dfa1;
 }

@@ -12,7 +12,7 @@
     <body>
         <div ng-controller="bugCtrl">
             <div class="logo right top toggle" ng-show="state.showLogo">
-                <img src="/images/roses2018logo.png" />
+                <img style="width: 400px;" src="/images/YSTV_Sport.svg" />
             </div>
             <div class="toggle" ng-show="state.showGeneral"> 
                 <div class="bug top slide-left" ng-show="state.showClock">
@@ -439,6 +439,33 @@
                 <div class="score york">{{waterpolo.yorkScore}} YORK<span ng-show="waterpolo.showcurrent"><span ng-show="showcurrentyork">&diams;</span></span></div>
                 <div class="clock">{{clock}}</div>
                 <div class="waterpoloquarter fade" ng-show="waterpolo.showquarter"><h1>{{waterpolo.currentQuarter}}</h1></div>
+            </div>
+        </div>
+
+        <div ng-controller="volleyballCtrl">
+            <div ng-show="volleyball.showScore" class="volleyball-score right bottom scale-fade">
+
+                <div class="bar" ng-show="volleyball.showTime">
+                    <div class="gradient-overlay"><span class="timer">{{clock}}</span></div>
+                    <div class="moving"></div>
+                </div>
+
+                <div class="score-inner">
+
+                    <div class="float-left" style="padding-bottom: 12px;">
+                        <h4>{{volleyball.name1}}</h4>
+                        <h1>{{volleyball.lancScore}}</h1>
+                        <h2>LAN</h2>
+                    </div>
+
+                    <div class="float-right">
+                        <h4>{{volleyball.name2}}</h4>
+                        <h1>{{volleyball.yorkScore}}</h1>
+                        <h2>YORK</h2>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
 
