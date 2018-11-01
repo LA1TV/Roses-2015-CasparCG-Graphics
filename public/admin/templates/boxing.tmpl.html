@@ -65,42 +65,42 @@
 
   <div class="ui grid center aligned">
     <div class="eight wide column">
-      <h3>Lancaster</h3>
+      <h3>{{boxing.homeTeam}}</h3>
       <input type="text" ng-model="boxing.name1" >
-      <h1>{{boxing.lancScore}}</h1>
+      <h1>{{boxing.homeScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="boxing.lancScore = boxing.lancScore + 1; updateScore();">
+        <button class="ui green button" ng-click="boxing.homeScore = boxing.homeScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="boxing.lancScore = boxing.lancScore - 1; updateScore();" ng-disabled="boxing.lancScore == 0">
+        <button class="ui red button" ng-click="boxing.homeScore = boxing.homeScore - 1; updateScore();" ng-disabled="boxing.homeScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="boxing.lancScore = 0">
+	 	<button class="ui red button" ng-click="boxing.homeScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
 	 </div>   
     </div>
 
     <div class="eight wide column">
-      <h3>York</h3>
+      <h3>{{boxing.awayTeam}}</h3>
       <input type="text" ng-model="boxing.name2" >
-      <h1>{{boxing.yorkScore}}</h1>
+      <h1>{{boxing.awayScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="boxing.yorkScore = boxing.yorkScore + 1; updateScore();">
+        <button class="ui green button" ng-click="boxing.awayScore = boxing.awayScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="boxing.yorkScore = boxing.yorkScore - 1; updateScore();" ng-disabled="boxing.yorkScore == 0">
+        <button class="ui red button" ng-click="boxing.awayScore = boxing.awayScore - 1; updateScore();" ng-disabled="boxing.awayScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="boxing.yorkScore = 0">
+	 	<button class="ui red button" ng-click="boxing.awayScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
 	 </div>

@@ -12,7 +12,7 @@
         <input id="SubHeading" placeholder="Sub Heading" type="text" ng-trim="true" ng-model="lowerThird.subHeading">
       </div>
     </div>
-	<br>
+	  <br>
     <div class="right floated right aligned six wide column">
       <div class="ui blue button" ng-click="add(lowerThird)" ng-disabled="lowerThirdsForm.$invalid" >Add</div>
       <div class="ui red button" ng-click="hideall()">Hide All</div>
@@ -24,16 +24,16 @@
   <div class="ui grid">
     <div class="six wide column">
       <h2 class="left aligned ui header">
-          <i class="list layout icon"></i>
-          <div class="content" ng-if="!third.edit">
-              <div>{{third.heading}}</div>
-              <div class="sub header">{{third.subHeading}}</div>
-          </div>
-          <div class="content" ng-if="third.edit">
-            <div><input type="text" class="lt-edit-input" ng-model="third.heading"></div>
-            <div><input type="text" class="sub header lt-edit-input" ng-model="third.subHeading"></div>
-          </div>
-        </h2>
+        <i class="list layout icon"></i>
+        <div class="content" ng-if="!third.edit">
+            <div>{{third.heading}}</div>
+            <div class="sub header">{{third.subHeading}}</div>
+        </div>
+        <div class="content" ng-if="third.edit">
+          <div><input type="text" class="lt-edit-input" ng-model="third.heading"></div>
+          <div><input type="text" class="sub header lt-edit-input" ng-model="third.subHeading"></div>
+        </div>
+      </h2>
     </div>
 
     <div class="two wide column">

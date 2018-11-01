@@ -34,7 +34,7 @@
 
     <div class="ui grid center aligned">
       <div class="eight wide column">
-        <h3>Lancaster</h3>
+        <h3>{{badminton.homeTeam}}</h3>
         <h1>{{badminton.game1}}</h1>
         <div class="ui icon buttons">
           <button class="ui green button" ng-click="badminton.game1 = badminton.game1 + 1;">
@@ -50,7 +50,7 @@
       </div>
 
       <div class="eight wide column">
-        <h3>York</h3>
+        <h3>{{badminton.awayTeam}}</h3>
         <h1>{{badminton.game2}}</h1>
         <div class="ui icon buttons">
           <button class="ui green button" ng-click="badminton.game2 = badminton.game2 + 1;">
@@ -100,7 +100,7 @@
             <div class="fields">
 
                 <div class="five wide field">
-                    <input type="text" placeholder="Lancaster Player" ng-model="badminton.player1">
+                    <input type="text" placeholder="Home Player" ng-model="badminton.homeTeam">
                 </div>
 
                 <div class="two wide field">
@@ -127,7 +127,7 @@
             <div class="fields">
 
                 <div class="five wide field">
-                    <input type="text" placeholder="York Player" ng-model="badminton.player2">
+                    <input type="text" placeholder="Away Player" ng-model="badminton.awayTeam">
                 </div>
 
                 <div class="two wide field">

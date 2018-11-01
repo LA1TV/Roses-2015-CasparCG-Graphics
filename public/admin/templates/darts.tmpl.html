@@ -3,7 +3,7 @@
 
     <div class="ui grid center aligned">
         <div class="4 wide column">
-            <div class="field"><checkbox ng-model="dart.show" size="large" type="toggle">Show Darts Score</checkbox></div>
+            <div class="field"><checkbox ng-model="darts.show" size="large" type="toggle">Show Darts Score</checkbox></div>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
 
     <div class="ui grid center aligned">
         <div class="four wide field">
-            <input style="text-align: center;"  type="text" placeholder="Match Name" ng-model="dart.match">
+            <input style="text-align: center;"  type="text" placeholder="Match Name" ng-model="darts.match">
         </div>
     </div>
 
@@ -29,26 +29,26 @@
 
     <div class="ui grid center aligned">
       <div class="eight wide column">
-        <h3>Lancaster</h3>
-        <h1>{{dart.set1}}</h1>
+        <h3>{{darts.homeTeam}}</h3>
+        <h1>{{darts.set1}}</h1>
         <div class="ui icon buttons">
-          <button class="ui green button" ng-click="dart.set1 = dart.set1 + 1;">
+          <button class="ui green button" ng-click="darts.set1 = darts.set1 + 1;">
             <i class="plus icon"></i>
           </button>
-          <button class="ui red button" ng-click="dart.set1 = dart.set1 - 1;" ng-disabled="dart.set1 == 0">
+          <button class="ui red button" ng-click="darts.set1 = darts.set1 - 1;" ng-disabled="darts.set1 == 0">
             <i class="minus icon"></i>
           </button>
         </div>
       </div>
 
       <div class="eight wide column">
-        <h3>York</h3>
-        <h1>{{dart.set2}}</h1>
+        <h3>{{darts.awayTeam}}</h3>
+        <h1>{{darts.set2}}</h1>
         <div class="ui icon buttons">
-          <button class="ui green button" ng-click="dart.set2 = dart.set2 + 1;">
+          <button class="ui green button" ng-click="darts.set2 = darts.set2 + 1;">
             <i class="plus icon"></i>
           </button>
-          <button class="ui red button" ng-click="dart.set2 = dart.set2 - 1;" ng-disabled="dart.set2 == 0">
+          <button class="ui red button" ng-click="darts.set2 = darts.set2 - 1;" ng-disabled="darts.set2 == 0">
             <i class="minus icon"></i>
           </button>
         </div>
@@ -99,22 +99,22 @@
             <div class="fields">
 
                 <div class="five wide field">
-                    <input type="text" placeholder="Lancaster Player" ng-model="dart.player1">
+                    <input type="text" placeholder="Home Player" ng-model="darts.player1">
                 </div>
 
                 <div class="two wide field">
-                  <h2>{{dart.leg1}}</h2>
+                  <h2>{{darts.leg1}}</h2>
                 </div>
 
                 <div class="two wide field">
                     <div class="ui icon buttons">
-                        <button class="ui green button" ng-click="dart.leg1 = dart.leg1 + 1;"><i class="plus icon"></i></button>
-                        <button class="ui red button"  ng-click="dart.leg1 = dart.leg1 - 1" ng-disabled="dart.leg1 == 0"><i class="minus icon"></i></button>
+                        <button class="ui green button" ng-click="darts.leg1 = darts.leg1 + 1;"><i class="plus icon"></i></button>
+                        <button class="ui red button"  ng-click="darts.leg1 = darts.leg1 - 1" ng-disabled="darts.leg1 == 0"><i class="minus icon"></i></button>
                     </div>
                 </div>
 
                 <div class="two wide field">
-                    <h2>{{dart.score1}}</h2>
+                    <h2>{{darts.score1}}</h2>
                 </div>
 
                 <div class="two wide field">
@@ -140,22 +140,22 @@
             <div class="fields">
 
                 <div class="five wide field">
-                    <input type="text" placeholder="York Player" ng-model="dart.player2">
+                    <input type="text" placeholder="Away Player" ng-model="darts.player2">
                 </div>
 
                 <div class="two wide field">
-                  <h2>{{dart.leg2}}</h2>
+                  <h2>{{darts.leg2}}</h2>
                 </div>
 
                 <div class="two wide field">
                     <div class="ui icon buttons">
-                        <button class="ui green button" ng-click="dart.leg2 = dart.leg2 + 1;"><i class="plus icon"></i></button>
-                        <button class="ui red button"  ng-click="dart.leg2 = dart.leg2 - 1" ng-disabled="dart.leg2 == 0"><i class="minus icon"></i></button>
+                        <button class="ui green button" ng-click="darts.leg2 = darts.leg2 + 1;"><i class="plus icon"></i></button>
+                        <button class="ui red button"  ng-click="darts.leg2 = darts.leg2 - 1" ng-disabled="darts.leg2 == 0"><i class="minus icon"></i></button>
                     </div>
                 </div>
 
                 <div class="two wide field">
-                    <h2>{{dart.score2}}</h2>
+                    <h2>{{darts.score2}}</h2>
                 </div>
 
                 <div class="two wide field">

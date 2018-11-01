@@ -121,7 +121,7 @@
                 </div>
                 
                 <div class="four wide field">
-                    <input type="text" placeholder="Lancaster" ng-model="tennisOptions.player1" ng-disabled="($scope.tennisOptions.matchName).includes("Mixed");">
+                    <input type="text" placeholder="Home Player" ng-model="tennisOptions.homeTeam" ng-disabled="($scope.tennisOptions.matchName).includes('Mixed');">
                 </div>
 
                 <div class="one wide field">
@@ -162,7 +162,7 @@
                 </div>
                 
                 <div class="four wide field">
-                    <input type="text" placeholder="York" ng-model="tennisOptions.player2" ng-disabled="($scope.tennisOptions.matchName).includes("Mixed");">
+                    <input type="text" placeholder="Away Player" ng-model="tennisOptions.awayTeam" ng-disabled="($scope.tennisOptions.matchName).includes('Mixed');">
                 </div>
 
                 <div class="one wide field">
@@ -238,7 +238,7 @@
             <div class="fields">
 
                 <div class="four wide field">
-                  <h3>{{tennisOptions.player1}}</h2>
+                  <h3>{{tennisOptions.homeTeam}}</h2>
                 </div>
 
                 <div class="two wide field">
@@ -274,7 +274,7 @@
             <div class="fields">
 
                 <div class="four wide field">
-                  <h3>{{tennisOptions.player2}}</h2>
+                  <h3>{{tennisOptions.awayTeam}}</h2>
                 </div>
 
                 <div class="two wide field">
@@ -373,7 +373,7 @@
             <div class="fields">
 
                 <div class="two wide field">
-                  <h3>{{tennisOptions.player1}}</h2>
+                  <h3>{{tennisOptions.homeTeam}}</h2>
                 </div>
 
                 <div class="one wide field">
@@ -433,7 +433,7 @@
             <div class="fields">
 
                 <div class="two wide field">
-                  <h3>{{tennisOptions.player2}}</h2>
+                  <h3>{{tennisOptions.awayTeam}}</h2>
                 </div>
 
                 <div class="one wide field">

@@ -46,52 +46,52 @@
 
     <div class="ui grid center aligned">
         <div class="eight wide column">
-            <h3>Lancaster</h3>
-            <h1>{{basketball.lancScore}}</h1>
+            <h3>{{basketball.homeTeam}}</h3>
+            <h1>{{basketball.homeScore}}</h1>
             <div class="ui icon buttons">
-                <button class="ui green button" ng-click="basketball.lancScore = basketball.lancScore + 3;">
+                <button class="ui green button" ng-click="basketball.homeScore = basketball.homeScore + 3;">
                     <i class="plus icon"></i>3
                 </button>
-                <button class="ui yellow button" ng-click="basketball.lancScore = basketball.lancScore + 2;">
+                <button class="ui yellow button" ng-click="basketball.homeScore = basketball.homeScore + 2;">
                     <i class="plus icon"></i>2
                 </button>
-                <button class="ui orange button" ng-click="basketball.lancScore = basketball.lancScore + 1;">
+                <button class="ui orange button" ng-click="basketball.homeScore = basketball.homeScore + 1;">
                     <i class="plus icon"></i>1
                 </button>
-                <button class="ui red button" ng-click="basketball.lancScore = basketball.lancScore - 1;" ng-disabled="basketball.lancScore == 0">
+                <button class="ui red button" ng-click="basketball.homeScore = basketball.homeScore - 1;" ng-disabled="basketball.homeScore == 0">
                     <i class="minus icon"></i>1
                 </button>
             </div>
  		   <br>
 		   <br>
 		   <div class="ui icon buttons">
-			<button class="ui red button" ng-click="basketball.lancScore = 0">
+			<button class="ui red button" ng-click="basketball.homeScore = 0">
 				<i class="ban icon"></i>Reset
 			</button>
 		   </div>
         </div>
 
         <div class="eight wide column">
-            <h3>York</h3>
-            <h1>{{basketball.yorkScore}}</h1>
+            <h3>{{basketball.awayTeam}}</h3>
+            <h1>{{basketball.awayScore}}</h1>
             <div class="ui icon buttons">
-                <button class="ui green button" ng-click="basketball.yorkScore = basketball.yorkScore + 3;">
+                <button class="ui green button" ng-click="basketball.awayScore = basketball.awayScore + 3;">
                     <i class="plus icon"></i>3
                 </button>
-                <button class="ui yellow button" ng-click="basketball.yorkScore = basketball.yorkScore + 2;">
+                <button class="ui yellow button" ng-click="basketball.awayScore = basketball.awayScore + 2;">
                     <i class="plus icon"></i>2
                 </button>
-                <button class="ui orange button" ng-click="basketball.yorkScore = basketball.yorkScore + 1;">
+                <button class="ui orange button" ng-click="basketball.awayScore = basketball.awayScore + 1;">
                     <i class="plus icon"></i>1
                 </button>
-                <button class="ui red button" ng-click="basketball.yorkScore = basketball.yorkScore - 1;" ng-disabled="basketball.yorkScore == 0">
+                <button class="ui red button" ng-click="basketball.awayScore = basketball.awayScore - 1;" ng-disabled="basketball.awayScore == 0">
                     <i class="minus icon"></i>1
                 </button>
             </div>
            <br>
 		   <br>
 		   <div class="ui icon buttons">
-			<button class="ui red button" ng-click="basketball.yorkScore = 0">
+			<button class="ui red button" ng-click="basketball.awayScore = 0">
 				<i class="ban icon"></i>Reset
 			</button>
 		   </div>

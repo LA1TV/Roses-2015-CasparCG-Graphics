@@ -1,22 +1,61 @@
 var express 	= require('express'),
+	gulp		= require('gulp'),
 	http 		= require('http'),
+	less		= require('gulp-less'),
+	path 		= require('path'),
+	watch		= require('gulp-watch'),
 	Stopwatch 	= require('./models/stopwatch');
+
+gulp.task('less', function(){
+	return gulp.src('./public/less/**/*.less')
+		.pipe(less({
+			paths: [path.join(__dirname, 'less', 'includes')]
+		}))
+		.pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('watchFiles', function(){
+	return watch('./public/less/**/*.less', function(){
+		gulp.start('less');
+	});
+});
+
+gulp.task('default', ['less', 'watchFiles']);
+
+gulp.start('default');
 
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var bug = {livetext: "Live", locationtext: '', showLive: false, showLocation: false};
-var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
+var eventLogo = "/images/roses2018logo.png";
+
+var homeTeamName = "Lancaster";
+var awayTeamName = "York";
+var homeTeamShortName = "LAN";
+var awayTeamShortName = "YOR";
+var homeTeamImage = "images/LancasterSport250.png";
+var awayTeamImage = "images/YorkSport250.png"
+
+var bug = {livetext: "Live", locationtext: '', showLive: false, showLocation: false, logo: eventLogo};
+var boxing = {homeTeam: homeTeamShortName, awayTeam: awayTeamShortName, homeScore: 0, awayScore: 0, currRound: ''};
 var score = {totalPoints: 354};
-var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var rugby = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var basketball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
-var swimming = {order: ''};
+var football = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0, homeTeamImage: homeTeamImage, awayTeamImage, awayTeamImage};
+var rugby = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
+var basketball = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
+var darts = {match: "Darts", homeTeam: homeTeamName, awayTeam: awayTeamName, player1: homeTeamName, player2: awayTeamName, set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
+var swimming = {order: '', lanes: [], homeTeam: homeTeamName, awayTeam: awayTeamName, laneOrder: [], prevOrderLength: 0};
+for (var i = 0; i < 8; i++){
+	swimming.lanes[i] = {
+		id: i,
+		name: "",
+		team: ""
+	};
+}
+
 var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
 var archery = {};
-var tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+var tennisOptions = {homeTeam: homeTeamName, awayTeam: awayTeamName, matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
 var tennisScore   = [{sets1: [0], sets2: [0],
                       set1: 0, set2: 0,
                       game1: 0, game2: 0,
@@ -34,9 +73,9 @@ var tennisScore   = [{sets1: [0], sets2: [0],
 					  serviceGame1: 0, serviceGame2: 0,
 					  servicesWon1: 0, servicesWon2: 0,
                       pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
-var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
-var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var waterpolo = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", homeTeam: homeTeamName, awayTeam: awayTeamName, game1: 0, game2:0, point1: 0, point2: 0 };
+var netball = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeScore: 0, awayScore: 0};
+var waterpolo = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeScore: 0, awayScore: 0};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -49,6 +88,26 @@ stopwatch.on('tick:stopwatch', function(time) {
 
 io.on('connection', function(socket) {
 	console.log("Client Socket Connected");
+
+	socket.on("teamName:home", function(){
+		io.sockets.emit("teamName:home", homeTeamName);
+	});
+
+	socket.on("teamName:home:short", function(){
+		io.sockets.emit("teamName:home:short", homeTeamShortName);
+	});
+
+	socket.on("teamName:away", function(){
+		io.sockets.emit("teamName:away", awayTeamName);
+	});
+
+	socket.on("teamName:away:short", function(){
+		io.sockets.emit("teamName:away:short", awayTeamShortName);
+	});
+
+	socket.on("config:logo:get", function(){
+		io.sockets.emit("config:logo", eventLogo);
+	});
 
 	/*
 	 * 		Clock functions
@@ -185,13 +244,13 @@ io.on('connection', function(socket) {
 	/*
 	 * 		Darts
 	 */
-	socket.on("dart", function(msg) {
-        dart = msg;
-		io.sockets.emit("dart", msg);
+	socket.on("darts", function(msg) {
+        darts = msg;
+		io.sockets.emit("darts", msg);
 	});
 
-    socket.on("dart:get", function(msg) {
-        io.sockets.emit("dart", dart);
+    socket.on("darts:get", function(msg) {
+        io.sockets.emit("darts", darts);
     });
 
     /*
@@ -199,19 +258,6 @@ io.on('connection', function(socket) {
 	 */
 	socket.on("swimming", function(msg) {
         swimming = msg;
-
-        swimming.order = (swimming.order).replace(/[^1-8]+/, '');
-        swimming.order = (swimming.order).replace(/(.).*\1/, function (x) {return x.substring(0, x.length - 1)})
-
-        if(!('pos1name' in swimming) && swimming.order != '') {
-            swimming.splittime = stopwatch.getTime().replace(/^0/, '');
-        }
-
-        for(i = 1; i <= 8; i++){
-            swimming['pos' + i + 'name'] = eval('swimming.lane' + (swimming.order).charAt(i-1) + 'name');
-            swimming['pos' + i + 'team'] = eval('swimming.lane' + (swimming.order).charAt(i-1) + 'team');
-            swimming['pos' + i + 'lane'] = (swimming.order).charAt(i-1);
-        }
 
 		io.sockets.emit("swimming", msg);
 	});
@@ -281,7 +327,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on("tennis:reset", function(msg) {
-        tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+        tennisOptions = {homeTeam: homeTeamName, awayTeam: awayTeamName, matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
         tennisScore   = [{sets1: [0], sets2: [0],
                           set1: 0, set2: 0,
                           game1: 0, game2: 0,

@@ -226,18 +226,18 @@ app.controller('rugbyCtrl', ['$scope', 'socket',
 
 app.controller('dartsCtrl', ['$scope', 'socket',
     function($scope, socket){
-        socket.on("dart", function (msg) {
+        socket.on("darts", function (msg) {
             $scope.darts = msg;
         });
 
-        $scope.$watch('dart', function() {
-            if (!$scope.dart) {
+        $scope.$watch('darts', function() {
+            if (!$scope.darts) {
                 getDartData();
             }
         }, true);
 
         function getDartData() {
-            socket.emit("dart:get");
+            socket.emit("darts:get");
         }
     }
 ]);
@@ -360,21 +360,21 @@ app.controller('netballCtrl', ['$scope', 'socket',
         socket.on("netball", function (msg) {
             $scope.netball = msg;
 
-            if ($scope.netball.firstpasslanc == true) {
-            	$scope.netball.lancoffset = 1;
+            if ($scope.netball.firstpasshome == true) {
+            	$scope.netball.homeoffset = 1;
             }
 
-            if ($scope.netball.firstpasslanc == true & $scope.netball.firstpassyork == true) {
-            	$scope.netball.lancoffset = 0;
+            if ($scope.netball.firstpasshome == true & $scope.netball.firstpassaway == true) {
+            	$scope.netball.homeoffset = 0;
             }
 
-            $scope.TotalScore = $scope.netball.yorkScore + $scope.netball.lancScore + $scope.netball.lancoffset;
+            $scope.TotalScore = $scope.netball.awayScore + $scope.netball.homeScore + $scope.netball.homeoffset;
 			if (($scope.TotalScore % 2) == 1) {
-						$scope.showcurrentlancs = true;
-						$scope.showcurrentyork = false;
+						$scope.showcurrenthome = true;
+						$scope.showcurrentaway = false;
 				} else {
-						$scope.showcurrentlancs = false;
-						$scope.showcurrentyork = true;
+						$scope.showcurrenthome = false;
+						$scope.showcurrentaway = true;
 					}
 			});
 
